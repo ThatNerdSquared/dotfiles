@@ -4,6 +4,10 @@ basic_utils = [
     'brew install mas' # Install MAS apps via cli
 ]
 
+dotfile_deploy = [
+    'ln -sv "/Users/nathanyeung/dotfiles/.zshrc" ~'
+]
+
 art_supplies = [
     'brew install krita', # FOSS digital painting software
     'brew install blender', # 3D modeling software
