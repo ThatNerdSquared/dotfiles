@@ -119,8 +119,8 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
   . /usr/local/etc/profile.d/z.sh
 
 # USER DEFINED ALIASES/FUNCTIONS
-alias editrc="nvim ~/.zshrc"
-alias sourcerc="source ~/.zshrc"
+alias editrc="nvim ~/dotfiles/.zshrc"
+alias sourcerc="source ~/dotfiles/.zshrc"
 alias ll="ls -la"
 muse() {
   ~/tunes.rb $1
@@ -144,7 +144,7 @@ entervault() {
     cd ~/OneDrive/Documents/notes-squared
     nvim .
 }
-alias catrc="cat ~/.zshrc"
+alias catrc="cat ~/dotfiles/.zshrc"
 alias listapps="osascript -e 'tell application "System Events" to get name of (processes where background only is false)'"
 alias raidroom="open discord://discord.com/channels/382364344731828224/668869769553772574"
 quit() {
@@ -167,16 +167,16 @@ vimr() {
 }
 alias editespanso="nvim ~/Library/Preferences/espanso/default.yml"
 # Python Nerdscripts.
-alias py.spacy="python3 /Users/nathanyeung/h4ck3r/scripts/spacy.py"
-alias py.codespaces="python3 /Users/nathanyeung/h4ck3r/scripts/codespaces.py"
-alias py.spktim="python3 /Users/nathanyeung/h4ck3r/scripts/spktim.py"
-alias py.wallpaper="python3 /Users/nathanyeung/h4ck3r/scripts/wallpaper.py"
-alias py.emoji="python3 /Users/nathanyeung/h4ck3r/scripts/emojis.py"
+alias py.spacy="python3 /Users/nathanyeung/dotfiles/scripts/spacy.py"
+alias py.codespaces="python3 /Users/nathanyeung/dotfiles/scripts/codespaces.py"
+alias py.spktim="python3 /Users/nathanyeung/dotfiles/scripts/spktim.py"
+alias py.wallpaper="python3 /Users/nathanyeung/dotfiles/scripts/wallpaper.py"
+alias py.emoji="python3 /Users/nathanyeung/dotfiles/scripts/emojis.py"
 py\.emoji() {
-    python3 /Users/nathanyeung/h4ck3r/scripts/emojis.py $1
+    python3 /Users/nathanyeung/h4ck3r/dotfiles/emojis.py $1
 }
-alias py.wc="python3 /Users/nathanyeung/h4ck3r/scripts/wc.py"
-alias py.gifs="python3 /Users/nathanyeung/h4ck3r/scripts/gifs.py"
+alias py.wc="python3 /Users/nathanyeung/dotfiles/scripts/wc.py"
+alias py.gifs="python3 /Users/nathanyeung/dotfiles/scripts/gifs.py"
 # Set Spaceship ZSH as a prompt
 autoload -U promptinit; promptinit
 prompt spaceship
