@@ -6,5 +6,4 @@ def ask(query, optionArray):
             text = str(i) + '| ' + item[0] + '\n'
             question = question + text
             i=i+1
-
-    return question
+    return int(input(question))

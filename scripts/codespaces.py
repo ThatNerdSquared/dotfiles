@@ -1,9 +1,10 @@
 import os
+import nerdutils
 
 workspaces = [
 	['horace', '/Users/nathanyeung/h4ck3r/koa/horace'],
 	['hyperfocus-app', '/Users/nathanyeung/h4ck3r/hyperfocus-app'],
-	['scripts', '/Users/nathanyeung/h4ck3r/scripts'],
+	['scripts', '/Users/nathanyeung/dotfiles/scripts'],
 	['xmaets-bot', '/Users/nathanyeung/h4ck3r/xmaets-bot'],
 	['widgets', '/Users/nathanyeung/Library/Application Support/Übersicht/widgets'],
 	['tutorial-app', '/Users/nathanyeung/h4ck3r/tutorial-app'],
@@ -15,15 +16,7 @@ workspaces = [
 	['zeus-bot', '/Users/nathanyeung/h4ck3r/zeus-bot']
 ]
 
-question = 'Which workspace should be opened?\n'
-i = 0
-
-for item in workspaces:
-	text = str(i) + '| ' + item[0] + '\n'
-	question = question + text
-	i=i+1
-
-space = int(input(question))
+space = nerdutils.ask('Which workspace should be opened?\n', workspaces)
 selection = workspaces[space]
 path = selection[1]
 cmd = 'open -a \"Visual Studio Code\" ' + path

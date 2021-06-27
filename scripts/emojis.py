@@ -1,3 +1,4 @@
+import nerdutils
 import clipboard
 import sys
 
@@ -24,15 +25,7 @@ if len(sys.argv) == 2:
     emoji = selection[1]
     print(emoji)
 else:
-    question = 'Which emote should be copied?\n'
-    i = 0
-
-    for item in emotes:
-        text = str(i) + '| ' + item[0] + '\n'
-        question = question + text
-        i=i+1
-
-    emote = int(input(question))
+    emote = nerdutils.ask('Which emote should be copied?\n', emotes)
     selection = emotes[emote]
     emoji = selection[1]
 
