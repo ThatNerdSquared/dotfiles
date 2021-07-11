@@ -10,7 +10,9 @@ wallpapers = [
         ['UBC Main Mall', '47954308962_5a79df32ed_o.jpg'],
         ['Milk and Mocha', 'Bearie.png'],
         ['Albert Einstein Quote', 'albert-eintstein-library.jpeg'],
-        ['Elixir', 'elixir-nerd-wallpaper.png']
+        ['Elixir', 'elixir-nerd-wallpaper.png'],
+        ['ThatNerded', 'thatnerdWallpaper.png'],
+        ['ThatNerded Colour', 'thatNerdColour.png']
 ]
 
 question = 'Which wallpaper should be set?\n'

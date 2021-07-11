@@ -5,6 +5,12 @@ basic_utils = [
     'brew install gh' # Github CLI
 ]
 
+dev_toolchains = [
+    'brew install nodejs',
+    'brew install npm',
+    'brew install go',
+]
+
 dotfile_deploy = [
     'ln -sv "/Users/nathanyeung/dotfiles/.zshrc" ~'
 ]
@@ -27,6 +33,7 @@ brew_commmands = [
     'brew install triangula', # Converts images into images made of triangles
     'brew install arduino', # The Arduino IDE, used for school sometimes.
     'brew install amethyst', # TWM written in Swift
+    'brew install rectangle' # Window rearranging software, like an OSS Magnet
 ]
 
 mildly_useless = [
