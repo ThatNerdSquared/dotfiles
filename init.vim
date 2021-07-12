@@ -15,6 +15,8 @@ Plug 'kyazdani42/nvim-web-devicons' " filetree icons
 Plug 'andweeb/presence.nvim' " Discord RPC integration
 Plug 'airblade/vim-gitgutter' " Shows git changes in the gutter
 Plug 'kana/vim-smartinput' " Autocloses brackets, braces, and more
+Plug 'junegunn/fzf' " Quick file finding
+Plug 'junegunn/fzf.vim' " Quick file finding
 
 call plug#end()
 
@@ -45,12 +47,17 @@ let g:gitgutter_signs = 0
 let g:gitgutter_highlight_lines = 1
 let g:gitgutter_highlight_linenrs = 1
 
+" fzf.vim plugin config
+nnoremap <C-p> :Buffers<CR>
+nnoremap <C-o> :Files<CR>
+
 
 " General UI config
 set wrap linebreak
 set list
 set number
 set listchars=tab:\|\ 
+set tabstop=4
 
 
 " General bindings
@@ -64,7 +71,7 @@ command -nargs=0 Unfocus Goyo!
 
 " GUI config.
 set background=light
-colo solarized
+colo iceberg-light
 if has("gui_running")
 	colorscheme pencil
 endif
