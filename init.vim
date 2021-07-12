@@ -7,29 +7,60 @@ Plug 'junegunn/goyo.vim' " hide UI for writing/coding
 Plug 'junegunn/limelight.vim' " focus line for writing/coding
 Plug 'reedes/vim-pencil' " Soft wrap! 
 Plug 'ycm-core/YouCompleteMe' " JS Autocomplete
-Plug 'leafgarland/typescript-vim' " This and the next are for TSX highlighting.
-Plug 'peitalin/vim-jsx-typescript'
+Plug 'peitalin/vim-jsx-typescript' " This and the next are for TSX highlighting.
 Plug 'mmai/wikilink' " Wikilink support
-Plug 'jeetsukumaran/vim-buffergator' " Better buffer management
+Plug 'dense-analysis/ale' " Linting.
+Plug 'kyazdani42/nvim-tree.lua' " filetree
+Plug 'kyazdani42/nvim-web-devicons' " filetree icons
+Plug 'andweeb/presence.nvim' " Discord RPC integration
+Plug 'airblade/vim-gitgutter' " Shows git changes in the gutter
+Plug 'kana/vim-smartinput' " Autocloses brackets, braces, and more
 
 call plug#end()
 
-" Goyo and Limelight Integration
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
-
-
-" General config
-set wrap linebreak
-noremap k gk
-noremap j gj
-set listchars=tab:\|\ 
-set list
-set number
+" Plugin config
 
 " Limelight plugin config.
 let g:limelight_conceal_ctermfg = 254 " Solarized Base1
 let g:limelight_conceal_guifg = '#eee8d5'  " Solarized Base1
+
+" ALE plugin config.
+let g:ale_sign_column_always = 1
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+" NvimTree plugin config.
+let g:nvim_tree_show_icons = {
+    \ 'git': 1,
+    \ 'folders': 0,
+    \ 'files': 0,
+    \ 'folder_arrows': 0,
+    \ }
+let g:nvim_tree_auto_open = 1 "0 by default, opens the tree when typing `vim $DIR` or `vim`
+let g:nvim_tree_auto_close = 1 "0 by default, closes the tree when it's the last window
+let g:nvim_tree_add_trailing = 1 "0 by default, append a trailing slash to folder names
+
+" Gitgutter plugin config.
+let g:gitgutter_signs = 0
+let g:gitgutter_highlight_lines = 1
+let g:gitgutter_highlight_linenrs = 1
+
+
+" General UI config
+set wrap linebreak
+set list
+set number
+set listchars=tab:\|\ 
+
+
+" General bindings
+noremap k gk
+noremap j gj
+command -nargs=0 Zen Goyo | Limelight
+command -nargs=0 Unzen Goyo! \| Limelight!
+command -nargs=0 Focus Goyo
+command -nargs=0 Unfocus Goyo!
+
 
 " GUI config.
 set background=light
@@ -37,6 +68,7 @@ colo solarized
 if has("gui_running")
 	colorscheme pencil
 endif
+
 
 " Markdown nice.
 let g:markdown_folding = 1
@@ -49,51 +81,3 @@ inoremap hhw HOWEVER:
 inoremap ccn CONCLUSION: 
 set spell
 
-
-" Netrw open in new tab
-function! NetrwOpenMultiTab(current_line,...) range
-	" Get the number of lines.
-	" let n_lines =  a:lastline - a:firstline + 1
-	" This is the command to be built up.
-	let command = "normal "
-
-	" Iterator.
-	let i = 1
-
-	" Virtually iterate over each line and build the command.
-	while i < n_lines
-	let command .= "tgT:" . ( a:firstline + i ) . "\<CR>:+tabmove\<CR>"
-	let i += 1
-	endwhile
-	let command .= "tgT"
-
-	" Restore the Explore tab position.
-	if i != 1
-	let command .= ":tabmove -" . ( n_lines - 1 ) . "\<CR>"
-	endif
-
-	" Restore the previous cursor line.
-	let command .= ":" . a:current_line  . "\<CR>"
-
-	" Check function arguments
-	if a:0 > 0
-	if a:1 > 0 && a:1 <= n_lines
-	 " The current tab is for the nth file.
-	 let command .= ( tabpagenr() + a:1 ) . "gt"
-	else
-	 " The current tab is for the last selected file.
-	 let command .= (tabpagenr() + n_lines) . "gt"
-	endif
-	endif
-	" The current tab is for the Explore tab by default.
-
-	" Execute the custom command.
-	execute command
-endfunction
-
-" Define mappings.
-augroup NetrwOpenMultiTabGroup
-	autocmd!
-	autocmd Filetype netrw vnoremap <buffer> <silent> <expr> t ":call NetrwOpenMultiTab(" . line(".") . "," . "v:count)\<CR>"
-	autocmd Filetype netrw vnoremap <buffer> <silent> <expr> T ":call NetrwOpenMultiTab(" . line(".") . "," . (( v:count == 0) ? '' : v:count) . ")\<CR>"
-augroup END
