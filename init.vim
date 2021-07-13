@@ -86,5 +86,5 @@ inoremap exm EXAMPLE:
 inoremap exx EXCEPTION: 
 inoremap hhw HOWEVER:
 inoremap ccn CONCLUSION: 
-set spell
+autocmd BufNewFile,BufRead *.md set spell
 
