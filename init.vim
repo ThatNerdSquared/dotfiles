@@ -13,7 +13,7 @@ call plug#begin("~/.config/nvim/plugged")
 Plug 'junegunn/goyo.vim' " hide UI for writing/coding
 Plug 'junegunn/limelight.vim' " focus line for writing/coding
 Plug 'reedes/vim-pencil' " Soft wrap! 
-Plug 'ycm-core/YouCompleteMe' " JS Autocomplete
+Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --all' } " Autocomplete code
 Plug 'peitalin/vim-jsx-typescript' " This and the next are for TSX highlighting.
 Plug 'mmai/wikilink' " Wikilink support
 Plug 'dense-analysis/ale' " Linting.
@@ -24,6 +24,12 @@ Plug 'airblade/vim-gitgutter' " Shows git changes in the gutter
 Plug 'kana/vim-smartinput' " Autocloses brackets, braces, and more
 Plug 'junegunn/fzf' " Quick file finding
 Plug 'junegunn/fzf.vim' " Quick file finding
+Plug 'lervag/vimtex'
+let g:tex_flavor='latex'
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+set conceallevel=1
+let g:tex_conceal='abdmg'
 
 call plug#end()
 
@@ -78,11 +84,13 @@ command -nargs=0 Unfocus Goyo!
 
 " GUI config.
 set background=light
-colo iceberg-light
+colo solarized
 if has("gui_running")
 	colorscheme pencil
 endif
 
+" JS config.
+autocmd BufNewFile,BufRead *.js nnoremap <C-/> I//<esc>
 
 " Markdown nice.
 let g:markdown_folding = 1
@@ -94,4 +102,5 @@ inoremap exx EXCEPTION:
 inoremap hhw HOWEVER:
 inoremap ccn CONCLUSION: 
 autocmd BufNewFile,BufRead *.md set spell
+autocmd BufNewFile,BufRead *.md nnoremap <leader>c :!pandoc "%:p" -o "%:p".pdf &<CR>
 
