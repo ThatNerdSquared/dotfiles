@@ -1,0 +1,95 @@
+# cycle forward
+shift + alt - k : yabai -m window --focus next || yabai -m window --focus first
+
+# cycle backwards
+shift + alt - j : yabai -m window --focus prev || yabai -m window --focus last
+
+# swap with previous window in tree
+shift + ctrl + alt - k : yabai -m window --swap prev || yabai -m window --swap last
+
+# swap with next window in tree
+shift + ctrl + alt - j : yabai -m window --swap next || yabai -m window --swap first
+
+# toggle split
+shift + ctrl + alt - u : yabai -m window --toggle split
+
+# resize right inward
+ctrl + cmd - h : yabai -m window --resize right:-10:0
+
+# resize right outward
+ctrl + cmd - l : yabai -m window --resize right:10:0
+
+# resize lower inward
+ctrl + cmd - k : yabai -m window --resize bottom:0:-10
+
+# resize lower outward
+ctrl + cmd - j : yabai -m window --resize bottom:0:10
+
+# make stack left
+ctrl + alt + cmd - h : yabai -m window --stack west
+
+# make stack right
+ctrl + alt + cmd - l : yabai -m window --stack east
+
+# make stack up
+ctrl + alt + cmd - k : yabai -m window --stack north
+
+# make stack down
+ctrl + alt + cmd - j : yabai -m window --stack south
+
+# cycle forward thru stack
+ctrl + alt - j : yabai -m window --focus stack.next || yabai -m window --focus stack.first
+
+# cycle backward thru stack
+ctrl + alt - k : yabai -m window --focus stack.prev || yabai -m window --focus stack.last
+
+# unstack current window
+shift + alt - space : yabai -m window --toggle float
+
+# throw to space one
+shift + ctrl - 1 : yabai -m window --space 1
+
+# throw to space 2
+shift + ctrl - 2 : yabai -m window --space 2
+
+# throw to space three
+shift + ctrl - 3 : yabai -m window --space 3
+
+# throw to space four
+shift + ctrl - 4 : yabai -m window --space 4
+
+# throw to space five
+shift + ctrl - 5 : yabai -m window --space 5
+
+# throw to space six
+shift + ctrl - 6 : yabai -m window --space 6
+
+# throw to space seven
+shift + ctrl - 6 : yabai -m window --space 7
+
+# focus main display
+shift + alt + ctrl - 1 : yabai -m display --focus 1
+
+# focus secondary display
+shift + alt + ctrl - 2 : yabai -m display --focus 2
+
+# flip tree horizontally
+shift + alt - h: yabai -m space --mirror x-axis
+
+# flip tree vertically 
+shift + alt - l: yabai -m space --mirror y-axis
+
+# rotate the windows clockwise
+shift + alt - r: yabai -m space --rotate 90
+
+# safety on for widgets
+shift + ctrl - s: osascript -e "tell application id \"tracesOf.Uebersicht\" to set hidden of widget id \"Nerdsmirk-jsx\" to true"
+
+# safety off for widgets
+shift + ctrl + alt - s: osascript -e "tell application id \"tracesOf.Uebersicht\" to set hidden of widget id \"Nerdsmirk-jsx\" to false"
+
+# sticky/unsticky the window
+shift + ctrl + cmd - s: yabai -m window --toggle sticky
+
+# spacy clipboard
+shift + alt + cmd - c: python3 ~/h4ck3r/scripts/spacy.py
