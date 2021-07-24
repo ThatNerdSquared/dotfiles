@@ -115,6 +115,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # USER DEFINED REQUIRED
+export PATH="/opt/homebrew/bin:$PATH"
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
   . /usr/local/etc/profile.d/z.sh
 
