@@ -117,7 +117,7 @@ source $ZSH/oh-my-zsh.sh
 # USER DEFINED REQUIRED
 export PATH="/opt/homebrew/bin:$PATH"
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-  . /usr/local/etc/profile.d/z.sh
+  . /opt/homebrew/etc/profile.d/z.sh
 
 # USER DEFINED ALIASES/FUNCTIONS
 alias editrc="nvim ~/dotfiles/.zshrc"

@@ -7,6 +7,9 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+" Set python
+let g:python3_host_prog="/usr/bin/python3"
+
 " vim-plug initialization
 call plug#begin("~/.config/nvim/plugged")
 
