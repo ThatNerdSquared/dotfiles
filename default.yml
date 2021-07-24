@@ -1,0 +1,145 @@
+# espanso configuration file
+
+# This is the default configuration file, change it as you like it
+# You can refer to the official documentation:
+# https://espanso.org/docs/
+toggle_key: CTRL
+
+# Matches are the substitution rules, when you type the "trigger" string
+# it gets replaced by the "replace" string.
+matches:
+  # Simple text replacement
+  - trigger: "/espanso"
+    replace: "Hi there!"
+  - trigger: "/newsnippet"
+    replace: "  - trigger: \"\"\nreplace: \"\""
+  - trigger: "/qq"
+    replace: "QUESTION: "
+  - trigger: "/dff"
+    replace: "DEFINITION: "
+  - trigger: "/exm"
+    replace: "EXAMPLE: "
+  - trigger: "/hhw"
+    replace: "HOWEVER: "
+  - trigger: "/ccn"
+    replace: "CONCLUSION: "
+  - trigger: "/ny"
+    replace: "Nathan Yeung"
+  - trigger: "/shrug"
+    replace: "¯\\_(ツ)_/¯"
+  - trigger: "/imd"
+    replace: "![](./attachments/.png)"
+  - trigger: "/mdc"
+    replace: "[//]: # \"\""
+  # Contact info
+  - trigger: "/email"
+    replace: "***REMOVED***"
+  - trigger: "/phone"
+    replace: "***REMOVED***"
+  - trigger: "/momphone"
+    replace: "***REMOVED***"
+  # Emotes
+  - trigger: "/emote"
+    replace: "{{emote}}"
+    vars:
+    - name: form1
+      type: form
+      params:
+        layout: |
+          Which emote should be copied?
+          _0| :cjoy:
+          _1| :hug:
+          _2| :kittysmile:
+          _3| :csmile:
+          _4| :yes:
+          _5| :blurry_eyes:
+          _6| :mmtea:
+          _7| :travelerBruh:
+          _8| :fancythink:
+          _9| :joystroke:
+          10| :chongyunCool:
+          11| :chongyunShock:
+          12| :chongyunSad:
+          13| :elixir:
+          {{name}}
+    - name: emote
+      type: shell
+      params:
+       cmd: "python3 /Users/nathanyeung/h4ck3r/scripts/emojis.py $ESPANSO_FORM1_NAME"
+  - trigger: ";;cjoy" 
+    replace: "https://cdn.discordapp.com/emojis/709811770264387665.png?size=64"
+  - trigger: ";;hug" 
+    replace: "https://cdn.discordapp.com/emojis/654337058923610133.png?size=64"
+  - trigger: ";;kittysmile" 
+    replace: "https://cdn.discordapp.com/emojis/821846594064220190.png?size=64"
+  - trigger: ";;csmile" 
+    replace: "https://cdn.discordapp.com/emojis/710211363640705045.png?size=64"
+  - trigger: ";;yes" 
+    replace: "https://cdn.discordapp.com/emojis/562072692086276118.png?size=64"
+  - trigger: ";;blurry_eyes" 
+    replace: "https://cdn.discordapp.com/emojis/751962882908094546.png?size=64"
+  - trigger: ";;mmtea" 
+    replace: "https://cdn.discordapp.com/emojis/585828753373003787.png?size=64"
+  - trigger: ";;travelerBruh" 
+    replace: "https://cdn.discordapp.com/emojis/854093158384402483.png?size=64"
+  - trigger: ";;fancythink" 
+    replace: "https://cdn.discordapp.com/emojis/588732963127164956.png?size=64"
+  - trigger: ";;joystroke" 
+    replace: "https://cdn.discordapp.com/emojis/830592461315375146.png?size=64"
+  - trigger: ";;chongyunCool"
+    replace: "https://cdn.discordapp.com/emojis/855157324041551923.png?size=64"
+  - trigger: ";;chongyunShock"
+    replace: "https://cdn.discordapp.com/emojis/855159654241271848.png?size=64"
+  - trigger: ";;chongyunSad"
+    replace: "https://cdn.discordapp.com/emojis/855161416951791627.png?size=64"
+  - trigger: ";;elixir"
+    replace: "https://cdn.discordapp.com/emojis/856335287926915092.png?size=64"
+  # GIFS
+  - trigger: "''dilucfail"
+    replace: "https://tenor.com/view/val-genshin-impact-diluc-destination-of-fate-gif-21305592"
+  - trigger: "''raid"
+    replace: "https://tenor.com/view/once-breach-fight-gif-18135810"
+
+  # LaTeX
+  - trigger: "/fr"
+    replace: "\\frac{}{}"
+  - trigger: "/nf"
+    replace: "-\\frac{}{}"
+  - trigger: "/lfr"
+    replace: "$\\frac{}{}$"
+  - trigger: "/lnf"
+    replace: "$-\\frac{}{}$"
+  - trigger: "/lpr"
+    replace: "$()$"
+  - trigger: "/op"
+    replace: "$(, )$"
+  - trigger: "/1leq"
+    replace: "$\\bold{1}$: $$"
+  - trigger: "/2leq"
+    replace: "$\\bold{2}$: $$"
+  - trigger: "/1xleq"
+    replace: "$\\bold{1}\\times$: $$"
+  - trigger: "/2xleq"
+    replace: "$\\bold{2}\\times$: $$"
+  - trigger: "/1sub"
+    replace: "substitute $\\bold{1}$ into $\\bold{2}$: $$"
+  - trigger: "/2sub"
+    replace: "substitute $\\bold{2}$ into $\\bold{1}$: $$"
+
+  # Dates
+  - trigger: "/date"
+    replace: "{{mydate}}"
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%Y-%m-%d"
+
+  # Shell commands
+  - trigger: "/shell"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: "echo Hello from your shell"
