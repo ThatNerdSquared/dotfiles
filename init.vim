@@ -13,6 +13,8 @@ let g:python3_host_prog="/usr/bin/python3"
 " vim-plug initialization
 call plug#begin("~/.config/nvim/plugged")
 
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/goyo.vim' " hide UI for writing/coding
 Plug 'junegunn/limelight.vim' " focus line for writing/coding
 Plug 'reedes/vim-pencil' " Soft wrap! 
@@ -28,19 +30,23 @@ Plug 'kana/vim-smartinput' " Autocloses brackets, braces, and more
 Plug 'junegunn/fzf' " Quick file finding
 Plug 'junegunn/fzf.vim' " Quick file finding
 Plug 'lervag/vimtex'
-let g:tex_flavor='latex'
-let g:vimtex_view_method='zathura'
-let g:vimtex_quickfix_mode=0
-set conceallevel=1
-let g:tex_conceal='abdmg'
+Plug 'sirver/ultisnips'
 
 call plug#end()
 
 " Plugin config
 
+" vim-airline plugin config.
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='fruit_punch'
+
 " Limelight plugin config.
 let g:limelight_conceal_ctermfg = 254 " Solarized Base1
 let g:limelight_conceal_guifg = '#eee8d5'  " Solarized Base1
+
+" YCM plugin config.
+let g:ycm_key_list_select_completion=[]
+let g:ycm_key_list_previous_completion=[]
 
 " ALE plugin config.
 let g:ale_sign_column_always = 1
@@ -54,7 +60,7 @@ let g:nvim_tree_show_icons = {
     \ 'files': 0,
     \ 'folder_arrows': 0,
     \ }
-let g:nvim_tree_auto_open = 1 "0 by default, opens the tree when typing `vim $DIR` or `vim`
+let g:nvim_tree_auto_open = 0 "0 by default, opens the tree when typing `vim $DIR` or `vim`
 let g:nvim_tree_auto_close = 1 "0 by default, closes the tree when it's the last window
 let g:nvim_tree_add_trailing = 1 "0 by default, append a trailing slash to folder names
 
@@ -67,6 +73,19 @@ let g:gitgutter_highlight_linenrs = 1
 nnoremap <C-p> :Buffers<CR>
 nnoremap <C-o> :Files<CR>
 
+" vimtex plugin config
+let g:tex_flavor='latex'
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+set conceallevel=1
+let g:tex_conceal='abdmg'
+
+" UltiSnips plugin config
+Plug 'sirver/ultisnips'
+let g:UltiSnipsExpandTrigger = '<tab>'
+let g:UltiSnipsJumpForwardTrigger = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+let g:UltiSnipsEditSplit="vertical"
 
 " General UI config
 set wrap linebreak
@@ -74,6 +93,7 @@ set list
 set number
 set listchars=tab:\|\ 
 set tabstop=4
+set shiftwidth=4
 
 
 " General bindings
@@ -107,3 +127,6 @@ inoremap ccn CONCLUSION:
 autocmd BufNewFile,BufRead *.md set spell
 autocmd BufNewFile,BufRead *.md nnoremap <leader>c :!pandoc "%:p" -o "%:p".pdf &<CR>
 
+" LaTeX also nice.
+autocmd BufNewFile,BufRead *.tex nnoremap <leader>c :!pdflatex "%:p"<CR>
+autocmd BufNewFile,BufRead *.tex nnoremap <C-e> $a\\
