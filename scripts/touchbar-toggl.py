@@ -1,30 +1,19 @@
 import tkinter as tk
-import requests
+from toggl.TogglPy import Toggl
 import os
 import dotenv
-import json
 
 dotenv.load_dotenv(override=True)
-
-headers = {'content-type': 'application/json'}
 auth = os.getenv("TOGGL_TOKEN")
-
-def get_project_id(project_name):
-    workspace_api = 'https://api.track.toggl.com/api/v8/workspaces'
-    r = requests.get(url = workspace_api, headers = headers, auth = auth)
-    data = json.loads(r.json())
-    print(data)
+toggl = Toggl()
+toggl.setAPIKey(auth)
 
 def activate(timer):
-    url = 'https://api.track.toggl.com/api/v8/time_entries/start'
-
-    data = {
-        "time_entry":{
-            "description":timer,
-            "pid":123,
-            "created_with":"touchbar-toggl"
-        }
-    }
+    project_name = timers[timer].upper() + '_TOGGL_PID'
+    pid = os.getenv(project_name)
+    toggl.startTimeEntry(timer, pid)
+    window.destroy()
+    return
 
 
 timers = {
@@ -51,7 +40,6 @@ for timer in timers:
         return activate(x)
     buttons[timer] = tk.Button(text = timer, command = action)
     buttons[timer].pack()
-    get_project_id('poggers')
 
 window.mainloop()
 
