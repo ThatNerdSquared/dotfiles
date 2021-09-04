@@ -38,22 +38,3 @@ for space in workspaces:
     buttons[space[0]].pack()
 
 window.mainloop()
-
-'''
-for space in workspaces:
-    layout.append([sg.Checkbox(space[1])])
-layout.append([sg.Submit(), sg.Cancel()])
-
-value = form.LayoutAndRead(layout)
-
-folder = workspaces[value]
-
-commands = [
-'tell application \"iTerm\"'
-'activate'
-'try'
-'create window with profile "Default" command nvim {folder[1]}'
-'end try'
-'end tell'
-]
-'''
