@@ -92,4 +92,9 @@ shift + ctrl + alt - s: osascript -e "tell application id \"tracesOf.Uebersicht\
 shift + ctrl + cmd - s: yabai -m window --toggle sticky
 
 # spacy clipboard
-shift + alt + cmd - c: python3 ~/h4ck3r/scripts/spacy.py
+shift + alt + cmd - c: python3 ~/dotfiles/scripts/spacy.py
+
+# TOUCHBAR TO KEYPAD
+alt - f13: python3 ~/dotfiles/scripts/touchbar-toggl.py
+alt - f14: python3 ~/dotfiles/scripts/touchbar-codespaces.py
+alt - f15: python3 ~/dotfiles/scripts/nukes.py
