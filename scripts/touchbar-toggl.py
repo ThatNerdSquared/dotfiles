@@ -8,7 +8,8 @@ auth = os.getenv("TOGGL_TOKEN")
 toggl = Toggl()
 toggl.setAPIKey(auth)
 
-def activate(timer):
+def activate(event):
+    timer = event.widget.get(event.widget.curselection()[0])
     project_name = timers[timer].upper() + '_TOGGL_PID'
     pid = os.getenv(project_name)
     toggl.startTimeEntry(timer, pid)
@@ -31,15 +32,15 @@ timers = {
 
 window = tk.Tk()
 window.title('Start Toggl Timer')
-label = tk.Label(text='Select Toggl timer:')
+
+label = tk.Label(text='Select Toggl timer:', padx=10, pady=10)
 label.pack()
 
-buttons = {}
+list = tk.Listbox(window, selectmode = 'single')
+list.bind('<<ListboxSelect>>', activate)
+list.pack(padx=10, pady=10, expand=True, fill="both")
 
 for timer in timers:
-    def action(x = timer):
-        return activate(x)
-    buttons[timer] = tk.Button(text = timer, command = action)
-    buttons[timer].pack()
+    list.insert(tk.END, timer)
 
 window.mainloop()
