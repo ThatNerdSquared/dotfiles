@@ -2,7 +2,6 @@ import tkinter as tk
 from toggl.TogglPy import Toggl
 import os
 import dotenv
-import nerdutils
 
 dotenv.load_dotenv(override=True)
 auth = os.getenv("TOGGL_TOKEN")
@@ -10,10 +9,11 @@ toggl = Toggl()
 toggl.setAPIKey(auth)
 
 def activate(timer):
-    print(timer)
     project_name = timers[timer].upper() + '_TOGGL_PID'
     pid = os.getenv(project_name)
     toggl.startTimeEntry(timer, pid)
+    window.destroy()
+    return
 
 
 timers = {
@@ -26,13 +26,20 @@ timers = {
     'KOA': 'Dev',
     'Errands': 'Work',
     'Piano': 'Work',
+    'FSL': 'Work',
 }
 
-buttons = []
+window = tk.Tk()
+window.title('Start Toggl Timer')
+label = tk.Label(text='Select Toggl timer:')
+label.pack()
+
+buttons = {}
+
 for timer in timers:
-    buttons.append(timer)
+    def action(x = timer):
+        return activate(x)
+    buttons[timer] = tk.Button(text = timer, command = action)
+    buttons[timer].pack()
 
-answer = nerdutils.applescript_prompt(buttons)
-print(answer)
-
-activate(answer)
+window.mainloop()
