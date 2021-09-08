@@ -98,3 +98,4 @@ shift + alt + cmd - c: python3 ~/dotfiles/scripts/spacy.py
 alt - f13: python3 ~/dotfiles/scripts/touchbar-toggl.py
 alt - f14: python3 ~/dotfiles/scripts/touchbar-codespaces.py
 alt - f15: python3 ~/dotfiles/scripts/nukes.py
+alt - f16: /usr/bin/automator /Users/nathanyeung/Library/Services/NerdPods.workflow
