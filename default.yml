@@ -34,6 +34,8 @@ matches:
   # Contact info
   - trigger: "/email"
     replace: "***REMOVED***"
+  - trigger: "/momemail"
+    replace: "***REMOVED***"
   - trigger: "/phone"
     replace: "***REMOVED***"
   - trigger: "/momphone"
