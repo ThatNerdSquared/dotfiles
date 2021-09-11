@@ -19,15 +19,16 @@ def activate(event):
 
 timers = {
     'Chill': 'Relaxation',
-    'Mr. Enns': 'Class',
-    'Olympiad': 'Class',
+    'Humanities': 'Work',
     'Harmony 10': 'Work',
-    'Foundations 11': 'Work',
-    'Biology': 'Work',
     'KOA': 'Dev',
-    'Errands': 'Work',
     'Piano': 'Work',
     'FSL': 'Work',
+    'Errands': 'Work',
+    'Biology': 'Work',
+    'Mr. Enns': 'Class',
+    'Olympiad': 'Class',
+    'Foundations 11': 'Work',
 }
 
 window = tk.Tk()
