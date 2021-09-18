@@ -24,11 +24,15 @@ timers = {
     'KOA': 'Dev',
     'Piano': 'Work',
     'FSL': 'Work',
+    'French': 'Work',
+    'Omega': 'Work',
+    'Omega Class': 'Class',
     'Errands': 'Work',
     'Biology': 'Work',
     'Mr. Enns': 'Class',
     'Olympiad': 'Class',
     'Foundations 11': 'Work',
+    'French': 'Work',
 }
 
 window = tk.Tk()
