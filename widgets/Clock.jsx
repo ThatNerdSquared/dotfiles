@@ -1,3 +1,4 @@
+export const command = "echo thatnerdwidget"
 // the refresh frequency in milliseconds
 export const refreshFrequency = 60000;
 

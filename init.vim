@@ -103,6 +103,12 @@ command -nargs=0 Zen Goyo | Limelight
 command -nargs=0 Unzen Goyo! \| Limelight!
 command -nargs=0 Focus Goyo
 command -nargs=0 Unfocus Goyo!
+command -nargs=0 Friendly !open -a Typora "%:p"
+nnoremap <C-S-t> NvimTreeToggle
+if has("nvim")
+  au! TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
+  au! FileType fzf tunmap <buffer> <Esc>
+endif
 
 
 " GUI config.
@@ -125,7 +131,8 @@ inoremap exx EXCEPTION:
 inoremap hhw HOWEVER:
 inoremap ccn CONCLUSION: 
 autocmd BufNewFile,BufRead *.md set spell
-autocmd BufNewFile,BufRead *.md nnoremap <leader>c :!pandoc "%:p" -o "%:p".pdf &<CR>
+autocmd BufNewFile,BufRead *.md nnoremap <leader>c :!pandoc "%:p" -o "%:r".pdf &<CR>
+autocmd BufNewFile,BufRead *.md nnoremap <leader>p :!pandoc "%:p" -o "%:r".docx &<CR>
 
 " LaTeX also nice.
 autocmd BufNewFile,BufRead *.tex nnoremap <leader>c :!pdflatex "%:p"<CR>
