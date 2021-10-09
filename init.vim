@@ -18,7 +18,12 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/goyo.vim' " hide UI for writing/coding
 Plug 'junegunn/limelight.vim' " focus line for writing/coding
 Plug 'reedes/vim-pencil' " Soft wrap! 
-Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --all' } " Autocomplete code
+" Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --all' } " Autocomplete code
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 Plug 'peitalin/vim-jsx-typescript' " This and the next are for TSX highlighting.
 Plug 'mmai/wikilink' " Wikilink support
 Plug 'dense-analysis/ale' " Linting.
@@ -31,8 +36,85 @@ Plug 'junegunn/fzf' " Quick file finding
 Plug 'junegunn/fzf.vim' " Quick file finding
 Plug 'lervag/vimtex'
 Plug 'sirver/ultisnips'
+Plug 'overcache/NeoSolarized'
 
 call plug#end()
+
+" nvim-lsp configuration
+lua <<EOF
+  -- Setup nvim-cmp.
+  local cmp = require'cmp'
+
+  cmp.setup({
+    snippet = {
+      expand = function(args)
+        vim.fn["UltiSnips#Anon"](args.body)
+      end,
+    },
+    mapping = {
+      ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.close(),
+      ['<Tab>'] = cmp.mapping.confirm({ select = true }),
+    },
+    sources = {
+      { name = 'nvim_lsp' },
+      { name = 'ultisnips' },
+      { name = 'buffer' },
+    }
+  })
+
+  -- Setup lspconfig.
+  -- Servers: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
+  require('lspconfig')["arduino_language_server"].setup {
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  }
+  require'lspconfig'.arduino_language_server.setup({
+	cmd =  {
+		"arduino-language-server",
+		"-cli-config", "/Users/nathanyeung/Library/Arduino15/arduino-cli.yaml",
+		"-cli", "/opt/homebrew/bin/arduino-cli",
+        "-clangd", "/opt/homebrew/opt/llvm/bin/clangd"
+	},
+  })
+  require('lspconfig')["bashls"].setup {
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  }
+  require('lspconfig')["clangd"].setup {
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  }
+  require('lspconfig')["cssls"].setup {
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  }
+  require('lspconfig')["gopls"].setup {
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  }
+  require('lspconfig')["html"].setup {
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  }
+  require('lspconfig')["jsonls"].setup {
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  }
+  require('lspconfig')["pyright"].setup {
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  }
+  require('lspconfig')["r_language_server"].setup {
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  }
+  require('lspconfig')["rust_analyzer"].setup {
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  }
+  require('lspconfig')["texlab"].setup {
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  }
+  require('lspconfig')["tsserver"].setup {
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  }
+  require('lspconfig')["vimls"].setup {
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  }
+EOF
 
 " Plugin config
 
@@ -72,6 +154,8 @@ let g:gitgutter_highlight_linenrs = 1
 " fzf.vim plugin config
 nnoremap <C-p> :Buffers<CR>
 nnoremap <C-o> :Files<CR>
+nnoremap <D-p> :Buffers<CR>
+nnoremap <D-o> :Files<CR>
 
 " vimtex plugin config
 let g:tex_flavor='latex'
@@ -104,19 +188,31 @@ command -nargs=0 Unzen Goyo! \| Limelight!
 command -nargs=0 Focus Goyo
 command -nargs=0 Unfocus Goyo!
 command -nargs=0 Friendly !open -a Typora "%:p"
-nnoremap <C-S-t> NvimTreeToggle
+nnoremap <C-S-e> :NvimTreeToggle
 if has("nvim")
-  au! TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
-  au! FileType fzf tunmap <buffer> <Esc>
+	au! TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
+	au! FileType fzf tunmap <buffer> <Esc>
 endif
+
+nnoremap <D-t> :tabnew<CR>
+nnoremap <D-w> :tabclose<CR>
+inoremap <D-v> <ESC>"*pi
+nnoremap <D-1> :tabn 1<CR>
+nnoremap <D-2> :tabn 2<CR>
+nnoremap <D-3> :tabn 3<CR>
+nnoremap <D-4> :tabn 4<CR>
+nnoremap <D-5> :tabn 5<CR>
+nnoremap <D-6> :tabn 6<CR>
+nnoremap <D-7> :tabn 7<CR>
+nnoremap <D-8> :tabn 8<CR>
+nnoremap <D-9> :tabn 9<CR>
 
 
 " GUI config.
 set background=light
-colo solarized
-if has("gui_running")
-	colorscheme pencil
-endif
+colo NeoSolarized
+set termguicolors
+let g:neovide_input_use_logo=v:true
 
 " JS config.
 autocmd BufNewFile,BufRead *.js nnoremap <C-/> I//<esc>
