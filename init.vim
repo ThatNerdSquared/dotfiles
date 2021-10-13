@@ -24,7 +24,7 @@ Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'quangnguyen30192/cmp-nvim-ultisnips'
-Plug 'peitalin/vim-jsx-typescript' " This and the next are for TSX highlighting.
+Plug 'peitalin/vim-jsx-typescript' " TSX highlighting.
 Plug 'mmai/wikilink' " Wikilink support
 Plug 'dense-analysis/ale' " Linting.
 Plug 'kyazdani42/nvim-tree.lua' " filetree
@@ -46,73 +46,73 @@ lua <<EOF
   local cmp = require'cmp'
 
   cmp.setup({
-    snippet = {
-      expand = function(args)
-        vim.fn["UltiSnips#Anon"](args.body)
-      end,
-    },
-    mapping = {
-      ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-      ['<C-f>'] = cmp.mapping.scroll_docs(4),
-      ['<C-Space>'] = cmp.mapping.complete(),
-      ['<C-e>'] = cmp.mapping.close(),
-      ['<Tab>'] = cmp.mapping.confirm({ select = true }),
-    },
-    sources = {
-      { name = 'nvim_lsp' },
-      { name = 'ultisnips' },
-      { name = 'buffer' },
-    }
+	snippet = {
+	  expand = function(args)
+		vim.fn["UltiSnips#Anon"](args.body)
+	  end,
+	},
+	mapping = {
+	  ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+	  ['<C-f>'] = cmp.mapping.scroll_docs(4),
+	  ['<C-Space>'] = cmp.mapping.complete(),
+	  ['<C-e>'] = cmp.mapping.close(),
+	  ['<Tab>'] = cmp.mapping.confirm({ select = true }),
+	},
+	sources = {
+	  { name = 'nvim_lsp' },
+	  { name = 'ultisnips' },
+	  { name = 'buffer' },
+	}
   })
 
   -- Setup lspconfig.
   -- Servers: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
   require('lspconfig')["arduino_language_server"].setup {
-    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+	capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   }
   require'lspconfig'.arduino_language_server.setup({
 	cmd =  {
 		"arduino-language-server",
 		"-cli-config", "/Users/nathanyeung/Library/Arduino15/arduino-cli.yaml",
 		"-cli", "/opt/homebrew/bin/arduino-cli",
-        "-clangd", "/opt/homebrew/opt/llvm/bin/clangd"
+		"-clangd", "/opt/homebrew/opt/llvm/bin/clangd"
 	},
   })
   require('lspconfig')["bashls"].setup {
-    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+	capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   }
   require('lspconfig')["clangd"].setup {
-    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+	capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   }
   require('lspconfig')["cssls"].setup {
-    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+	capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   }
   require('lspconfig')["gopls"].setup {
-    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+	capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   }
   require('lspconfig')["html"].setup {
-    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+	capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   }
   require('lspconfig')["jsonls"].setup {
-    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+	capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   }
   require('lspconfig')["pyright"].setup {
-    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+	capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   }
   require('lspconfig')["r_language_server"].setup {
-    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+	capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   }
   require('lspconfig')["rust_analyzer"].setup {
-    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+	capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   }
   require('lspconfig')["texlab"].setup {
-    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+	capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   }
   require('lspconfig')["tsserver"].setup {
-    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+	capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   }
   require('lspconfig')["vimls"].setup {
-    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+	capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   }
 EOF
 
@@ -137,11 +137,11 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " NvimTree plugin config.
 let g:nvim_tree_show_icons = {
-    \ 'git': 1,
-    \ 'folders': 0,
-    \ 'files': 0,
-    \ 'folder_arrows': 0,
-    \ }
+	\ 'git': 1,
+	\ 'folders': 0,
+	\ 'files': 0,
+	\ 'folder_arrows': 0,
+	\ }
 let g:nvim_tree_auto_open = 0 "0 by default, opens the tree when typing `vim $DIR` or `vim`
 let g:nvim_tree_auto_close = 1 "0 by default, closes the tree when it's the last window
 let g:nvim_tree_add_trailing = 1 "0 by default, append a trailing slash to folder names
@@ -188,12 +188,13 @@ command -nargs=0 Unzen Goyo! \| Limelight!
 command -nargs=0 Focus Goyo
 command -nargs=0 Unfocus Goyo!
 command -nargs=0 Friendly !open -a Typora "%:p"
-nnoremap <C-S-e> :NvimTreeToggle
+command -nargs=0 Einit tabedit ~/dotfiles/init.vim
 if has("nvim")
 	au! TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
 	au! FileType fzf tunmap <buffer> <Esc>
 endif
 
+" GUI bindings
 nnoremap <D-t> :tabnew<CR>
 nnoremap <D-w> :tabclose<CR>
 inoremap <D-v> <ESC>"*pi
