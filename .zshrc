@@ -176,6 +176,9 @@ alias py.emoji="python3 /Users/nathanyeung/dotfiles/scripts/emojis.py"
 py\.emoji() {
     python3 /Users/nathanyeung/h4ck3r/dotfiles/emojis.py $1
 }
+m4a2mp3() {
+	ffmpeg -i $1 -c:v copy -c:a libmp3lame -q:a 4 output.mp3
+}
 alias py.wc="python3 /Users/nathanyeung/dotfiles/scripts/wc.py"
 alias py.gifs="python3 /Users/nathanyeung/dotfiles/scripts/gifs.py"
 # Set Spaceship ZSH as a prompt

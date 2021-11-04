@@ -40,6 +40,15 @@ matches:
     replace: "***REMOVED***"
   - trigger: "/momphone"
     replace: "***REMOVED***"
+  # Video Scripts
+  - trigger: "/aroll"
+    replace: "A-ROLL: "
+  - trigger: "/broll"
+    replace: "B-ROLL: "
+  - trigger: "/conmus"
+    replace: "CONTINUOUS MUSIC: "
+  - trigger: "/sfx"
+    replace: "SOUND EFFECT: "
   # Emotes
   - trigger: "/emote"
     replace: "{{emote}}"

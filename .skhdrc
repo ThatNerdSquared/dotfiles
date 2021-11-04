@@ -38,10 +38,10 @@ ctrl + alt + cmd - k : yabai -m window --stack north
 ctrl + alt + cmd - j : yabai -m window --stack south
 
 # cycle forward thru stack
-ctrl + alt - j : yabai -m window --focus stack.next || yabai -m window --focus stack.first
+# ctrl + alt - j : yabai -m window --focus stack.next || yabai -m window --focus stack.first
 
 # cycle backward thru stack
-ctrl + alt - k : yabai -m window --focus stack.prev || yabai -m window --focus stack.last
+# ctrl + alt - k : yabai -m window --focus stack.prev || yabai -m window --focus stack.last
 
 # unstack current window
 shift + alt - space : yabai -m window --toggle float
