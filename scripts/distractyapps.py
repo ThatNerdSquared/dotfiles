@@ -14,6 +14,6 @@
 
 import subprocess
 
-appNames = ['Discord', 'Microsoft Teams', 'MPU Talk']
+appNames = ['Discord', 'Microsoft Teams', 'MPU Talk', 'Twitter']
 for app in appNames:
 	subprocess.Popen(f'open -a \'{app}\'', shell=True)

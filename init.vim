@@ -41,6 +41,8 @@ else
 	Plug 'lervag/vimtex'
 	Plug 'sirver/ultisnips'
 	Plug 'overcache/NeoSolarized'
+    Plug 'thaerkh/vim-indentguides' " Indentation guides for space indents
+
 
 	call plug#end()
 
@@ -50,6 +52,7 @@ else
 
 	" vim-airline plugin config.
 	let g:airline#extensions#tabline#enabled = 1
+	let g:airline#extensions#tabline#fnamemod = ':t'
 	let g:airline_theme='fruit_punch'
 
 	" Limelight plugin config.
@@ -108,11 +111,14 @@ else
 	set listchars=tab:\|\ 
 	set tabstop=4
 	set shiftwidth=4
+	set expandtab
 
 
 	" General bindings
 	noremap k gk
 	noremap j gj
+	noremap <Tab> gt
+	noremap <S-Tab> gT
 	command -nargs=0 Zen Goyo | Limelight
 	command -nargs=0 Unzen Goyo! \| Limelight!
 	command -nargs=0 Focus Goyo
@@ -141,7 +147,8 @@ else
 
 	" GUI config.
 	set background=light
-	colo NeoSolarized
+    "colo NeoSolarized
+    colo lavender
 	set termguicolors
 	let g:neovide_input_use_logo=v:true
 
