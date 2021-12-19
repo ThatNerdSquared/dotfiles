@@ -8,7 +8,7 @@ yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^(Python)$" manage=off
 yabai -m rule --add app="^(Drafts)$" manage=off
 
-yabai -m config top_padding 23
+# yabai -m config top_padding 2
 # yabai -m config top_padding                  35
 # yabai -m config bottom_padding               15
 # yabai -m config left_padding                 15

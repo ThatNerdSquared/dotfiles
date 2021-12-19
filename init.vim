@@ -147,8 +147,7 @@ else
 
 	" GUI config.
 	set background=light
-    "colo NeoSolarized
-    colo lavender
+    colo NeoSolarized
 	set termguicolors
 	let g:neovide_input_use_logo=v:true
 
