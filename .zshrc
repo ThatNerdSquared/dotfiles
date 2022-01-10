@@ -9,6 +9,7 @@ export ZSH="/Users/nathanyeung/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="spaceship"
 SPACESHIP_PROMPT_ORDER=(
+  venv
   time          # Time stamps section
   user          # Username section
   dir           # Current directory section
@@ -124,6 +125,7 @@ export NVM_DIR="$HOME/.nvm"
   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # USER DEFINED ALIASES/FUNCTIONS
+export BAT_THEME="Solarized (light)"
 alias editrc="nvim ~/dotfiles/.zshrc"
 alias sourcerc="source ~/dotfiles/.zshrc"
 alias ll="ls -la"

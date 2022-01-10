@@ -22,7 +22,6 @@ else
 	Plug 'junegunn/goyo.vim' " hide UI for writing/coding
 	Plug 'junegunn/limelight.vim' " focus line for writing/coding
 	Plug 'reedes/vim-pencil' " Soft wrap! 
-	" Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --all' } " Autocomplete code
 	Plug 'neovim/nvim-lspconfig'
 	Plug 'hrsh7th/cmp-nvim-lsp'
 	Plug 'hrsh7th/cmp-buffer'
@@ -42,7 +41,11 @@ else
 	Plug 'sirver/ultisnips'
 	Plug 'overcache/NeoSolarized'
     Plug 'thaerkh/vim-indentguides' " Indentation guides for space indents
-
+    Plug 'szw/vim-maximizer'
+    " PlantUML support
+    Plug 'weirongxu/plantuml-previewer.vim'
+    Plug 'tyru/open-browser.vim'
+    Plug 'aklt/plantuml-syntax'
 
 	call plug#end()
 
@@ -58,10 +61,6 @@ else
 	" Limelight plugin config.
 	let g:limelight_conceal_ctermfg = 254 " Solarized Base1
 	let g:limelight_conceal_guifg = '#eee8d5'  " Solarized Base1
-
-	" YCM plugin config.
-	let g:ycm_key_list_select_completion=[]
-	let g:ycm_key_list_previous_completion=[]
 
 	" ALE plugin config.
 	let g:ale_sign_column_always = 1
@@ -157,12 +156,6 @@ else
 	" Markdown nice.
 	let g:markdown_folding = 1
 	set foldmethod=indent
-	inoremap qq QUESTION: 
-	inoremap dff DEFINITION
-	inoremap exm EXAMPLE: 
-	inoremap exx EXCEPTION: 
-	inoremap hhw HOWEVER:
-	inoremap ccn CONCLUSION: 
 	autocmd BufNewFile,BufRead *.md set spell
 	autocmd BufNewFile,BufRead *.md nnoremap <leader>c :!pandoc "%:p" -o "%:r".pdf &<CR>
 	autocmd BufNewFile,BufRead *.md nnoremap <leader>p :!pandoc "%:p" -o "%:r".docx &<CR>
