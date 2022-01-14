@@ -63,6 +63,10 @@ else
 	let g:limelight_conceal_guifg = '#eee8d5'  " Solarized Base1
 
 	" ALE plugin config.
+    let g:ale_linters = {
+    \   'javascript': ['eslint'],
+    \   'python': ['flake8'],
+    \}
 	let g:ale_sign_column_always = 1
 	nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 	nmap <silent> <C-j> <Plug>(ale_next_wrap)
