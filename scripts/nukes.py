@@ -16,13 +16,14 @@ import os
 
 illegals = [
     'Discord',
+    'MPU Talk',
     'Microsoft Teams',
-    'Hollow Knight',
+    'Slack',
     'GRIS',
+    'Hollow Knight',
     'Into the Breach',
     'Official Krunker.io Client',
     'IINA',
-    'MPU Talk',
     'Twitch',
     'Chatterino'
 ]

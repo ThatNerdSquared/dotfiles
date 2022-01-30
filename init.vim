@@ -132,6 +132,15 @@ else
 		au! TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
 		au! FileType fzf tunmap <buffer> <Esc>
 	endif
+    nnoremap <leader>f :MaximizerToggle<CR>
+    vnoremap <leader>f :MaximizerToggle<CR>
+    command -nargs=0 Spellen set spell spelllang=en_ca
+    command -nargs=0 Spellfr set spell spelllang=fr
+    command -nargs=0 Open !open "%:p" " open the file
+    nnoremap <leader>o :!open "%:p"<CR> " open the file
+    command -nargs=0 Openpdf !open "%:r".pdf " open the corresponding PDF file
+    nnoremap <leader>i :!open "%:r".pdf<CR> " open the corresponding PDF file
+
 
 	" GUI bindings
 	nnoremap <D-t> :tabnew<CR>
@@ -155,14 +164,16 @@ else
 	let g:neovide_input_use_logo=v:true
 
 	" JS config.
-	autocmd BufNewFile,BufRead *.js nnoremap <C-/> I//<esc>
+	autocmd BufNewFile,BufRead *.js,*.ts,*.jsx,*.tsx nnoremap <C-\/> I//<esc>
+    autocmd BufNewFile,BufRead *.js,*.ts,*.jsx,*.tsx command Prettier !npx prettier --config .prettierrc 'src/**/*.*' --write
+    autocmd BufNewFile,BufRead *.js,*.ts,*.jsx,*.tsx nnoremap <leader>r :!npx prettier --config .prettierrc 'src/**/*.*' --write &<CR>
 
 	" Markdown nice.
 	let g:markdown_folding = 1
 	set foldmethod=indent
 	autocmd BufNewFile,BufRead *.md set spell
-	autocmd BufNewFile,BufRead *.md nnoremap <leader>c :!pandoc "%:p" -o "%:r".pdf &<CR>
-	autocmd BufNewFile,BufRead *.md nnoremap <leader>p :!pandoc "%:p" -o "%:r".docx &<CR>
+	autocmd BufNewFile,BufRead *.md nnoremap <leader>c :!pandoc -f markdown+hard_line_breaks+yaml_metadata_block "%:p" -o "%:r".pdf --template eisvogel &<CR>
+	autocmd BufNewFile,BufRead *.md nnoremap <leader>p :!pandoc -f markdown+hard_line_breaks+yaml_metadata_block "%:p" -o "%:r".docx &<CR>
 
 	" LaTeX also nice.
 	autocmd BufNewFile,BufRead *.tex nnoremap <leader>c :!pdflatex "%:p"<CR>
