@@ -78,9 +78,8 @@ else
 		\ 'files': 0,
 		\ 'folder_arrows': 0,
 		\ }
-	let g:nvim_tree_auto_open = 0 "0 by default, opens the tree when typing `vim $DIR` or `vim`
-	let g:nvim_tree_auto_close = 1 "0 by default, closes the tree when it's the last window
 	let g:nvim_tree_add_trailing = 1 "0 by default, append a trailing slash to folder names
+    lua require'nvim-tree'.setup { auto_close = false }
 
 	" Gitgutter plugin config.
 	let g:gitgutter_signs = 0
