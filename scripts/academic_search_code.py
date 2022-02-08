@@ -21,8 +21,11 @@ import sys
 with open("/Users/nathanyeung/dotfiles/academic_search_codes.json", "r", encoding="UTF-8") as search_codes:
     data = json.load(search_codes)
 
-data[sys.argv[1]] += 1
-clipboard.copy(f"`{sys.argv[1]}{str(data[sys.argv[1]]).zfill(3)}`")
+proj = sys.argv[1]
+data[proj] += 1
+name = f"`{proj}{str(data[proj]).zfill(3)}`"
+search = str(clipboard.paste())
+clipboard.copy("".join(["- ", name, ": \"", search, "\""]))
 
 with open("/Users/nathanyeung/dotfiles/academic_search_codes.json", "w", encoding="UTF-8") as search_codes:
     json.dump(data, search_codes)
