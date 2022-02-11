@@ -16,8 +16,8 @@
 import os
 
 cmd = """tell application \\\"iTerm\\\"
-    activate
     create window with profile \\\"Powershell\\\"
+    activate
 end tell"""
 
 os.system(f"osascript -e \"{cmd}\"")
