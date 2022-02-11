@@ -29,3 +29,5 @@ clipboard.copy("".join(["- ", name, ": \"", search, "\""]))
 
 with open("/Users/nathanyeung/dotfiles/academic_search_codes.json", "w", encoding="UTF-8") as search_codes:
     json.dump(data, search_codes)
+
+print(name)
