@@ -20,12 +20,14 @@ SPACESHIP_PROMPT_ORDER=(
   xcode         # Xcode section
   swift         # Swift section
   battery       # Battery level and status
+  vi_mode       # Vi-mode indicator
   char          # Prompt character
 )
 SPACESHIP_USER_SHOW=always
 SPACESHIP_HOST_SHOW=always
 SPACESHIP_HOST_PREFIX="@"
 SPACESHIP_PROMPT_ADD_NEWLINE=false
+SPACESHIP_VI_MODE_COLOR=green
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -208,6 +210,9 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+
+bindkey -v
+eval spaceship_vi_mode_enable
 
 # heroku autocomplete setup
 HEROKU_AC_ZSH_SETUP_PATH=/Users/nathanyeung/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
