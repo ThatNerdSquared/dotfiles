@@ -1,0 +1,7 @@
+requests>=2.27.1
+beautifulsoup4>=4.10.0
+clipboard>=0.0.4
+TogglPy>=0.1.2
+python-dotenv>=0.19.0
+markdownify>=0.10.3
+emoji>=1.6.3
