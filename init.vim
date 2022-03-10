@@ -46,6 +46,8 @@ else
     Plug 'weirongxu/plantuml-previewer.vim'
     Plug 'tyru/open-browser.vim'
     Plug 'aklt/plantuml-syntax'
+    " Markdown preview support
+    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 	call plug#end()
 
@@ -65,11 +67,13 @@ else
 	" ALE plugin config.
     let g:ale_linters = {
     \   'javascript': ['eslint'],
-    \   'python': ['flake8'],
+    \   'python': ['flake8', 'pyright'],
     \}
 	let g:ale_sign_column_always = 1
 	nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 	nmap <silent> <C-j> <Plug>(ale_next_wrap)
+	nmap <silent> <A-i> <Plug>(ale-go-to-definition)
+	nmap <silent> <A-d> <Plug>(ale-find-references)
 
 	" NvimTree plugin config.
 	let g:nvim_tree_show_icons = {
