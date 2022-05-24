@@ -119,6 +119,7 @@ source $ZSH/oh-my-zsh.sh
 
 # USER DEFINED REQUIRED
 export PATH="/opt/homebrew/bin:$PATH"
+eval "$(/opt/homebrew/bin/brew shellenv)"
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
   . /opt/homebrew/etc/profile.d/z.sh
 

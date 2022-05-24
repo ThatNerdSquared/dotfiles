@@ -48,6 +48,8 @@ else
     Plug 'aklt/plantuml-syntax'
     " Markdown preview support
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+    Plug 'mattn/emmet-vim' "HTML Emmett support
+    Plug 'j-hui/fidget.nvim' " A cool LSP progress spinner.
 
 	call plug#end()
 
@@ -110,6 +112,9 @@ else
 	let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 	let g:UltiSnipsEditSplit="vertical"
 
+    " fidget.nvim config
+    lua require"fidget".setup{}
+
 	" General UI config
 	set wrap linebreak
 	set list
@@ -118,7 +123,6 @@ else
 	set tabstop=4
 	set shiftwidth=4
 	set expandtab
-
 
 	" General bindings
 	noremap k gk
@@ -144,7 +148,6 @@ else
     command -nargs=0 Openpdf !open "%:r".pdf " open the corresponding PDF file
     nnoremap <leader>i :!open "%:r".pdf<CR> " open the corresponding PDF file
 
-
 	" GUI bindings
 	nnoremap <D-t> :tabnew<CR>
 	nnoremap <D-w> :tabclose<CR>
@@ -159,17 +162,23 @@ else
 	nnoremap <D-8> :tabn 8<CR>
 	nnoremap <D-9> :tabn 9<CR>
 
-
 	" GUI config.
 	set background=light
     colo NeoSolarized
 	set termguicolors
 	let g:neovide_input_use_logo=v:true
 
+    " HTML config.
+    let g:user_emmet_leader_key='<Tab>'
+
 	" JS config.
 	autocmd BufNewFile,BufRead *.js,*.ts,*.jsx,*.tsx nnoremap <C-\/> I//<esc>
     autocmd BufNewFile,BufRead *.js,*.ts,*.jsx,*.tsx command Prettier !npx prettier --config .prettierrc 'src/**/*.*' --write
     autocmd BufNewFile,BufRead *.js,*.ts,*.jsx,*.tsx nnoremap <leader>r :!npx prettier --config .prettierrc 'src/**/*.*' --write &<CR>
+
+    " Python config.
+	autocmd BufNewFile,BufRead *.py nnoremap <leader>/ I# <esc>
+	autocmd BufNewFile,BufRead *.py command Runpy !python3 "%:p"<esc>
 
 	" Markdown nice.
 	let g:markdown_folding = 1

@@ -94,12 +94,8 @@ shift + ctrl + cmd - s: yabai -m window --toggle sticky
 # spacy clipboard
 shift + alt + cmd - c: python3 ~/dotfiles/scripts/spacy.py
 
-# hermes
-shift + alt + cmd - d: open "discord://discord.com/channels/@me/788866684479078440"
-
 # TOUCHBAR TO KEYPAD
 alt - f13: python3 ~/dotfiles/scripts/touchbar-toggl.py
 alt - f14: python3 ~/dotfiles/scripts/touchbar-codespaces.py
 alt - f15: python3 ~/dotfiles/scripts/nukes.py
 alt - f16: /usr/bin/automator /Users/nathanyeung/Library/Services/NerdPods.workflow
-alt - f17: open "discord://discord.com/channels/@me/788866684479078440"

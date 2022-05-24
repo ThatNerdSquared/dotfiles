@@ -25,6 +25,8 @@ matches:
     replace: "CONCLUSION: "
   - trigger: "/ny"
     replace: "Nathan Yeung"
+  - trigger: "/bday"
+    replace: "***REMOVED***"
   - trigger: "/shrug"
     replace: "¯\\_(ツ)_/¯"
   - trigger: "/imd"
@@ -154,3 +156,12 @@ matches:
         type: shell
         params:
           cmd: "echo Hello from your shell"
+  - trigger: "/iso"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: script
+        params:
+          args:
+            - python3
+            - /Users/nathanyeung/dotfiles/scripts/iso.py
