@@ -50,6 +50,7 @@ else
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
     Plug 'mattn/emmet-vim' "HTML Emmett support
     Plug 'j-hui/fidget.nvim' " A cool LSP progress spinner.
+    Plug 'rose-pine/neovim'
 
 	call plug#end()
 
@@ -86,6 +87,8 @@ else
 		\ }
 	let g:nvim_tree_add_trailing = 1 "0 by default, append a trailing slash to folder names
     lua require'nvim-tree'.setup { auto_close = false }
+    command Ft NvimTreeToggle
+    nnoremap <leader>e :NvimTreeToggle<CR>
 
 	" Gitgutter plugin config.
 	let g:gitgutter_signs = 0
@@ -164,7 +167,7 @@ else
 
 	" GUI config.
 	set background=light
-    colo NeoSolarized
+    colo rose-pine
 	set termguicolors
 	let g:neovide_input_use_logo=v:true
 
