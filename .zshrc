@@ -118,6 +118,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # USER DEFINED REQUIRED
+ulimit -n 65536
 export PATH="/opt/homebrew/bin:$PATH"
 eval "$(/opt/homebrew/bin/brew shellenv)"
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
@@ -129,6 +130,9 @@ export NVM_DIR="$HOME/.nvm"
 
 # USER DEFINED ALIASES/FUNCTIONS
 export BAT_THEME="Solarized (light)"
+e() {
+    nvim "$1"
+}
 alias editrc="nvim ~/dotfiles/.zshrc"
 alias sourcerc="source ~/dotfiles/.zshrc"
 alias ll="ls -la"
