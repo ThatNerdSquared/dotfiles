@@ -38,6 +38,7 @@ else
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim' " Fuzzy finder
     Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+    Plug 'nvim-telescope/telescope-live-grep-args.nvim'
     Plug 'szw/vim-maximizer' " Fullscreen the current pane
     Plug 'kana/vim-smartinput' " Autocloses brackets, braces, and more
     Plug 'airblade/vim-gitgutter' " Shows git changes in the gutter
@@ -51,6 +52,7 @@ else
     Plug 'weirongxu/plantuml-previewer.vim' " PlantUML 
     Plug 'tyru/open-browser.vim'
     Plug 'aklt/plantuml-syntax'
+    Plug 'leafOfTree/vim-svelte-plugin' " Svelte
 
     " Extra goodies.
     Plug 'junegunn/goyo.vim' " Hide UI for writing/coding
@@ -69,6 +71,7 @@ else
     let g:airline#extensions#tabline#enabled = 1
     let g:airline#extensions#tabline#fnamemod = ':t'
     let g:airline_theme='fruit_punch'
+    let g:airline#extensions#wordcount#filetypes = '\vasciidoc|help|mail|markdown|markdown.pandoc|org|rmd|rst|tex|text'
 
     " ALE config.
     let g:ale_linters = {
@@ -85,8 +88,11 @@ else
     lua require"fidget".setup{}
 
     " telescope config
+    lua require('telescope').setup({ defaults = { layout_strategy = "vertical", hidden = true, preview_cutoff = "1" } })
+    lua require("telescope").load_extension("live_grep_args")
     nnoremap <C-p> :lua require('telescope.builtin').buffers()<CR>
     nnoremap <C-o> :lua require('telescope.builtin').git_files()<CR>
+    nnoremap <C-f> :lua require("telescope").extensions.live_grep_args.live_grep_args({prompt_title = "< find >"})<CR>
     nnoremap <Leader>df :lua require('telescope.builtin').git_files({ prompt_title = "< dotfiles >", cwd = '~/dotfiles', hidden = true })<CR>
 
     " NvimTree config.
@@ -133,7 +139,10 @@ else
     set shiftwidth=4
     set expandtab
     set foldmethod=indent
-    set wrap linebreak
+    set breakindent
+    set formatoptions=l
+    set lbr
+    " set wrap linebreak
     set list
     setl tw=80
 
@@ -164,18 +173,20 @@ else
     autocmd BufNewFile,BufRead *.js,*.ts,*.jsx,*.tsx nnoremap <leader>/ I// <esc>
     autocmd BufNewFile,BufRead *.js,*.ts,*.jsx,*.tsx command Prettier !npx prettier --config .prettierrc 'src/**/*.*' --write
     autocmd BufNewFile,BufRead *.js,*.ts,*.jsx,*.tsx nnoremap <leader>r :!npx prettier --config .prettierrc 'src/**/*.*' --write &<CR>
+    let g:vim_svelte_plugin_load_full_syntax = 1
 
     " Python config.
     autocmd BufNewFile,BufRead *.py nnoremap <leader>/ I# <esc>
     autocmd BufNewFile,BufRead *.py command Runpy !python3 "%:p"
 
     " Markdown nice.
-    let g:markdown_folding = 1
+    autocmd BufNewFile,BufRead *.md let g:markdown_folding = 1
     autocmd BufNewFile,BufRead *.md set spell
     autocmd BufNewFile,BufRead *.md nnoremap <leader>c :!pandoc -f markdown+hard_line_breaks+yaml_metadata_block "%:p" -o "%:r".pdf --template eisvogel &<CR>
     autocmd BufNewFile,BufRead *.md nnoremap <leader>p :!pandoc -f markdown+hard_line_breaks+yaml_metadata_block "%:p" -o "%:r".docx &<CR>
     autocmd BufNewFile,BufRead *.md command -nargs=0 Openpdf !open "%:r".pdf " open the corresponding PDF file
     autocmd BufNewFile,BufRead *.md nnoremap <leader>i :!open "%:r".pdf<CR> " open the corresponding PDF file
+    autocmd BufNewFile,BufRead *.md set foldmethod=markdown
 
     " LaTeX also nice.
     autocmd BufNewFile,BufRead *.tex nnoremap <leader>c :!pdflatex "%:p"<CR>

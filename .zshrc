@@ -2,6 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/nathanyeung/.oh-my-zsh"
+OPENSSL_ROOT_DIR="/usr/bin/openssl"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -199,6 +200,8 @@ autoload -U promptinit; promptinit
 prompt spaceship
 export VISUAL=nvim
 export EDITOR="$VISUAL"
+alias shit="git restore ."
+alias stag="source .venv/bin/activate && jupyter lab --no-browser"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -222,3 +225,5 @@ eval spaceship_vi_mode_enable
 # heroku autocomplete setup
 HEROKU_AC_ZSH_SETUP_PATH=/Users/nathanyeung/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
 export PATH="/opt/homebrew/opt/python@3.10/bin:$PATH"
+
+eval $(thefuck --alias)

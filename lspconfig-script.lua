@@ -1,6 +1,7 @@
 -- nvim-lsp configuration
 -- Setup nvim-cmp.
 local cmp = require'cmp'
+local types = require('cmp.types')
 
 cmp.setup({
 snippet = {
@@ -9,6 +10,22 @@ snippet = {
 	end,
 },
 mapping = {
+  ['<Down>'] = cmp.mapping({
+    i = cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Select }),
+    c = function(fallback)
+      cmp.close()
+      vim.schedule(cmp.suspend())
+      fallback()
+    end,
+  }),
+  ['<Up>'] = cmp.mapping({
+    i = cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Select }),
+    c = function(fallback)
+      cmp.close()
+      vim.schedule(cmp.suspend())
+      fallback()
+    end,
+  }),
   ['<C-d>'] = cmp.mapping.scroll_docs(-4),
   ['<C-f>'] = cmp.mapping.scroll_docs(4),
   ['<C-Space>'] = cmp.mapping.complete(),

@@ -16,8 +16,12 @@ import clipboard
 import requests
 from bs4 import BeautifulSoup
 
-url = clipboard.paste()
-page = requests.get(url)
-soup = BeautifulSoup(page.text, 'html.parser')
-title = soup.title.string
-clipboard.copy(f'[{title}]({url})')
+urls = str(clipboard.paste()).splitlines()
+result = []
+for url in urls:
+    page = requests.get(url)
+    soup = BeautifulSoup(page.text, 'html.parser')
+    title = soup.title.string
+    result.append(f'[{title}]({url})')
+clipboard.copy('\n'.join(result))
+print("Done!")
