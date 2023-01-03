@@ -201,7 +201,9 @@ prompt spaceship
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 alias shit="git restore ."
-alias stag="source .venv/bin/activate && jupyter lab --no-browser"
+alias studio="source .venv/bin/activate && jupyter lab --no-browser"
+
+autoload zmv
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!

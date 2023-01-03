@@ -1,0 +1,13 @@
+matches:
+  - trigger: "/ny"
+    replace: "Nathan Yeung"
+  - trigger: "/bday"
+    replace: "***REMOVED***"
+  - trigger: "/email"
+    replace: "***REMOVED***"
+  - trigger: "/momemail"
+    replace: "***REMOVED***"
+  - trigger: "/phone"
+    replace: "***REMOVED***"
+  - trigger: "/momphone"
+    replace: "***REMOVED***"

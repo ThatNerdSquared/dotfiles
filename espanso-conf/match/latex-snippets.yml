@@ -1,0 +1,42 @@
+matches:
+  - trigger: /fr
+    replace: "\\frac{$|$}{}"
+  - trigger: /xt
+    replace: "\\times "
+  - trigger: /=>
+    replace: "\\rightarrow "
+  - trigger: /ltx
+    replace: "\\text{$|$}"
+  - trigger: /nf
+    replace: "-\\frac{}{}"
+  - trigger: /lfr
+    replace: "$\\frac{}{}$"
+  - trigger: /lnf
+    replace: "$-\\frac{}{}$"
+  - trigger: /lpr
+    replace: $()$
+  - trigger: /odp
+    replace: "$($|$, )$"
+  - trigger: /1leq
+    replace: "$\\bold{1}$: $$"
+  - trigger: /2leq
+    replace: "$\\bold{2}$: $$"
+  - trigger: /1xleq
+    replace: "$\\bold{1}\\times$: $$"
+  - trigger: /2xleq
+    replace: "$\\bold{2}\\times$: $$"
+  - trigger: /1sub
+    replace: "substitute $\\bold{1}$ into $\\bold{2}$: $$"
+  - trigger: /2sub
+    replace: "substitute $\\bold{2}$ into $\\bold{1}$: $$"
+  - trigger: /lal
+    replace: |
+      $$
+      \begin{aligned}
+      $|$
+      \end{aligned}
+      $$
+  - trigger: /drv
+    replace: "\\frac{d}{dx}"
+  - trigger: /sq
+    replace: "\\sqrt{$|$}"

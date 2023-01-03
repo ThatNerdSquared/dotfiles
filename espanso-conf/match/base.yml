@@ -1,0 +1,21 @@
+matches:
+  - trigger: /newsnippet
+    replace: "  - trigger: \"\"\nreplace: \"\""
+  - trigger: /shrug
+    replace: "¯\\_(ツ)_/¯"
+  - trigger: /date
+    replace: "{{mydate}}"
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%Y-%m-%d"
+  - trigger: /iso
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: script
+        params:
+          args:
+            - python3
+            - /Users/nathanyeung/dotfiles/scripts/iso.py

@@ -1,0 +1,5 @@
+matches:
+  - trigger: "''dilucfail"
+    replace: "https://tenor.com/view/val-genshin-impact-diluc-destination-of-fate-gif-21305592"
+  - trigger: "''raid"
+    replace: "https://tenor.com/view/once-breach-fight-gif-18135810"
