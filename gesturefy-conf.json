@@ -1,0 +1,111 @@
+{
+  "Exclusions": [
+    "krunker.io"
+  ],
+  "Gestures": [
+    {
+      "pattern": [
+        [
+          0,
+          -169
+        ],
+        [
+          8,
+          150
+        ]
+      ],
+      "command": {
+        "name": "RestoreTab",
+        "settings": {
+          "currentWindowOnly": false
+        }
+      }
+    },
+    {
+      "pattern": [
+        [
+          198,
+          6
+        ],
+        [
+          -56,
+          120
+        ],
+        [
+          5,
+          47
+        ]
+      ],
+      "command": {
+        "name": "ReloadTab",
+        "settings": {
+          "cache": true
+        }
+      }
+    },
+    {
+      "pattern": [
+        [
+          -6,
+          -306
+        ]
+      ],
+      "command": {
+        "name": "CloseTab",
+        "settings": {
+          "nextFocus": "default",
+          "closePinned": true
+        }
+      }
+    },
+    {
+      "pattern": [
+        [
+          0,
+          220
+        ],
+        [
+          -9,
+          57
+        ]
+      ],
+      "command": {
+        "name": "NewTab",
+        "settings": {
+          "position": "default",
+          "focus": true
+        }
+      }
+    },
+    {
+      "pattern": [
+        [
+          -417,
+          31
+        ]
+      ],
+      "command": {
+        "name": "PageBack"
+      }
+    },
+    {
+      "pattern": [
+        [
+          247,
+          -11
+        ]
+      ],
+      "command": {
+        "name": "PageForth"
+      }
+    }
+  ],
+  "Settings": {
+    "General": {
+      "theme": "light"
+    },
+    "Rocker": {
+      "active": true
+    }
+  }
+}

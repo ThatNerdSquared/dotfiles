@@ -202,6 +202,10 @@ export VISUAL=nvim
 export EDITOR="$VISUAL"
 alias shit="git restore ."
 alias studio="source .venv/bin/activate && jupyter lab --no-browser"
+alias stag="cd ~/h4ck3r/stag && source .venv/bin/activate && jupyter lab"
+pirate() {
+    youtube-dl $1 -x --audio-format mp3
+}
 
 autoload zmv
 
