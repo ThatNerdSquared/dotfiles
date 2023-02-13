@@ -1,6 +1,6 @@
 matches:
   - trigger: /newsnippet
-    replace: "  - trigger: \"\"\nreplace: \"\""
+    replace: "  - trigger: \n  replace: \"\""
   - trigger: /shrug
     replace: "¯\\_(ツ)_/¯"
   - trigger: /date
@@ -10,6 +10,13 @@ matches:
         type: date
         params:
           format: "%Y-%m-%d"
+  - trigger: /time
+    replace: "{{mytime}}"
+    vars:
+      - name: mytime
+        type: date
+        params:
+          format: "%H:%M"
   - trigger: /iso
     replace: "{{output}}"
     vars:

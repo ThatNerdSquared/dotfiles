@@ -3,6 +3,10 @@ matches:
     replace: "\\frac{$|$}{}"
   - trigger: /xt
     replace: "\\times "
+  - trigger: /lbld
+    replace: "\\textbf{$|$}"
+  - trigger: /llbld
+    replace: "\\textbf{$|$} \\\\\n"
   - trigger: /=>
     replace: "\\rightarrow "
   - trigger: /ltx
@@ -32,11 +36,28 @@ matches:
   - trigger: /lal
     replace: |
       $$
-      \begin{aligned}
+      \begin{align*}
       $|$
-      \end{aligned}
+      \end{align*}
       $$
+  - trigger: /oal
+    replace: |
+      \begin{align*}
+      $|$
+      \end{align*}
   - trigger: /drv
     replace: "\\frac{d}{dx}"
   - trigger: /sq
     replace: "\\sqrt{$|$}"
+  - trigger: /cit
+    replace: "$A = P(1 + \\frac{r}{n})^{nt}$"
+  - trigger: /acit
+    replace: "A &= P(1 + \\frac{r}{n})^{nt} \\\\"
+  - trigger: /pert
+    replace: "$Pe^{rt}$"
+  - trigger: /apert
+    replace: "A &= Pe^{rt} \\\\"
+  - trigger: /mep
+    replace: "^{$|$}"
+  - trigger: /rlh
+    replace: "\\rightleftharpoons "

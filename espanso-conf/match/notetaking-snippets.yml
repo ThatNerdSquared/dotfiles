@@ -33,3 +33,5 @@ matches:
     form_fields:
       notes:
         multiline: true
+  - trigger: ^^2
+    replace: "²"
