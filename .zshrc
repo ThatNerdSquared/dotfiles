@@ -156,12 +156,11 @@ vscode() {
 alias darkmode="osascript ~/darkmode.scpt"
 alias lightmode="osascript ~/lightmode.scpt"
 entervault() {
-    cd ~/OneDrive/Documents/notes-squared
+    cd ~/OneDrive/Documents/cyberplace-book
     nvim .
 }
-alias catrc="cat ~/dotfiles/.zshrc"
+alias catrc="cat ~/dotfiles/.zshrc | less"
 alias listapps="osascript -e 'tell application "System Events" to get name of (processes where background only is false)'"
-alias raidroom="open discord://discord.com/channels/382364344731828224/668869769553772574"
 quit() {
     osascript -e 'quit app "$1"'
 }
@@ -192,6 +191,7 @@ py\.emoji() {
 }
 m4a2mp3() {
 	ffmpeg -i $1 -c:v copy -c:a libmp3lame -q:a 4 output.mp3
+    cowsay "m4a converted to mp3!" | lolcat
 }
 alias py.wc="python3 /Users/nathanyeung/dotfiles/scripts/wc.py"
 alias py.gifs="python3 /Users/nathanyeung/dotfiles/scripts/gifs.py"
@@ -205,6 +205,19 @@ alias studio="source .venv/bin/activate && jupyter lab --no-browser"
 alias stag="cd ~/h4ck3r/stag && source .venv/bin/activate && jupyter lab"
 pirate() {
     youtube-dl $1 -x --audio-format mp3
+}
+pdfify() {
+    filename=$(basename "$1" | cut -d. -f1)
+    pandoc "$filename".md -o "$filename".pdf --template=eisvogel
+    cowsay "pdfified!" | lolcat
+    open "$filename".pdf
+}
+importtimers() {
+    mv timers ~/.Trash/
+    cp -r ~/h4ck3r/timers-for-raycast ./timers
+    cd timers/
+    mv .DS_Store .git/ .gitignore .vscode .idea ~/.Trash/
+    cowsay "copy of timers-for-raycast imported!" | lolcat
 }
 
 autoload zmv
@@ -230,6 +243,6 @@ eval spaceship_vi_mode_enable
 
 # heroku autocomplete setup
 HEROKU_AC_ZSH_SETUP_PATH=/Users/nathanyeung/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
-export PATH="/opt/homebrew/opt/python@3.10/bin:$PATH"
+export PATH="/opt/homebrew/opt/python@3.11/bin:$PATH"
 
 eval $(thefuck --alias)

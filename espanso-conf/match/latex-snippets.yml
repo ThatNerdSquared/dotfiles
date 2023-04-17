@@ -3,6 +3,8 @@ matches:
     replace: "\\frac{$|$}{}"
   - trigger: /xt
     replace: "\\times "
+  - trigger: /xot
+    replace: "\\cdot "
   - trigger: /lbld
     replace: "\\textbf{$|$}"
   - trigger: /llbld
@@ -59,5 +61,10 @@ matches:
     replace: "A &= Pe^{rt} \\\\"
   - trigger: /mep
     replace: "^{$|$}"
+  - trigger: /cong
+    replace: "\\cong"
+# Chem
+  - trigger: /hnium
+    replace: "[H_3O]"
   - trigger: /rlh
     replace: "\\rightleftharpoons "

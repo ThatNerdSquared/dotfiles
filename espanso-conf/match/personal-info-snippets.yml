@@ -11,3 +11,5 @@ matches:
     replace: "***REMOVED***"
   - trigger: "/momphone"
     replace: "***REMOVED***"
+  - trigger: /sn
+    replace: "***REMOVED***"
