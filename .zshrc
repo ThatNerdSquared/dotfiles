@@ -204,7 +204,10 @@ alias shit="git restore ."
 alias studio="source .venv/bin/activate && jupyter lab --no-browser"
 alias stag="cd ~/h4ck3r/stag && source .venv/bin/activate && jupyter lab"
 pirate() {
-    youtube-dl $1 -x --audio-format mp3
+    yt-dlp $1 -x --audio-format mp3
+}
+vidl() {
+    yt-dlp $1 --format mp4
 }
 pdfify() {
     filename=$(basename "$1" | cut -d. -f1)
@@ -219,6 +222,10 @@ importtimers() {
     mv .DS_Store .git/ .gitignore .vscode .idea ~/.Trash/
     cowsay "copy of timers-for-raycast imported!" | lolcat
 }
+bvim() {
+    nvim -u NONE $1
+}
+alias fci="flutter analyze && dart format **/*.dart"
 
 autoload zmv
 

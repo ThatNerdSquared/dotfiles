@@ -1,6 +1,10 @@
 matches:
   - trigger: /fr
     replace: "\\frac{$|$}{}"
+  - trigger: /halfr
+    replace: "\\frac{$|$}{2}"
+  - trigger: /recp
+    replace: "\\frac{1}{$|$}"
   - trigger: /xt
     replace: "\\times "
   - trigger: /xot
@@ -14,11 +18,11 @@ matches:
   - trigger: /ltx
     replace: "\\text{$|$}"
   - trigger: /nf
-    replace: "-\\frac{}{}"
+    replace: "-\\frac{$|$}{}"
   - trigger: /lfr
-    replace: "$\\frac{}{}$"
+    replace: "$\\frac{$|$}{}$"
   - trigger: /lnf
-    replace: "$-\\frac{}{}$"
+    replace: "$-\\frac{$|$}{}$"
   - trigger: /lpr
     replace: $()$
   - trigger: /odp
@@ -63,6 +67,21 @@ matches:
     replace: "^{$|$}"
   - trigger: /cong
     replace: "\\cong"
+# Trig
+  - trigger: /sin
+    replace: "\\sin(\\theta)"
+  - trigger: /cos
+    replace: "\\cos(\\theta)"
+  - trigger: /tan
+    replace: "\\tan(\\theta)"
+  - trigger: /csc
+    replace: "\\csc(\\theta)"
+  - trigger: /sec
+    replace: "\\sec(\\theta)"
+  - trigger: /cot
+    replace: "\\cot(\\theta)"
+  - trigger: /pifr
+    replace: "\\frac{$|$\\pi}{}"
 # Chem
   - trigger: /hnium
     replace: "[H_3O]"
