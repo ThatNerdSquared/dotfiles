@@ -11,6 +11,8 @@ matches:
     replace: "EXCEPT: "
   - trigger: /ccn
     replace: "CONCLUSION: "
+  - trigger: /ans
+    replace: "ANSWER: "
   - trigger: /imd
     replace: "![](./attachments/$|$)"
   - trigger: /mdc

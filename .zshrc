@@ -216,10 +216,10 @@ pdfify() {
     open "$filename".pdf
 }
 importtimers() {
-    mv timers ~/.Trash/
+    rm -rf timers
     cp -r ~/h4ck3r/timers-for-raycast ./timers
     cd timers/
-    mv .DS_Store .git/ .gitignore .vscode .idea ~/.Trash/
+    rm -rf .DS_Store .git/ .gitignore .vscode .idea
     cowsay "copy of timers-for-raycast imported!" | lolcat
 }
 bvim() {
