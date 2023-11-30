@@ -12,7 +12,7 @@ else
     endif
 
     " Set python
-    let g:python3_host_prog="/usr/bin/python3"
+    let g:python3_host_prog="/opt/homebrew/bin/python3"
 
     " vim-plug initialization
     call plug#begin("~/.config/nvim/plugged")
@@ -39,6 +39,7 @@ else
     Plug 'nvim-telescope/telescope.nvim' " Fuzzy finder
     Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
     Plug 'nvim-telescope/telescope-live-grep-args.nvim'
+    Plug 'LukasPietzschmann/telescope-tabs'
     Plug 'szw/vim-maximizer' " Fullscreen the current pane
     Plug 'kana/vim-smartinput' " Autocloses brackets, braces, and more
     Plug 'airblade/vim-gitgutter' " Shows git changes in the gutter
@@ -49,10 +50,14 @@ else
     Plug 'peitalin/vim-jsx-typescript' " TSX highlighting.
     Plug 'lervag/vimtex' " LaTeX
     Plug 'mattn/emmet-vim' "HTML Emmett support
+    Plug 'dcampos/cmp-emmet-vim' " better emmet support?
     Plug 'weirongxu/plantuml-previewer.vim' " PlantUML 
     Plug 'tyru/open-browser.vim'
     Plug 'aklt/plantuml-syntax'
     Plug 'leafOfTree/vim-svelte-plugin' " Svelte
+    Plug 'quarto-dev/quarto-nvim'
+    Plug 'jmbuhr/otter.nvim'
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
     " Extra goodies.
     Plug 'junegunn/goyo.vim' " Hide UI for writing/coding
@@ -64,6 +69,7 @@ else
     call plug#end()
 
     source ~/dotfiles/lspconfig-script.lua
+    "source ~/dotfiles/treesitter-config.lua
 
     " Plugin config
 
@@ -71,7 +77,7 @@ else
     let g:airline#extensions#tabline#enabled = 1
     let g:airline#extensions#tabline#fnamemod = ':t'
     let g:airline_theme='fruit_punch'
-    let g:airline#extensions#wordcount#filetypes = '\vasciidoc|help|mail|markdown|markdown.pandoc|org|rmd|rst|tex|text'
+    let g:airline#extensions#wordcount#filetypes = '\vasciidoc|help|mail|markdown|markdown.pandoc|org|rmd|rst|tex|text|qmd'
 
     " ALE config.
     let g:ale_linters = {
@@ -93,7 +99,8 @@ else
     nnoremap <C-p> :lua require('telescope.builtin').buffers()<CR>
     nnoremap <C-o> :lua require('telescope.builtin').git_files()<CR>
     nnoremap <C-f> :lua require("telescope").extensions.live_grep_args.live_grep_args({prompt_title = "< find >"})<CR>
-    nnoremap <Leader>df :lua require('telescope.builtin').git_files({ prompt_title = "< dotfiles >", cwd = '~/dotfiles', hidden = true })<CR>
+    nnoremap <leader>df :lua require('telescope.builtin').git_files({ prompt_title = "< dotfiles >", cwd = '~/dotfiles', hidden = true })<CR>
+    nnoremap <leader>t :lua require('telescope-tabs').list_tabs()<CR>
 
     " NvimTree config.
     let g:nvim_tree_show_icons = {
@@ -103,7 +110,7 @@ else
         \ 'folder_arrows': 1,
         \ }
     let g:nvim_tree_add_trailing = 1 "0 by default, append a trailing slash to folder names
-    lua require'nvim-tree'.setup { auto_close = false }
+    lua require'nvim-tree'.setup { }
     command Ft NvimTreeToggle
     nnoremap <leader>e :NvimTreeToggle<CR>
 
@@ -112,14 +119,24 @@ else
     vnoremap <leader>f :MaximizerToggle<CR>
 
     " Gitgutter config.
-    let g:gitgutter_signs = 0
-    let g:gitgutter_highlight_lines = 1
+    "let g:gitgutter_signs = 0
+    "let g:gitgutter_highlight_lines = 1
+    "let g:gitgutter_set_sign_backgrounds = 1
+    "highlight! link SignColumn LineNr
+    "highlight GitGutterChange guifg=b4637a ctermfg=Red
+    "highlight GitGutterAdd    guifg=#009900 ctermfg=172
     let g:gitgutter_highlight_linenrs = 1
+    let g:gitgutter_sign_added = '█'
+    let g:gitgutter_sign_modified = '█'
+    let g:gitgutter_sign_removed = '█'
+    let g:gitgutter_sign_removed_first_line = '█'
+    let g:gitgutter_sign_removed_above_and_below = '█'
+    let g:gitgutter_sign_modified_removed = '█'
 
     " UltiSnips config
-    let g:UltiSnipsExpandTrigger = '<tab>'
-    let g:UltiSnipsJumpForwardTrigger = '<tab>'
-    let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+    let g:UltiSnipsExpandTrigger = '<C-S-tab>'
+    let g:UltiSnipsJumpForwardTrigger = '<C-S-tab>'
+    let g:UltiSnipsJumpBackwardTrigger = '<C-S-tab>'
     let g:UltiSnipsEditSplit="vertical"
 
     " vimtex config
@@ -136,6 +153,7 @@ else
     let g:limelight_conceal_guifg = '#eee8d5'  " Solarized Base1
 
     " General sets
+    set syntax
     set number relativenumber
     set tabstop=4
     set shiftwidth=4
@@ -146,17 +164,23 @@ else
     set lbr
     " set wrap linebreak
     set list
-    setl tw=80
+    set autoindent
+    set noignorecase
 
     " General bindings
     noremap k gk
     noremap j gj
-    noremap <Tab> gt
-    noremap <S-Tab> gT
+    noremap <leader>[ gT
+    noremap <leader>] gt
+    noremap <leader><leader> :tabnew<CR>
     command -nargs=0 Friendly !open -a MacDown "%:p"
     command -nargs=0 Einit tabedit ~/dotfiles/init.vim
     command -nargs=0 Spellen set spell spelllang=en_ca
     command -nargs=0 Spellfr set spell spelllang=fr
+    nnoremap Ï :lua vim.lsp.buf.format { async = true }<CR>
+    nnoremap [d :lua vim.diagnostic.goto_prev<CR>
+    nnoremap ]d :lua vim.diagnostic.goto_next<CR>
+    nnoremap <C-S-g> :Git<CR>
     if has("nvim")
         au! TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
         au! FileType fzf tunmap <buffer> <Esc>
@@ -169,7 +193,7 @@ else
     let g:neovide_input_use_logo=v:true
 
     " HTML config.
-    let g:user_emmet_leader_key='<Tab>'
+    let g:user_emmet_leader_key='<C-S-Tab>'
 
     " JS config.
     autocmd BufNewFile,BufRead *.js,*.ts,*.jsx,*.tsx nnoremap <leader>/ I// <esc>
@@ -183,16 +207,23 @@ else
 
     " Markdown nice.
     autocmd BufNewFile,BufRead *.md let g:markdown_folding = 1
+    autocmd BufNewFile,BufRead *.md setl tw=80
     autocmd BufNewFile,BufRead *.md set spell
     autocmd BufNewFile,BufRead *.md nnoremap <leader>c :!pandoc -f markdown+hard_line_breaks+yaml_metadata_block "%:p" -o "%:r".pdf --template eisvogel &<CR>
     autocmd BufNewFile,BufRead *.md nnoremap <leader>p :!pandoc -f markdown+hard_line_breaks+yaml_metadata_block "%:p" -o "%:r".docx &<CR>
     autocmd BufNewFile,BufRead *.md command -nargs=0 Openpdf !open "%:r".pdf " open the corresponding PDF file
     autocmd BufNewFile,BufRead *.md nnoremap <leader>i :!open "%:r".pdf<CR> " open the corresponding PDF file
     autocmd BufNewFile,BufRead *.md set foldmethod=markdown
+    let g:mkdp_command_for_global = 1 " allow markdown preview for all filetypes
+    nnoremap <leader>k :s/\[ \]/[x]/<CR>
+    nnoremap <leader>l :s/\[x\]/[ ]/<CR>
 
     " LaTeX also nice.
     autocmd BufNewFile,BufRead *.tex nnoremap <leader>c :!pdflatex "%:p"<CR>
     autocmd BufNewFile,BufRead *.tex nnoremap <C-e> $a\\
+
+    " Dart-specific config
+    "autocmd BufNewFile,BufRead *.dart set formatexpr='dart format'
 
     " GUI bindings
     nnoremap <D-t> :tabnew<CR>
@@ -207,4 +238,7 @@ else
     nnoremap <D-7> :tabn 7<CR>
     nnoremap <D-8> :tabn 8<CR>
     nnoremap <D-9> :tabn 9<CR>
+    nnoremap <D-p> :lua require('telescope.builtin').buffers()<CR>
+    nnoremap <D-o> :lua require('telescope.builtin').git_files()<CR>
+    nnoremap <leader>v :MarkdownPreview<CR>
 endif

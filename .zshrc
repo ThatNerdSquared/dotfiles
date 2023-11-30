@@ -17,11 +17,12 @@ SPACESHIP_PROMPT_ORDER=(
   host          # Hostname section
   git           # Git section (git_branch + git_status)
   package       # Package version
+  dart          # Dart section
   node          # Node.js section
   xcode         # Xcode section
   swift         # Swift section
   battery       # Battery level and status
-  vi_mode       # Vi-mode indicator
+  # vi_mode       # Vi-mode indicator
   char          # Prompt character
 )
 SPACESHIP_USER_SHOW=always
@@ -44,7 +45,7 @@ SPACESHIP_VI_MODE_COLOR=green
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to automatically update without prompting.
 # DISABLE_UPDATE_PROMPT="true"
@@ -78,7 +79,7 @@ SPACESHIP_VI_MODE_COLOR=green
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="yyyy-mm-dd"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -124,10 +125,6 @@ export PATH="/opt/homebrew/bin:$PATH"
 eval "$(/opt/homebrew/bin/brew shellenv)"
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
   . /opt/homebrew/etc/profile.d/z.sh
-
-export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # USER DEFINED ALIASES/FUNCTIONS
 export BAT_THEME="Solarized (light)"
@@ -197,7 +194,6 @@ alias py.wc="python3 /Users/nathanyeung/dotfiles/scripts/wc.py"
 alias py.gifs="python3 /Users/nathanyeung/dotfiles/scripts/gifs.py"
 # Set Spaceship ZSH as a prompt
 autoload -U promptinit; promptinit
-prompt spaceship
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 alias shit="git restore ."
@@ -226,6 +222,8 @@ bvim() {
     nvim -u NONE $1
 }
 alias fci="flutter analyze && dart format **/*.dart"
+alias openl="open '/Users/nathanyeung/Library/Containers/ca.failsafetech.lento/Data/Documents'"
+alias openp="open '/Users/nathanyeung/Library/Containers/ca.nathanyeung.peregrine/Data/Documents'"
 
 autoload zmv
 
@@ -246,10 +244,14 @@ unset __conda_setup
 
 
 bindkey -v
-eval spaceship_vi_mode_enable
+#eval spaceship_vi_mode_enable
 
 # heroku autocomplete setup
 HEROKU_AC_ZSH_SETUP_PATH=/Users/nathanyeung/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
 export PATH="/opt/homebrew/opt/python@3.11/bin:$PATH"
 
 eval $(thefuck --alias)
+
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+haven --init-view

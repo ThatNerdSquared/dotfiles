@@ -1,6 +1,10 @@
 matches:
   - trigger: /fr
     replace: "\\frac{$|$}{}"
+  - trigger: /dfr
+    replace: "\\dfrac{$|$}{}"
+  - trigger: /bigparen
+    replace: "\\left($|$\\right)"
   - trigger: /halfr
     replace: "\\frac{$|$}{2}"
   - trigger: /recp
@@ -87,3 +91,17 @@ matches:
     replace: "[H_3O]"
   - trigger: /rlh
     replace: "\\rightleftharpoons "
+# LaTeX document setup.
+  - trigger: /btex
+    replace: |
+      \documentclass{article}
+      \begin{document}
+      $|$
+      \end{document}
+  - trigger: /--
+    replace: \item 
+  - trigger: /bul
+    replace: |
+      \begin{itemize}
+          \item $|$
+      \end{itemize}

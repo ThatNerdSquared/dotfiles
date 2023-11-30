@@ -13,3 +13,5 @@ matches:
     replace: "***REMOVED***"
   - trigger: /snum
     replace: "***REMOVED***"
+  - trigger: /labid
+    replace: "***REMOVED***"
