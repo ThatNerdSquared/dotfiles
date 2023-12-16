@@ -1,5 +1,5 @@
 matches:
-  - trigger: /newsnippet
+  - trigger: /nsnip
     replace: "  - trigger: \n  replace: \"\""
   - trigger: /shrug
     replace: "¯\\_(ツ)_/¯"

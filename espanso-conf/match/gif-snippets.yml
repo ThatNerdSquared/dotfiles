@@ -3,5 +3,5 @@ matches:
     replace: "https://tenor.com/view/val-genshin-impact-diluc-destination-of-fate-gif-21305592"
   - trigger: "''raid"
     replace: "https://tenor.com/view/once-breach-fight-gif-18135810"
-  - trigger: /bruh
+  - trigger: "''bruh"
     replace: "https://tenor.com/view/clueless-aware-twitch-forsen-emote-gif-25354609\n"

@@ -152,10 +152,6 @@ vscode() {
 }
 alias darkmode="osascript ~/darkmode.scpt"
 alias lightmode="osascript ~/lightmode.scpt"
-entervault() {
-    cd ~/OneDrive/Documents/cyberplace-book
-    nvim .
-}
 alias catrc="cat ~/dotfiles/.zshrc | less"
 alias listapps="osascript -e 'tell application "System Events" to get name of (processes where background only is false)'"
 quit() {
@@ -224,6 +220,13 @@ bvim() {
 alias fci="flutter analyze && dart format **/*.dart"
 alias openl="open '/Users/nathanyeung/Library/Containers/ca.failsafetech.lento/Data/Documents'"
 alias openp="open '/Users/nathanyeung/Library/Containers/ca.nathanyeung.peregrine/Data/Documents'"
+alias loadios="open ios/Runner.xcworkspace"
+alias hh="nvim ~/heart-hands"
+alias ee="find ~/h4ck3r ~/dotfiles -mindepth 1 -maxdepth 2 -type d | fzf | xargs nvim"
+alias cc="find ~/h4ck3r ~/dotfiles -mindepth 1 -maxdepth 2 -type d | fzf | xargs code"
+fp() {
+    find $1 -mindepth 1 -maxdepth 2 | fzf | xargs open
+}
 
 autoload zmv
 
