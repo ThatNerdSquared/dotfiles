@@ -20,7 +20,8 @@ else
     " Basic theming and statusline.
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
-    Plug 'thaerkh/vim-indentguides' " Indentation guides for space indents
+    "Plug 'thaerkh/vim-indentguides' " Indentation guides for space indents
+    Plug 'lukas-reineke/indent-blankline.nvim'
     Plug 'rose-pine/neovim' " Colourscheme
 
     " LSP config.
@@ -69,7 +70,7 @@ else
     call plug#end()
 
     source ~/dotfiles/lspconfig-script.lua
-    "source ~/dotfiles/treesitter-config.lua
+    source ~/dotfiles/treesitter-config.lua
 
     " Plugin config
 
@@ -96,6 +97,7 @@ else
     " telescope config
     lua require('telescope').setup({ defaults = { layout_strategy = "vertical", hidden = true, preview_cutoff = "1" } })
     lua require("telescope").load_extension("live_grep_args")
+    autocmd FileType TelescopeResults setlocal nofoldenable
     nnoremap <C-p> :lua require('telescope.builtin').buffers()<CR>
     nnoremap <C-o> :lua require('telescope.builtin').git_files()<CR>
     nnoremap <C-f> :lua require("telescope").extensions.live_grep_args.live_grep_args({prompt_title = "< find >"})<CR>
@@ -132,6 +134,7 @@ else
     let g:gitgutter_sign_removed_first_line = '█'
     let g:gitgutter_sign_removed_above_and_below = '█'
     let g:gitgutter_sign_modified_removed = '█'
+    let g:gitgutter_sign_allow_clobber = 1
 
     " UltiSnips config
     let g:UltiSnipsExpandTrigger = '<C-S-tab>'
@@ -166,6 +169,7 @@ else
     set list
     set autoindent
     set noignorecase
+    set signcolumn=yes
 
     " General bindings
     noremap k gk
@@ -177,9 +181,13 @@ else
     command -nargs=0 Einit tabedit ~/dotfiles/init.vim
     command -nargs=0 Spellen set spell spelllang=en_ca
     command -nargs=0 Spellfr set spell spelllang=fr
+    command -nargs=0 Cp w !pbcopy
     nnoremap Ï :lua vim.lsp.buf.format { async = true }<CR>
-    nnoremap [d :lua vim.diagnostic.goto_prev<CR>
-    nnoremap ]d :lua vim.diagnostic.goto_next<CR>
+    nnoremap [d :lua vim.diagnostic.goto_prev()<CR>
+    nnoremap ]d :lua vim.diagnostic.goto_next()<CR>
+    nnoremap <C-S-g> :Git<CR>
+    nnoremap <silent> <A-Up> :m-2<CR>
+    nnoremap <silent> <A-Down> :m+1<CR>
     nnoremap <C-S-g> :Git<CR>
     if has("nvim")
         au! TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
@@ -188,6 +196,7 @@ else
 
     " GUI config.
     set background=light
+    lua require('rose-pine').setup({ disable_italics = true })
     colo rose-pine
     set termguicolors
     let g:neovide_input_use_logo=v:true
@@ -221,9 +230,18 @@ else
     " LaTeX also nice.
     autocmd BufNewFile,BufRead *.tex nnoremap <leader>c :!pdflatex "%:p"<CR>
     autocmd BufNewFile,BufRead *.tex nnoremap <C-e> $a\\
+    autocmd BufNewFile,BufRead *.tex nnoremap <leader>i :!open "%:r".pdf<CR> " open the corresponding PDF file
 
     " Dart-specific config
     "autocmd BufNewFile,BufRead *.dart set formatexpr='dart format'
+    autocmd BufNewFile,BufRead *.dart set tabstop=2
+    autocmd BufNewFile,BufRead *.dart set shiftwidth=2
+    "autocmd OptionSet shiftwidth execute 'setlocal listchars=trail:·,tab:│\ ,multispace:┆' . repeat('\ ', &sw - 1)
+    "let g:indentguides_tabchar = '┆'
+    "let g:indentguides_spacechar = '|'
+    autocmd OptionSet shiftwidth execute 'setlocal listchars=trail:·,tab:│\ ,multispace:┆' . repeat('\ ', &sw - 1)
+    lua require("ibl").setup()
+    autocmd BufNewFile,BufRead *.dart nnoremap <leader>/ I// <esc>
 
     " GUI bindings
     nnoremap <D-t> :tabnew<CR>
