@@ -44,6 +44,7 @@ EOF
 
 declare -A filesToLocations=(
     [".zshrc"]="~"
+    [".gitconfig"]="~"
     ["sioyek/keys_user.config"]="~/Library/Application Support/sioyek/"
     ["sioyek/prefs_user.config"]="~/Library/Application Support/sioyek/"
     ["espanso"]="~/Library/Preferences/espanso"

@@ -1,0 +1,40 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+	name = ThatNerdSquared
+	email = 72814106+ThatNerdSquared@users.noreply.github.com
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	ca = commit -av
+	st = status
+	jj = pull
+	kk = push
+    ls = log --oneline
+    ll = log
+    it = init
+    df = diff
+    dfs = diff --staged
+    dfl = diff --color-words
+    dmod = diff --diff-filter=M
+    hres-test = clean -n
+    hres-final = clean -f
+    unstg = restore --staged
+    agamotto = rebase --committer-date-is-author-date -i
+    oops = commit --amend --no-edit
+[init]
+	defaultBranch = main
+[core]
+	excludesfile = /Users/nathanyeung/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
