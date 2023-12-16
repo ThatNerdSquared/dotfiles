@@ -1,0 +1,102 @@
+// Place your key bindings in this file to override the defaultsauto[]
+[
+	{
+		"key": "ctrl+alt+cmd+down",
+		"command": "workbench.action.splitEditorDown"
+	},
+	{
+		"key": "ctrl+alt+cmd+up",
+		"command": "workbench.action.splitEditorUp"
+	},
+	{
+		"key": "cmd+k l",
+		"command": "workbench.view.extension.liveshare"
+	},
+	{
+		"key": "shift+cmd+pageup",
+		"command": "editor.action.insertCursorAbove",
+		"when": "editorTextFocus"
+	},
+	{
+		"key": "alt+cmd+up",
+		"command": "-editor.action.insertCursorAbove",
+		"when": "editorTextFocus"
+	},
+	{
+		"key": "shift+cmd+pagedown",
+		"command": "editor.action.insertCursorBelow",
+		"when": "editorTextFocus"
+	},
+	{
+		"key": "alt+cmd+down",
+		"command": "-editor.action.insertCursorBelow",
+		"when": "editorTextFocus"
+	},
+	{
+		"key": "ctrl+cmd+o",
+		"command": "workbench.action.openWorkspace"
+	},
+	{
+		"key": "cmd+k cmd+g",
+		"command": "git.timeline.openDiff"
+	},
+	{
+		"key": "ctrl+shift+c",
+		"command": "workbench.panel.repl.view.focus"
+	},
+	{
+		"key": "ctrl+cmd+l",
+		"command": "todo-tree-view.focus"
+    },
+    {
+        "key": "alt+cmd+\\",
+        "command": "editor.action.marker.next",
+        "when": "editorFocus"
+    },
+    {
+        "key": "alt+f8",
+        "command": "-editor.action.marker.next",
+        "when": "editorFocus"
+    },
+    {
+        "key": "ctrl+w",
+        "command": "-workbench.action.switchWindow"
+	},
+	{
+		"key": "cmd+\\ f",
+		"command": "workbench.action.toggleEditorWidths"
+	},
+	{
+		"key": "shift+cmd+r d",
+		"command": "workbench.action.debug.start",
+		"when": "debuggersAvailable && debugState == 'inactive'"
+	},
+	{
+		"key": "shift+cmd+r s",
+		"command": "workbench.action.debug.stop",
+		"when": "inDebugMode && !focusedSessionIsAttach"
+	},
+	{
+		"key": "shift+cmd+r r",
+		"command": "workbench.action.debug.restart",
+		"when": "inDebugMode"
+	},
+	{
+		"key": "cmd+g cmd+d",
+		"command": "git.openChange"
+	},
+	{
+		"key": "cmd+k cmd+r",
+		"command": "-workbench.action.keybindingsReference"
+	},
+	{
+		"key": "shift+cmd+r g",
+		"command": "workbench.action.debug.run",
+		"when": "debuggersAvailable && debugState != 'initializing'"
+	},
+	{
+		"key": "ctrl+f5",
+		"command": "-workbench.action.debug.run",
+		"when": "debuggersAvailable && debugState != 'initializing'"
+	}
+]
