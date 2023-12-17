@@ -37,6 +37,7 @@ cask "racket" # i took one cs course that needed this, might remove later
 brew "cmake"
 brew "lua" # required for wireshark
 brew "lua-language-server"
+#brew "arduino-cli" # back in the day i needed this for high school assignments
 brew "qt"
 brew "ruby" # required for cocoapods
 brew "gcc" # required for R
@@ -121,7 +122,6 @@ brew "ranger"
 #brew "neofetch" # FOR THE AESTHETICS 😤
 brew "speedtest-cli"
 brew "asciinema" # better terminal recording
-brew "arduino-cli"
 brew "links"
 
 # cli games - i don't really use these but they're cool ig
