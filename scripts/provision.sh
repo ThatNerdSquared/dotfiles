@@ -51,6 +51,7 @@ declare -A filesToLocations=(
     ["vscode/settings.json"]="~/Library/Application Support/Code/User/"
     ["vscode/keybindings.json"]="~/Library/Application Support/Code/User/"
     # vscode extensions are included in the brewfile
+    ["cmus/rc"]="~/.config/cmus/"
 )
 
 for dotfileSet in "${filesToLocations[@]}"; do

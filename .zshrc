@@ -8,7 +8,8 @@ OPENSSL_ROOT_DIR="/usr/bin/openssl"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="spaceship"
+#ZSH_THEME="spaceship"
+source "/opt/homebrew/opt/spaceship/spaceship.zsh"
 SPACESHIP_PROMPT_ORDER=(
   venv
   time          # Time stamps section
@@ -222,10 +223,10 @@ alias openl="open '/Users/nathanyeung/Library/Containers/ca.failsafetech.lento/D
 alias openp="open '/Users/nathanyeung/Library/Containers/ca.nathanyeung.peregrine/Data/Documents'"
 alias loadios="open ios/Runner.xcworkspace"
 alias hh="nvim ~/heart-hands"
-alias ee="find ~/h4ck3r ~/dotfiles -mindepth 1 -maxdepth 2 -type d | fzf | xargs nvim"
-alias cc="find ~/h4ck3r ~/dotfiles -mindepth 1 -maxdepth 2 -type d | fzf | xargs code"
+alias ee="find ~/h4ck3r ~/dotfiles -mindepth 1 -maxdepth 2 -type d | fzf --preview 'exa --tree --git-ignore {}' | xargs nvim"
+alias cc="find ~/h4ck3r ~/dotfiles -mindepth 1 -maxdepth 2 -type d | fzf --preview 'exa --tree --git-ignore {}' | xargs code"
 fp() {
-    find $1 -mindepth 1 -maxdepth 2 | fzf | xargs open
+    find $1 -mindepth 1 -maxdepth 2 | fzf --preview 'bat {}' | xargs open
 }
 
 autoload zmv
