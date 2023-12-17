@@ -1,3 +1,4 @@
+# taps
 tap "dart-lang/dart"
 tap "homebrew/bundle"
 tap "homebrew/cask-drivers"
@@ -8,273 +9,242 @@ tap "khanhas/tap"
 tap "koekeishiya/formulae"
 tap "michaeleisel/zld"
 tap "supabase/tap"
-brew "libpng"
-brew "gettext"
-brew "glib"
-brew "pkg-config"
-brew "pixman"
-brew "cairo"
-brew "gdk-pixbuf"
-brew "harfbuzz"
-brew "pango"
-brew "librsvg"
-brew "adwaita-icon-theme"
-brew "little-cms2"
-brew "webp"
-brew "jpeg-xl"
-brew "aom"
-brew "arduino-cli"
+tap "saulpw/vd"
+
+# language toolchains (minimal)
+cask "flutter" # my favourite gui framework (comes with dart)
+brew "volta" # nodejs manager
+brew "typescript-language-server"
 brew "python@3.10"
-brew "asciinema"
-brew "autoconf"
-brew "automake"
-brew "bat"
-brew "openjdk"
-brew "bfg"
-brew "bitwarden-cli"
-brew "boost"
-brew "carthage"
-brew "ccache"
-brew "choose-gui"
-brew "cmake"
-brew "libidn2"
-brew "gnutls"
-brew "tesseract"
-brew "ffmpeg"
-brew "cmus"
-brew "ruby"
-brew "cocoapods"
-brew "coreutils"
-brew "cowsay"
-brew "defaultbrowser"
-brew "docker", link: false
-brew "docutils"
-brew "exa"
-brew "fd"
-brew "ffmpeg@4"
-brew "fzf"
-brew "gcc"
-brew "gd"
-brew "gh"
-brew "ghostscript"
-brew "gifski"
-brew "git-filter-repo"
-brew "tcl-tk"
-brew "git-gui"
-brew "git-lfs"
-brew "glow"
-brew "gnu-chess"
-brew "gnu-sed"
-brew "lua"
-brew "qt"
-brew "gnuplot"
+brew "pyright"
+brew "r"
+brew "rustup-init"
+brew "rust-analyzer"
+brew "michaeleisel/zld/zld" # faster rust linking
+brew "cocoapods" # swift pkg manager
+brew "carthage" # another swift pkg manager
+brew "bash-language-server"
+
+# language toolchains (extended)
+mas "Xcode", id: 497799835
+brew "poetry" # alternate python pkg manager (mostly unused)
+#brew "trunk" # WASM bundler for rust
 brew "go"
-brew "gobject-introspection"
-brew "netpbm"
-brew "gts"
-brew "libtool"
-brew "graphviz"
-brew "gsettings-desktop-schemas"
-brew "gtk+3"
-brew "guile"
-brew "hledger"
-brew "htop"
-brew "ical-buddy"
-brew "shared-mime-info"
-brew "libheif"
-brew "python@3.9"
-brew "libraw"
-brew "imagemagick"
-brew "inetutils"
-brew "jbig2enc"
-brew "jemalloc"
-brew "jsonschema"
-brew "libfido2"
-brew "libproxy"
-brew "libqalculate"
-brew "libraqm"
-brew "libssh"
-brew "links"
-brew "llvm"
-brew "lolcat"
+brew "openjdk"
+cask "adoptopenjdk8"
+#brew "maven" # don't need this right now but i forsee needing it for CPSC210
+cask "racket" # i took one cs course that needed this, might remove later
+brew "cmake"
+brew "lua" # required for wireshark
 brew "lua-language-server"
-brew "luv"
-brew "mas"
-brew "maven"
-brew "mdbook"
-brew "ninja"
-brew "meson"
-brew "vapoursynth"
-brew "yt-dlp"
-brew "mpv"
-brew "msgpack"
-brew "mysql"
-brew "neofetch"
-brew "neovim"
-brew "neovide"
-brew "nghttp2"
-brew "ninvaders"
-brew "pillow"
-brew "qpdf"
-brew "unpaper"
-brew "ocrmypdf"
-brew "openblas"
-brew "pacman4console"
+brew "qt"
+brew "ruby" # required for cocoapods
+brew "gcc" # required for R
+brew "meson" # i'm actually not entirely sure why i have this on hand, but it
+             # seems useful so i'm gonna keep it for now
+
+# document toolchains
 brew "pandoc"
 brew "pandoc-crossref"
-brew "virtualenv"
-brew "poetry"
-brew "poppler"
-brew "postgresql@14"
-brew "qt@5"
-brew "pyqt@5"
-brew "python-tk@3.9"
-brew "qemu"
-brew "r"
-brew "ragel"
-brew "ranger"
-brew "ripgrep"
-brew "rust-analyzer"
-brew "scc"
-brew "scons"
-brew "socat"
-brew "speedtest-cli"
-brew "sphinx-doc"
+cask "quarto"
+cask "mactex"
 brew "texlab"
-brew "thefuck"
-brew "tmux"
-brew "transmission-cli"
-brew "trunk"
-brew "volta"
-brew "wifi-password"
-brew "wireshark"
-brew "youtube-dl"
-brew "z"
-brew "khanhas/tap/spicetify-cli"
-brew "koekeishiya/formulae/skhd"
-brew "koekeishiya/formulae/yabai", args: ["HEAD"]
-brew "michaeleisel/zld/zld"
-brew "supabase/tap/supabase"
-cask "adobe-digital-editions"
-cask "adoptopenjdk8"
-cask "affinity-designer"
-cask "blender"
-cask "bluestacks"
-cask "calibre"
-cask "canva"
-cask "chromium"
-cask "db-browser-for-sqlite"
+brew "mdbook"
+
+# dbs
+brew "mysql"
+brew "postgresql@16" # is this outdated?
+
+# dev setup (minimal)
+brew "neovim" # world's best text editor (let the flame wars begin!)
+cask "iterm2"
+brew "fzf"
+brew "spaceship"
+brew "ripgrep"
+brew "coreutils"
+
+# dev setup (extended)
+cask "visual-studio-code" # «IDE»
+brew "docker", link: false
 cask "docker"
-cask "dozer"
-cask "dropbox"
-cask "endless-sky"
-cask "espanso"
-cask "figma"
+brew "gh"
+brew "saulpw/vd/visidata" # TUI for viewing CSV/SQLite/xlsx/etc
+#cask "db-browser-for-sqlite" # unused bc i use visidata now
+cask "ngrok"
+brew "scc" # analyze no. of lines of code
+mas "TestFlight", id: 899247664
+cask "postico" # native macOS postgres browser
+cask "utm"
+brew "wireshark"
+brew "qemu"
+brew "supabase/tap/supabase"
+brew "cloudflare-wrangler2"
+brew "neovide" # keeping this for now
+cask "sublime-merge"
+
+# git tools
+brew "bfg" # cleanse data from a repo
+brew "git-filter-repo" # rewrite git history
+brew "git-lfs"
+brew "git-gui" # ugliest git gui in existence
+
+# cli tools
+brew "z"
+brew "hledger" # make sure i don't accidentally go broke
+brew "yt-dlp"
+brew "ocrmypdf" # god looked at the PDF and said, LET THERE BE SELECTABLE TEXT
+brew "glow" # aesthetic markdown reader CLI
+brew "eza" # replacement for exa, which i only use for the --tree flag
+brew "bat" # aesthetic version of cat
+# brew "fd" # user-friendly find, unused bc i want to use more standard version
+brew "ffmpeg"
+brew "imagemagick"
+brew "bitwarden-cli"
+brew "choose-gui" # really cool GUI fuzzy picker - chooses from stdin
+brew "transmission-cli" # for torrenting
+brew "cowsay" # haha funny cow speech bubble output
+brew "lolcat" # haha funny neon coloured output
+brew "cmus" # TUI music player
+brew "mpv"
+brew "htop"
+brew "graphviz"
+brew "gnuplot"
+#brew "koekeishiya/formulae/yabai" # twm for macOS, i don't use this anymore
+brew "khanhas/tap/spicetify-cli"
+brew "mas" # install mac app store apps from the CLI
+#brew "ical-buddy" # idk why i had this installed but it seems pretty cool
+#brew "tmux" # can't be bothered to learn how this works
+#brew "defaultbrowser" # now that i don't browser-hop this isn't as necessary
+brew "gifski"
+brew "wifi-password" # exactly what it says on the tin
+brew "ranger"
+#brew "neofetch" # FOR THE AESTHETICS 😤
+brew "speedtest-cli"
+brew "asciinema" # better terminal recording
+brew "arduino-cli"
+brew "links"
+
+# cli games - i don't really use these but they're cool ig
+#brew "gnu-chess"
+#brew "pacman4console"
+#brew "ninvaders"
+
+# keyboard & peripheral related
+brew "koekeishiya/formulae/skhd" # global keybinds
+cask "espanso" # text expansion
+cask "karabiner-elements" # low-level keyboard remaps
+cask "keyboardcleantool" # lock keyboard keys
+cask "logi-options-plus" # configure all the funky little buttons on mx master
+
+# the usual
 cask "firefox-developer-edition"
-cask "flutter"
-cask "flux"
+cask "spotify"
+cask "sioyek" # PDF reader, amusingly low feature overlap w mainstream readers
+cask "zotero"
+mas "OneDrive", id: 823766827 # cannot believe i'm still paying for this tbh
+cask "iina" # native GUI wrapper around mpv
+cask "raycast" # best launcher on macOS (let the flame wars begin!)
+mas "Bitwarden", id: 1352778147 # it ain't great, but it's FOSS, and it works
+mas "Microsoft Excel", id: 462058435 # i prefer jupyter notebooks tbh
+mas "Microsoft Word", id: 462054704 # unfortunately, other ppl don't use .md
+mas "Drafts", id: 1435957248 # store snippets of text between iOS/macOS
+cask "calibre"
+cask "chromium" # for webdev testing on chromium
+cask "dropbox" # i use this to sync books to my kobo
+cask "mochi" # flashcards
+
+# creative
+cask "affinity-designer"
+cask "figma"
+cask "blender"
+cask "canva"
+mas "DaVinci Resolve", id: 571213070
+mas "Pastel", id: 413897608 # save color palettes (+ why native != better)
+cask "gifcapture"
+cask "musescore"
+cask "obs"
+#cask "shotcut" # i use resolve now
+#cask "scrivener" # never actually bought this, now i just use nvim
+#mas "Muse", id: 1501563902 # i keep this around to study the product design
+
+# fonts
 cask "font-inconsolata-nerd-font"
 cask "font-iosevka"
-cask "gifcapture"
-cask "hazeover"
-cask "iina"
-cask "imageoptim"
-cask "iterm2"
-cask "karabiner-elements"
-cask "keyboardcleantool"
-cask "logi-options-plus"
-cask "mactex"
-cask "mochi"
-cask "mono-mdk-for-visual-studio"
-cask "musescore"
-cask "ngrok"
-cask "obs"
-cask "pdfsam-basic"
-cask "pennywise"
-cask "phantomjs"
-cask "pika"
-cask "postico"
-cask "prince"
-cask "quarto"
-cask "racket"
-cask "raycast"
-cask "rectangle"
-cask "scrivener"
-cask "shotcut"
+
+# communication
 cask "signal"
-cask "sioyek"
-cask "skim"
-cask "spotify"
-cask "steam"
-cask "sublime-merge"
-cask "syntax-highlight"
-cask "tetrio"
-cask "the-battle-for-wesnoth"
-cask "the-unarchiver"
-cask "thonny"
-cask "tor-browser"
-cask "transmission"
-cask "utm"
-cask "visual-studio-code"
-cask "wkhtmltopdf"
+cask "discord"
+cask "slack"
 cask "zoom"
-cask "zotero"
-mas "Bitwarden", id: 1352778147
-mas "DaVinci Resolve", id: 571213070
-mas "Drafts", id: 1435957248
-mas "Goodnotes", id: 1444383602
-mas "Hyperduck", id: 6444667067
-mas "KeyLimePie", id: 1575163350
-mas "Keynote", id: 409183694
-mas "Microsoft Excel", id: 462058435
+
+# games
+cask "steam"
+cask "endless-sky"
+cask "the-battle-for-wesnoth"
+cask "tetrio"
+
+# handy little utilities
+cask "flux" # ensure my eyes remain intact
+cask "imageoptim" # legendary image compression
+cask "pika" # really nice colour picker with contrast report
+mas "Hyperduck", id: 6444667067 # share links to my mac from iOS
+cask "dozer"
+#mas "PDF Viewer", id: 1120099014 # i only use this to insert imgs into PDFS
+cask "pdfsam-basic" # i want to replace this with a script
+cask "rectangle" # window management by an awesome indie dev
+cask "transmission" # torrent
+cask "the-unarchiver" # can't remember what compression format i use this for
+mas "Microsoft Remote Desktop", id: 1295203466 # remote into windows machines
+cask "hazeover" # dim everything except focused window
+cask "syntax-highlight" # syntax highlighting in quicklook
+mas "KeyLimePie", id: 1575163350 # show what keybinds you press on screen
+cask "adobe-digital-editions" # get un-DRMed ebooks
+cask "prince" # html->pdf
+
+# stuff i keep to open up old files
 mas "Microsoft PowerPoint", id: 462062816
-mas "Microsoft Remote Desktop", id: 1295203466
-mas "Microsoft Word", id: 462054704
-mas "Muse", id: 1501563902
-mas "Numbers", id: 409203825
-mas "OneDrive", id: 823766827
+mas "Keynote", id: 409183694
 mas "Pages", id: 409201541
-mas "Pastel", id: 413897608
-mas "PDF Viewer", id: 1120099014
-mas "TestFlight", id: 899247664
-mas "Xcode", id: 497799835
-vscode "alexandernanberg.horizon-theme-vscode"
-vscode "arcticicestudio.nord-visual-studio-code"
-vscode "ban.spellright"
-vscode "bierner.markdown-footnotes"
-vscode "bierner.markdown-mermaid"
-vscode "cdonohue.quill-icons"
+mas "Goodnotes", id: 1444383602 # i no longer support digital handwriting
+
+# vscode extensions
+vscode "mvllow.rose-pine" # theme of choice
+vscode "cdonohue.quill-icons" # i like these icons
+vscode "vscodevim.vim" # cannot use vscode without this
+vscode "tomoki1207.pdf" # render PDFs in vscode
+vscode "dhedgecock.radical-vscode" # i use ths if i use dark mode
+vscode "alexandernanberg.horizon-theme-vscode" # this is cute too ig
+vscode "eamodio.gitlens" # show git blame directly in editor
+vscode "icrawl.discord-vscode" # discord rpc
+#vscode "foam.foam-vscode" # like obsidian, but in vscode - unused
+vscode "ms-vsliveshare.vsliveshare" # look at what google docs needs to imitate
+                                    # a mere fraction of our power
+
+# vscode language support
 vscode "Dart-Code.dart-code"
 vscode "Dart-Code.flutter"
-vscode "dbaeumer.vscode-eslint"
-vscode "dhedgecock.radical-vscode"
-vscode "dunstontc.viml"
-vscode "eamodio.gitlens"
 vscode "esbenp.prettier-vscode"
-vscode "foam.foam-vscode"
-vscode "gera2ld.markmap-vscode"
-vscode "golang.go"
-vscode "icrawl.discord-vscode"
-vscode "James-Yu.latex-workshop"
-vscode "jloow.vscode-criticmarkup"
-vscode "kortina.vscode-markdown-notes"
-vscode "mel-brown.deep-purple"
-vscode "ms-python.isort"
-vscode "ms-python.python"
-vscode "ms-python.vscode-pylance"
+vscode "dbaeumer.vscode-eslint"
+vscode "quarto.quarto"
+#vscode "James-Yu.latex-workshop" # i use vimtex nowadays
 vscode "ms-toolsai.jupyter"
 vscode "ms-toolsai.jupyter-renderers"
 vscode "ms-toolsai.vscode-jupyter-cell-tags"
 vscode "ms-toolsai.vscode-jupyter-slideshow"
-vscode "ms-vscode.cpptools"
-vscode "ms-vscode.vscode-serial-monitor"
-vscode "ms-vsliveshare.vsliveshare"
-vscode "mvllow.rose-pine"
-vscode "quarto.quarto"
+vscode "ms-python.python"
+vscode "ms-python.vscode-pylance"
+vscode "ms-python.isort"
 vscode "rust-lang.rust-analyzer"
-vscode "svelte.svelte-vscode"
-vscode "tchayen.markdown-links"
-vscode "tomoki1207.pdf"
-vscode "vsciot-vscode.vscode-arduino"
-vscode "vscodevim.vim"
+vscode "golang.go"
+vscode "ms-vscode.cpptools"
+#vscode "dunstontc.viml" # why did i have vimscript support in vscode
+
+# vscode markdown tooling
 vscode "yzhang.markdown-all-in-one"
+vscode "tchayen.markdown-links" # show obsidian-like graph of wikilinks
+vscode "bierner.markdown-mermaid" # render mermaid diagrams
+vscode "bierner.markdown-footnotes"
+vscode "kortina.vscode-markdown-notes" # enable wikilinks
+vscode "gera2ld.markmap-vscode" # render a bullet list as a mindmap
+vscode "jloow.vscode-criticmarkup"
+vscode "ban.spellright"
