@@ -38,34 +38,34 @@ ctrl + alt + cmd - k : yabai -m window --stack north
 ctrl + alt + cmd - j : yabai -m window --stack south
 
 # cycle forward thru stack
-# ctrl + alt - j : yabai -m window --focus stack.next || yabai -m window --focus stack.first
+ctrl + alt - j : yabai -m window --focus stack.next || yabai -m window --focus stack.first
 
 # cycle backward thru stack
-# ctrl + alt - k : yabai -m window --focus stack.prev || yabai -m window --focus stack.last
+ctrl + alt - k : yabai -m window --focus stack.prev || yabai -m window --focus stack.last
 
 # unstack current window
-# shift + alt - space : yabai -m window --toggle float
+shift + alt - space : yabai -m window --toggle float
 
 # throw to space one
-# shift + ctrl - 1 : yabai -m window --space 1
+shift + ctrl - 1 : yabai -m window --space 1
 
 # throw to space 2
-# shift + ctrl - 2 : yabai -m window --space 2
+shift + ctrl - 2 : yabai -m window --space 2
 
 # throw to space three
-# shift + ctrl - 3 : yabai -m window --space 3
+shift + ctrl - 3 : yabai -m window --space 3
 
 # throw to space four
-# shift + ctrl - 4 : yabai -m window --space 4
+shift + ctrl - 4 : yabai -m window --space 4
 
 # throw to space five
-# shift + ctrl - 5 : yabai -m window --space 5
+shift + ctrl - 5 : yabai -m window --space 5
 
 # throw to space six
-# shift + ctrl - 6 : yabai -m window --space 6
+shift + ctrl - 6 : yabai -m window --space 6
 
 # throw to space seven
-# shift + ctrl - 6 : yabai -m window --space 7
+shift + ctrl - 6 : yabai -m window --space 7
 
 # focus main display
 shift + alt + ctrl - 1 : yabai -m display --focus 1
@@ -82,20 +82,5 @@ shift + alt - l: yabai -m space --mirror y-axis
 # rotate the windows clockwise
 shift + alt - r: yabai -m space --rotate 90
 
-# safety on for widgets
-shift + ctrl - s: osascript -e "tell application id \"tracesOf.Uebersicht\" to set hidden of widget id \"Nerdsmirk-jsx\" to true"
-
-# safety off for widgets
-shift + ctrl + alt - s: osascript -e "tell application id \"tracesOf.Uebersicht\" to set hidden of widget id \"Nerdsmirk-jsx\" to false"
-
 # sticky/unsticky the window
 shift + ctrl + cmd - s: yabai -m window --toggle sticky
-
-# spacy clipboard
-shift + alt + cmd - c: python3 ~/dotfiles/scripts/spacy.py
-
-# TOUCHBAR TO KEYPAD
-alt - f13: python3 ~/dotfiles/scripts/touchbar-toggl.py
-alt - f14: python3 ~/dotfiles/scripts/touchbar-codespaces.py
-alt - f15: python3 ~/dotfiles/scripts/nukes.py
-alt - f16: /usr/bin/automator /Users/nathanyeung/Library/Services/NerdPods.workflow
