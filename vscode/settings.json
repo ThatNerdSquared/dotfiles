@@ -1,17 +1,37 @@
 {
+    // sensible defaults
+    "telemetry.telemetryLevel": "off",
+    "editor.tabCompletion": "on",
+    "editor.acceptSuggestionOnEnter": "off",
+    "workbench.startupEditor": "newUntitledFile",
     "workbench.editor.closeEmptyGroups": false,
     "workbench.editor.enablePreview": false,
-    "editor.tabCompletion": "on",
-    "editor.renderControlCharacters": false,
-    "workbench.startupEditor": "newUntitledFile",
-    "explorer.confirmDragAndDrop": false,
-    "editor.snippetSuggestions": "top",
+    "security.workspace.trust.banner": "never",
+    "diffEditor.ignoreTrimWhitespace": false,
+    "keyboard.dispatch": "keyCode",
+    
+    // theming
     "window.autoDetectColorScheme": true,
+    "workbench.colorTheme": "Rosé Pine Dawn",
     "workbench.preferredLightColorTheme": "Rosé Pine Dawn",
     "workbench.preferredDarkColorTheme": "Radical",
-    "prettier.useTabs": true,
-    "editor.acceptSuggestionOnEnter": "off",
-    "markdown.extension.list.indentationSize": "inherit",
+    "editor.fontFamily": "iA Writer Quattro, Menlo, Monaco, 'Courier New', monospace",
+    "workbench.iconTheme": "quill-icons",
+    "editor.lineNumbers": "relative",
+    "editor.cursorStyle": "line",
+    "zenMode.fullScreen": false,
+    "workbench.activityBar.location": "top",
+    "window.commandCenter": false,
+    "workbench.editor.editorActionsLocation": "titleBar",
+    "workbench.editor.showTabs": "single",
+
+    // general settings
+    "debug.onTaskErrors": "showErrors",
+    "explorer.confirmDragAndDrop": false,
+    "workbench.editor.splitInGroupLayout": "vertical",
+    "editor.snippetSuggestions": "top",
+    "editor.accessibilitySupport": "off",
+    "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
     "files.associations": {
         "*.ino": "cpp"
     },
@@ -19,18 +39,8 @@
         "*.pdf": "pdf.preview",
         "*.ipynb": "jupyter-notebook"
     },
-    "workbench.iconTheme": "quill-icons",
-    "C_Cpp.default.compilerPath": "/usr/bin/clang",
-    "terminal.integrated.shell.osx": "/bin/zsh",
-    "todo-tree.tree.showScanModeButton": false,
-    "keyboard.dispatch": "keyCode",
-    "markdown-links.graphType": "obsidian",
-    "spellright.language": [
-        "en"
-    ],
-    "spellright.documentTypes": [
-        "latex"
-    ],
+
+    // extension-specific settings
     "vim.cursorStylePerMode.insert": "line-thin",
     "vim.normalModeKeyBindingsNonRecursive": [
         {
@@ -42,63 +52,52 @@
           "after": ["g", "j"]
         }
     ],
-    "todo-tree.general.tags": [
-        "BUG",
-        "HACK",
-        "FIXME",
-        "TODO",
-        "XXX",
-        "[ ]",
-        "[x]"
+    "spellright.language": [
+        "en"
     ],
-    "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
-    "foam.files.ignore": [
-        "**/index.md"
+    "spellright.documentTypes": [
+        "latex"
     ],
-    "files.exclude": {
-        "**/index.md": true
-    },
-    "files.watcherExclude": {
-        "**/index.md": true
-    },
-    "editor.accessibilitySupport": "off",
-    "telemetry.enableTelemetry": false,
-    "telemetry.enableCrashReporter": false,
-    "editor.cursorStyle": "line",
-    "editor.lineNumbers": "relative",
-    "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+    "markdown.extension.list.indentationSize": "inherit",
+    "C_Cpp.default.compilerPath": "/usr/bin/clang",
+    "markdown-links.graphType": "obsidian",
     "notebook.cellToolbarLocation": {
         "default": "right",
         "jupyter-notebook": "left"
     },
-    "security.workspace.trust.banner": "never",
-    "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
-    "workbench.editor.splitInGroupLayout": "vertical",
+    "gitlens.ai.experimental.generateCommitMessage.enabled": false,
     "gitlens.defaultDateFormat": "YYYY-MM-DD",
     "gitlens.defaultDateShortFormat": "YYYY-MM-DD",
     "gitlens.defaultTimeFormat": "hh:mm",
     // "powermode.enabled": true,
-    // "powermode.presets": "flames"
+    // "powermode.presets": "flames",
+
+    // language-specific settings
+    "dart.debugExternalPackageLibraries": false,
+    "dart.debugSdkLibraries": false,
     "eslint.validate": [
         "javascript",
         "javascriptreact",
         "typescript",
-        "typescriptreact",
+        "typescriptreact"
     ],
-    "[typescript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "vscode-neovim.neovimExecutablePaths.win32": " C:\\tools\\neovim\\Neovim\\bin\\nvim.exe",
-    "svelte.enable-ts-plugin": true,
-    "debug.onTaskErrors": "showErrors",
-    "[typescriptreact]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
     "[json]": {
         "editor.defaultFormatter": "vscode.json-language-features"
     },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python"
+    },
     "[markdown]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[css]": {
+        "editor.defaultFormatter": "vscode.css-language-features"
     },
     "[html]": {
         "editor.defaultFormatter": "vscode.html-language-features"
@@ -106,7 +105,6 @@
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "editor.fontFamily": "iA Writer Quattro, Menlo, Monaco, 'Courier New', monospace",
     "editor.tokenColorCustomizations": {
         "textMateRules": [
             {
@@ -140,23 +138,5 @@
                 }
             }
         ]
-    },
-    "[css]": {
-        "editor.defaultFormatter": "vscode.css-language-features"
-    },
-    "arduino.useArduinoCli": true,
-    "python.formatting.provider": "black",
-    "[python]": {
-        "editor.defaultFormatter": "ms-python.python"
-    },
-    "zenMode.fullScreen": false,
-    "dart.debugExternalPackageLibraries": false,
-    "dart.debugSdkLibraries": false,
-    "diffEditor.ignoreTrimWhitespace": false,
-    "window.zoomLevel": 0,
-    "workbench.colorTheme": "Rosé Pine Dawn",
-    "workbench.activityBar.location": "top",
-    "window.commandCenter": false,
-    "workbench.editor.editorActionsLocation": "titleBar",
-    "workbench.editor.showTabs": "single",
+    }
 }

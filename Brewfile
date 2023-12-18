@@ -216,6 +216,7 @@ vscode "dhedgecock.radical-vscode" # i use ths if i use dark mode
 vscode "alexandernanberg.horizon-theme-vscode" # this is cute too ig
 vscode "eamodio.gitlens" # show git blame directly in editor
 vscode "icrawl.discord-vscode" # discord rpc
+#vscode hoovercj.vscode-power-mode # funny flame effects when you type
 #vscode "foam.foam-vscode" # like obsidian, but in vscode - unused
 vscode "ms-vsliveshare.vsliveshare" # look at what google docs needs to imitate
                                     # a mere fraction of our power

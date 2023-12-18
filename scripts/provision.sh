@@ -52,6 +52,11 @@ declare -A filesToLocations=(
     ["vscode/keybindings.json"]="~/Library/Application Support/Code/User/"
     # vscode extensions are included in the brewfile
     ["cmus/rc"]="~/.config/cmus/"
+
+    ["nvim/init.vim"]="~/.config/nvim/"
+    ["nvim/lsp-config.lua"]="~/.config/nvim/"
+    ["nvim/treesitter-config.lua"]="~/.config/nvim/"
+    ["nvim/colors/"]="~/.config/nvim/"
 )
 
 for dotfileSet in "${filesToLocations[@]}"; do
