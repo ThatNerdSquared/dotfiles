@@ -69,8 +69,8 @@ else
 
     call plug#end()
 
-    source ~/dotfiles/lspconfig-script.lua
-    source ~/dotfiles/treesitter-config.lua
+    source ./lspconfig-script.lua
+    source ./treesitter-config.lua
 
     " Plugin config
 
