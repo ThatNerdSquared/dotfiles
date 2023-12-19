@@ -254,8 +254,6 @@ bindkey -v
 HEROKU_AC_ZSH_SETUP_PATH=/Users/nathanyeung/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
 export PATH="/opt/homebrew/opt/python@3.11/bin:$PATH"
 
-eval $(thefuck --alias)
-
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 haven --init-view
