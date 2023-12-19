@@ -6,7 +6,7 @@ require 'nvim-treesitter.configs'.setup {
         "vim",
         "vimdoc",
         "query",
-        -- my personal stack:
+        -- my personal stack
         "dart",
         "typescript",
         "python",
@@ -17,5 +17,8 @@ require 'nvim-treesitter.configs'.setup {
     auto_install = true, -- auto-install parsers when opening buffer
     highlight = {
         enable = true, -- enable syntax highlighting
+        disable = function(lang, bufnr) -- prevent latency on 10MB json files
+            return vim.api.nvim_buf_line_count(bufnr) > 10000
+        end,
     }
 }

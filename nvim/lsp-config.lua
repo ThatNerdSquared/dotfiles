@@ -1,97 +1,45 @@
--- nvim-lsp configuration
--- Setup nvim-cmp.
-local cmp = require 'cmp'
-local types = require('cmp.types')
+local lspconfig = require('lspconfig')
+local cmp = require('cmp')
 
+vim.diagnostic.config {
+    float = { width = 90, border = "rounded" },
+}
+
+-- init cmp sensibly
 cmp.setup({
-    snippet = {
-        expand = function(args)
-            vim.fn["UltiSnips#Anon"](args.body)
-        end,
+    window = {
+        -- give these popups a fighting chance at being actually readable
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
     },
-    mapping = {
-        ['<Down>'] = cmp.mapping({
-            i = cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Select }),
-            c = function(fallback)
-                cmp.close()
-                vim.schedule(cmp.suspend())
-                fallback()
-            end,
-        }),
-        ['<Up>'] = cmp.mapping({
-            i = cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Select }),
-            c = function(fallback)
-                cmp.close()
-                vim.schedule(cmp.suspend())
-                fallback()
-            end,
-        }),
-        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<C-e>'] = cmp.mapping.close(),
-        ['<Tab>'] = cmp.mapping.confirm({ select = true }),
-    },
-    sources = {
+    sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-        { name = 'ultisnips' },
-        { name = 'emmet_vim' },
         { name = 'buffer' },
-    }
+    }),
+    mapping = cmp.mapping.preset.insert({
+        ['<C-e>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<Tab>'] = cmp.mapping.confirm({ select = true })
+    }),
 })
 
--- Setup lspconfig.
--- Servers: :help lspconfig-all
-require('lspconfig')["arduino_language_server"].setup {
-    capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- Servers from :help lspconfig-all
+local lspservers = {
+    'dartls',
+    'tsserver',
+    'eslint',
+    'pyright',
+    'rust_analyzer',
+    'r_language_server',
+    'jsonls',
+    'emmet_ls',
+    'cssls',
+    'texlab',
 }
-require 'lspconfig'.arduino_language_server.setup({
-    cmd = {
-        "arduino-language-server",
-        "-cli-config", "/Users/nathanyeung/Library/Arduino15/arduino-cli.yaml",
-        "-cli", "/opt/homebrew/bin/arduino-cli",
-        "-clangd", "/opt/homebrew/opt/llvm/bin/clangd"
-    },
-})
-require('lspconfig')["bashls"].setup {
-    capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-}
-require('lspconfig')["clangd"].setup {
-    capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-}
-require('lspconfig')["cssls"].setup {
-    capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-}
-require('lspconfig')["dartls"].setup {
-    capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-}
-require('lspconfig')["gopls"].setup {
-    capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-}
-require('lspconfig')["html"].setup {
-    capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-}
-require('lspconfig')["jsonls"].setup {
-    capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-}
-require('lspconfig')["lua_ls"].setup {
-    capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-}
-require('lspconfig')["pyright"].setup {
-    capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-}
-require('lspconfig')["r_language_server"].setup {
-    capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-}
-require('lspconfig')["rust_analyzer"].setup {
-    capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-}
-require('lspconfig')["texlab"].setup {
-    capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-}
-require('lspconfig')["tsserver"].setup {
-    capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-}
-require('lspconfig')["vimls"].setup {
-    capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-}
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+-- disable snippets
+capabilities.textDocument.completion.completionItem.snippetSupport = false
+-- init server completions
+for _, server in pairs(lspservers) do
+    lspconfig[server].setup { capabilities = capabilities }
+end

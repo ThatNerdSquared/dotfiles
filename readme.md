@@ -17,19 +17,20 @@ WIDGETS CURRENTLY IN:
 
 ## todo
 - [ ] split personal information into private submodule
-- [ ] clean up vscode settings
+- [-] clean up vscode settings
 - [ ] organize zshrc, extract aliases?
-- [ ] organize init.vim, remove unnecessary code/plugins
-- [ ] update brewfile
+- [x] organize init.vim, remove unnecessary code/plugins
+- [x] update brewfile
 - [ ] organize scripts, archive old ones, add new ones?
 - [ ] organize snippets
-- [ ] add gitconfig
+- [x] add gitconfig
 - [ ] firefox config?
 - [ ] what do i do about ubersicht widgets?
 - [ ] yabai/skhd? rectangle? amethyst?
 - [ ] spicetify, iterm
 - [ ] move in as many config files as possible (go thru brewfile)
 - [ ] use scoop on windows
+- [ ] enable sudo using touchid
 
 ## philosophy
 - prioritize macOS first, popos at a distant second, windows last

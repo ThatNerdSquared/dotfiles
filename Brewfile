@@ -15,6 +15,8 @@ tap "saulpw/vd"
 cask "flutter" # my favourite gui framework (comes with dart)
 brew "volta" # nodejs manager
 brew "typescript-language-server"
+brew "vscode-langservers-extracted"
+# npm install -g emmet-ls
 brew "python@3.10"
 brew "pyright"
 brew "r"
