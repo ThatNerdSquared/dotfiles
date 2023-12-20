@@ -27,6 +27,7 @@ WIDGETS CURRENTLY IN:
 - [ ] firefox config?
 - [ ] what do i do about ubersicht widgets?
 - [ ] yabai/skhd? rectangle? amethyst?
+- [x] remove oh-my-zsh
 - [ ] spicetify, iterm
 - [ ] move in as many config files as possible (go thru brewfile)
 - [ ] use scoop on windows
@@ -39,7 +40,6 @@ WIDGETS CURRENTLY IN:
 ---
 
 heart hands bg?
-do i still need oh-my-zsh?
 is superstat in my brewfile? can i tap it somehow?
 rebind hotkey window to c-` ?
 rebind mdlink

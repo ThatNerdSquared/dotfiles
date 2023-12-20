@@ -35,6 +35,7 @@ brew bundle install --file=~/dotfiles/Brewfile
 echo "🔋 installing latest node using volta..."
 volta install node@latest
 
+#curl -L https://iterm2.com/shell_integration/install_shell_integration_and_utilities.sh | bash
 
 cat << EOF
 -------------------------
