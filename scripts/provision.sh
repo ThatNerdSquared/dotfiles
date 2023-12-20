@@ -55,9 +55,9 @@ declare -A filesToLocations=(
     ["cmus/rc"]="~/.config/cmus/"
 
     ["nvim/init.vim"]="~/.config/nvim/"
-    ["nvim/lsp-config.lua"]="~/.config/nvim/"
-    ["nvim/treesitter-config.lua"]="~/.config/nvim/"
     ["nvim/colors/"]="~/.config/nvim/"
+    ["bindings/karabiner.json"]="~/.config/karabiner/"
+    ["spicetify/config-xpui.ini"]="~/.config/spicetify/"
 )
 
 for dotfileSet in "${filesToLocations[@]}"; do

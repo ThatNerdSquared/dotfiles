@@ -1,3 +1,4 @@
+#!/bin/bash
 function reviewCycle() {
     param=$1[@]
     files=("${!param}")

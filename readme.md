@@ -17,19 +17,20 @@ WIDGETS CURRENTLY IN:
 
 ## todo
 - [ ] split personal information into private submodule
-- [-] clean up vscode settings
-- [ ] organize zshrc, extract aliases?
+- [x] clean up vscode settings
+- [x] organize zshrc, extract aliases?
 - [x] organize init.vim, remove unnecessary code/plugins
 - [x] update brewfile
 - [ ] organize scripts, archive old ones, add new ones?
 - [ ] organize snippets
 - [x] add gitconfig
-- [ ] firefox config?
-- [ ] what do i do about ubersicht widgets?
-- [ ] yabai/skhd? rectangle? amethyst?
+- [x] firefox config?
+- [x] what do i do about ubersicht widgets?
+- [x] yabai/skhd? rectangle? amethyst?
 - [x] remove oh-my-zsh
-- [ ] spicetify, iterm
-- [ ] move in as many config files as possible (go thru brewfile)
+- [x] spicetify
+- [x] iterm
+- [x] move in as many config files as possible (go thru brewfile)
 - [ ] use scoop on windows
 - [ ] enable sudo using touchid
 
@@ -46,17 +47,6 @@ rebind mdlink
 automatically create desktops/set walls?
 
 
-<details>
-<summary>Why VSCode?</summary>
-</details>
-
-<details>
-<summary>Why Firefox Developer Edition?</summary>
-
-- good devtools
-- fast
-
-</details>
 
 <details>
 <summary>Why iTerm2 instead of the macOS Terminal?</summary>
@@ -74,5 +64,4 @@ automatically create desktops/set walls?
 
 Other terminal apps are either too fancy or don't have the native feel that
 iTerm has.
-
 </details>

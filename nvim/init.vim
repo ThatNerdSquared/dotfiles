@@ -85,6 +85,8 @@ set cursorline
 set splitright " new splits open to right/down - more intuitive
 set splitbelow
 set autochdir " set working dir to dir of opened file
+" set working dir to dir in argument if provided
+if argc() == 1 && isdirectory(argv(0)) | cd `=argv(0)` | endif
 
 " general bindings
 noremap k gk

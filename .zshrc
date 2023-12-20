@@ -20,8 +20,9 @@ SPACESHIP_PROMPT_ADD_NEWLINE=false
 # PATH and other env vars
 export VOLTA_HOME="$HOME/.volta"
 export VOLTA_PATH="$HOME/.volta/bin"
+export SCRIPTS_PATH="$HOME/dotfiles/scripts"
 export HOMEBREW_PATH="/opt/homebrew/bin"
-export PATH="$VOLTA_HOME:$HOMEBREW_PATH:$PATH"
+export PATH="$VOLTA_HOME:$SCRIPTS_PATH:$HOMEBREW_PATH:$PATH"
 export OPENSSL_ROOT_DIR="/usr/bin/openssl"
 export BAT_THEME="Solarized (light)"
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git/"'
@@ -50,22 +51,45 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && \
 # --- custom aliases/functions ---
 # base
 alias ls='ls -G' # colors by default
+alias hist='history -i 0'
 alias editrc="$EDITOR ~/dotfiles/.zshrc" # edit config
 alias sourcerc="source ~/dotfiles/.zshrc" # reload config
 alias catrc="bat ~/dotfiles/.zshrc | less" # view config
 alias lo="ls -d .*" # only show hidden files
 
-# quick open
-alias hh="nvim ~/heart-hands"
+# -- quick open --
+# open my personal documents repo
+alias hh="echo '/Users/nathanyeung/heart-hands' | xargs nvim"
+# open jupyterlab in current directory
 alias studio="source .venv/bin/activate && jupyter lab --no-browser"
+# open my personal data repo
 alias stag="cd ~/h4ck3r/stag && source .venv/bin/activate && jupyter lab"
-alias openl="open '/Users/nathanyeung/Library/Containers/ca.failsafetech.lento/Data/Documents'"
-alias openp="open '/Users/nathanyeung/Library/Containers/ca.nathanyeung.peregrine/Data/Documents'"
-alias loadios="open ios/Runner.xcworkspace"
-alias ee="find ~/h4ck3r ~/dotfiles -mindepth 1 -maxdepth 2 -type d | fzf --preview 'exa --tree --git-ignore {}' | xargs nvim"
-alias cc="find ~/h4ck3r ~/dotfiles -mindepth 1 -maxdepth 2 -type d | fzf --preview 'exa --tree --git-ignore {}' | xargs code"
+# open lento's application support dir
+alias openl="open \
+            '/Users/nathanyeung/Library/Containers/ca.failsafetech.lento/Data/Documents'"
+# open peregrine's application support dir
+alias openp="open \
+            '/Users/nathanyeung/Library/Containers/ca.nathanyeung.peregrine/Data/Documents'"
+alias loadios="open ios/Runner.xcworkspace" # open the iOS Xcode workspace for a flutter project
+ee() {
+    find ~/h4ck3r ~/dotfiles \
+        -mindepth 1 -maxdepth 2 \
+        -type d \
+    | fzf --preview 'eza --tree --git-ignore {}' \
+    | xargs nvim
+}
+cc() {
+    find ~/h4ck3r ~/dotfiles \
+        -mindepth 1 -maxdepth 2 \
+        -type d \
+    | fzf --preview 'eza --tree --git-ignore {}' \
+    | xargs code
+}
 fp() {
-    find $1 -mindepth 1 -maxdepth 2 | fzf --preview 'bat {}' | xargs open
+    ! [ -z "$1" ] && folder="$1" || folder=.
+    find "$folder" -mindepth 1 -maxdepth 2 \
+    | fzf --preview 'bat {}' \
+    | xargs open
 }
 
 # actions
@@ -74,6 +98,7 @@ bvim() {
     nvim -u NONE $1
 }
 importtimers() {
+    cd ~/h4ck3r/extensions/extensions
     rm -rf timers
     cp -r ~/h4ck3r/timers-for-raycast ./timers
     cd timers/
@@ -89,6 +114,19 @@ trashme() {
 qlk() {
     qlmanage -p "$1" > /dev/null
 }
+pdfify() {
+    filename=$(basename "$1" | cut -d. -f1)
+    pandoc "$filename".md -o "$filename".pdf --template=eisvogel
+    cowsay "pdfified!" | lolcat
+    open "$filename".pdf
+}
+vidl() {
+    yt-dlp $1 --format mp4
+}
+m4a2mp3() {
+	ffmpeg -i $1 -c:v copy -c:a libmp3lame -q:a 4 output.mp3
+    cowsay "m4a converted to mp3!" | lolcat
+}
 ipull() {
     brctl download "$1"
 }
@@ -96,37 +134,14 @@ alias listapps="osascript -e 'tell application \"System Events\" to get name of 
 quit() {
     osascript -e 'quit app "$1"'
 }
-spktim() {
-    SPK=$(wc -w $1)
-    SPK=${SPK//[!0-9]/}
-    expr $SPK / 150
-}
-m4a2mp3() {
-	ffmpeg -i $1 -c:v copy -c:a libmp3lame -q:a 4 output.mp3
-    cowsay "m4a converted to mp3!" | lolcat
-}
-vidl() {
-    yt-dlp $1 --format mp4
-}
-pdfify() {
-    filename=$(basename "$1" | cut -d. -f1)
-    pandoc "$filename".md -o "$filename".pdf --template=eisvogel
-    cowsay "pdfified!" | lolcat
-    open "$filename".pdf
-}
 
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
-        . "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh"
-    else
-        export PATH="/opt/homebrew/Caskroom/miniconda/base/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
+# --- init view ---
+init-view() {
+cat << EOF
+----------------------------------------------------
+🫶 Hello, $(whoami) @ $(hostname)!
+$(date) || Up for $(uptime | awk -F'( |,|:)+' '{print $4"d", $6"hr", $7"min"}')
+----------------------------------------------------
+EOF
+}
+init-view
