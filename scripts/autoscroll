@@ -1,6 +1,8 @@
+#!/usr/bin/env python3
 import argparse
 import os
 import time
+import sys
 
 parser = argparse.ArgumentParser(description='Autoscroll in a given direction. macOS only.')
 parser.add_argument(
@@ -44,10 +46,15 @@ KEY_CODES = {
 };
 
 def scrollcmd(key):
-    for x in range(5000):
+    intv = args.interval if args.interval is not None else 3
+    for _ in range(5000):
         os.system(f'osascript -e \'tell application \"System Events\" to keystroke (key code {KEY_CODES[key]})\'')
-        time.sleep(3)
+        time.sleep(intv)
 
+if len(sys.argv)==1:
+    parser.print_help()
+    exit()
+intv = args.interval if args.interval is not None else 3
 if args.up:
     scrollcmd('up')
 elif args.down:

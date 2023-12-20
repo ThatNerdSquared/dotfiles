@@ -3,7 +3,7 @@
 # Required parameters:
 # @raycast.schemaVersion 1
 # @raycast.title Wobbly
-# @raycast.mode fullOutput
+# @raycast.mode silent
 
 # Optional parameters:
 # @raycast.icon 📈
@@ -19,8 +19,8 @@ newText = ''
 
 for letterNum in range(len(input)):
 	if letterNum % 2:
-		newText = newText + input[letterNum].upper()
+		newText += input[letterNum].upper()
 	else:
-		newText = newText + input[letterNum].lower()
+		newText += input[letterNum].lower()
 
 clipboard.copy(newText)

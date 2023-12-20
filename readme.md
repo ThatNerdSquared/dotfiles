@@ -22,7 +22,7 @@ WIDGETS CURRENTLY IN:
 - [x] organize init.vim, remove unnecessary code/plugins
 - [x] update brewfile
 - [ ] organize scripts, archive old ones, add new ones?
-- [ ] organize snippets
+- [x] organize snippets
 - [x] add gitconfig
 - [x] firefox config?
 - [x] what do i do about ubersicht widgets?

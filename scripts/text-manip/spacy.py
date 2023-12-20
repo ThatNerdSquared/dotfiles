@@ -3,7 +3,7 @@
 # Required parameters:
 # @raycast.schemaVersion 1
 # @raycast.title Spacy
-# @raycast.mode fullOutput
+# @raycast.mode silent
 
 # Optional parameters:
 # @raycast.icon 🪐
@@ -13,13 +13,4 @@
 # @raycast.authorURL https://github.com/ThatNerdSquared
 
 import clipboard
-
-text = clipboard.paste()
-newText = ''
-
-for letter in text:
-    newLetter = letter + ' '
-    newText = newText + newLetter
-
-clipboard.copy(newText)
-
+clipboard.copy(' '.join(clipboard.paste()))

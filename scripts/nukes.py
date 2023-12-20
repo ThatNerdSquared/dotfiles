@@ -15,16 +15,17 @@
 import os
 
 illegals = [
+    'mpv',
     'IINA',
-    'SUPERHOT',
     'Discord',
-    'Into the Breach',
-    'GRIS',
     'Slack',
+    'SUPERHOT',
+    'GRIS',
+    'Stardew Valley',
+    'Into the Breach',
     'Hollow Knight',
-    'Twitch',
-    'Chatterino'
-    'MPU Talk'
+    'The Battle for Wesnoth',
+    'Steam',
 ]
 
 for app in illegals:
