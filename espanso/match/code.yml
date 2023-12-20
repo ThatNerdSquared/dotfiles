@@ -1,0 +1,34 @@
+matches:
+  - trigger: ;;nsl
+    form: |
+      class [[WidgetName]] extends StatelessWidget {
+        const [[WidgetName]]({
+          super.key,
+        });
+
+        @override
+        Widget build(BuildContext context) {
+
+        }
+      }
+  - trigger: ;;nsf
+    form: |
+      class [[WidgetName]] extends StatefulWidget {
+        const [[WidgetName]]({
+          super.key,
+        });
+
+        @override
+        [[WidgetName]]State createState() => [[WidgetName]]State();
+      }
+
+      class [[WidgetName]]State extends State<[[WidgetName]]> {
+        @override
+        Widget build(BuildContext context) {
+
+        }
+      }
+  - trigger: ;;pr
+    replace: print($|$);
+  - trigger: ;;pyr
+    replace: print($|$)

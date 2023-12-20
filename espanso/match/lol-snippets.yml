@@ -1,0 +1,13 @@
+matches:
+  - trigger: "''asobtocostafortune"
+    replace: "https://cdn.discordapp.com/emojis/856278440523988992.webp?size=96&quality=lossless"
+  - trigger: "''blurry_eyes"
+    replace: "https://cdn.discordapp.com/emojis/751962882908094546.png?size=64"
+  - trigger: "''joystroke"
+    replace: "https://cdn.discordapp.com/emojis/830592461315375146.png?size=64"
+  - trigger: "''hug"
+    replace: "https://cdn.discordapp.com/emojis/654337058923610133.png?size=64"
+  - trigger: "''kittysmile"
+    replace: "https://cdn.discordapp.com/emojis/821846594064220190.png?size=64"
+  - trigger: "''bruh"
+    replace: "https://tenor.com/view/clueless-aware-twitch-forsen-emote-gif-25354609"

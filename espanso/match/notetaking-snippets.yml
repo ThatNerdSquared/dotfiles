@@ -17,19 +17,11 @@ matches:
     replace: "![](./attachments/$|$)"
   - trigger: /mdc
     replace: "[//]: # \"\""
-  - trigger: /aroll
-    replace: "A-ROLL: "
-  - trigger: /broll
-    replace: "B-ROLL: "
-  - trigger: /conmus
-    replace: "CONTINUOUS MUSIC: "
-  - trigger: /sfx
-    replace: "SOUND EFFECT: "
   - trigger: /mdlq
     form: |
       > [!cite]
       > [[quote]] (pg [[pgnum]])
-      
+
       [[notes]]
       ---
     form_fields:
@@ -39,15 +31,3 @@ matches:
     replace: "²"
   - trigger: /attrf
     replace: "> Information is from $|$ unless otherwise noted."
-  - trigger: /attrlf
-    form: |
-      > Information is from the [[date]] [[location]] lecture on [[subject]], given by [[lecturer]], unless otherwise noted.
-    form_fields:
-      date:
-        default: "${date}"
-      location:
-        default: "${location}"
-      subject:
-        default: "${subject}"
-      lecturer:
-        default: "${lecturer}"

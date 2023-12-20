@@ -4,25 +4,23 @@ matches:
   - trigger: /shrug
     replace: "¯\\_(ツ)_/¯"
   - trigger: /date
-    replace: "{{mydate}}"
+    replace: "{{dt}}"
     vars:
-      - name: mydate
+      - name: dt
         type: date
         params:
           format: "%Y-%m-%d"
   - trigger: /time
-    replace: "{{mytime}}"
+    replace: "{{dt}}"
     vars:
-      - name: mytime
+      - name: dt
         type: date
         params:
           format: "%H:%M"
   - trigger: /iso
-    replace: "{{output}}"
+    replace: "{{dt}}"
     vars:
-      - name: output
-        type: script
+      - name: dt
+        type: date
         params:
-          args:
-            - python3
-            - /Users/nathanyeung/dotfiles/scripts/iso.py
+          format: "%Y-%m-%d %H:%M:%S"
