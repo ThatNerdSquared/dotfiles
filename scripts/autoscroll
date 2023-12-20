@@ -51,7 +51,7 @@ def scrollcmd(key):
         os.system(f'osascript -e \'tell application \"System Events\" to keystroke (key code {KEY_CODES[key]})\'')
         time.sleep(intv)
 
-if len(sys.argv)==1:
+if len(sys.argv) == 1:
     parser.print_help()
     exit()
 intv = args.interval if args.interval is not None else 3

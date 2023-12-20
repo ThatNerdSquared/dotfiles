@@ -94,6 +94,13 @@ fp() {
 
 # actions
 alias fci="flutter analyze && dart format **/*.dart"
+tree() {
+    ! [ -z "$1" ] && folder="$1" || folder=.
+    eza --tree --git-ignore -a "$folder"
+}
+concat-pdf() {
+    pdfjam "$@" -o output.pdf
+}
 bvim() {
     nvim -u NONE $1
 }
@@ -140,7 +147,7 @@ init-view() {
 cat << EOF
 ----------------------------------------------------
 🫶 Hello, $(whoami) @ $(hostname)!
-$(date) || Up for $(uptime | awk -F'( |,|:)+' '{print $4"d", $6"hr", $7"min"}')
+$(date) || Up for $(uptime | awk -F'( |,|:)+' '{print $5"d", $7"hr", $8"min"}')
 ----------------------------------------------------
 EOF
 }

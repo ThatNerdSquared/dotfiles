@@ -4,3 +4,4 @@ scripts/__pycache__/
 .ipynb_checkpoints
 .vscode/
 Brewfile.lock.json
+multicounter.json

@@ -1,0 +1,50 @@
+#!/bin/bash
+if [ -z $1 ]; then
+    gum log --structured --level error "No PDF provided!"
+    exit 1
+fi
+
+FTYPE_CHECK=$(file $1 | grep -q "PDF document")
+if [ "$FTYPE_CHECK" ]; then
+    gum log \
+        --structured --level error \
+        "This file doesn't seem to be a PDF."
+    exit 1
+fi
+
+ORIGINAL_SIZE=$(du -k $1 | awk -F '\t' '{print $1}')
+
+FILENAME=$(basename "$1" | awk -F '.' '{print $1}')
+OUTPUTFILE="$FILENAME-compressed.pdf"
+$(
+gs \
+    -sDEVICE=pdfwrite \
+    -r80 \
+    -dCompatibilityLevel=1.4 \
+    -dPDFSETTINGS=/ebook \
+    -dNOPAUSE -dBATCH \
+    -dDownsampleGrayImages=true \
+    -dColorImageResolution=150 \
+    -sOutputFile="$OUTPUTFILE" \
+    $1
+)
+
+NEW_SIZE=$(du -k "$OUTPUTFILE" | awk -F '\t' '{print $1}')
+
+count=$((ORIGINAL_SIZE-NEW_SIZE))
+if [ $count -le 0 ]; then
+    gum log \
+        --structured --level error \
+        "Could not compress PDF to be smaller!"
+    exit 1
+fi
+
+MSG=$(cat << EOF
+🗞️  PDF compressed!
+Original size: $ORIGINAL_SIZE kb
+Compressed size: $NEW_SIZE kb
+EOF)
+gum style \
+    --border normal \
+    --padding "0 1" \
+    "$MSG"

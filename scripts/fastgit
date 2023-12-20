@@ -37,7 +37,7 @@ IFS=$'\n'
 
 OVERVIEW=$(git status --porcelain .)
 if [ -z "$OVERVIEW" ]; then
-    gumprint "🫶 Nothing to commit!"
+    gumprint "🫶  Nothing to commit!"
     exit 0
 fi
 gumprint "OVERVIEW"

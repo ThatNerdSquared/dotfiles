@@ -1,0 +1,117 @@
+#!/usr/bin/env python3
+# Required parameters:
+# @raycast.schemaVersion 1
+# @raycast.title MultiCounter
+# @raycast.mode silent
+#
+# Optional parameters:
+# @raycast.icon ➕
+# @raycast.argument1 {"type": "text", "placeholder": "Counter"}
+#
+# Documentation:
+# @raycast.description Store multiple counters with different names.
+# @raycast.author ThatNerdSquared
+# @raycast.authorURL https://github.com/ThatNerdSquared
+
+import argparse
+import os
+import json
+import subprocess
+import sys
+from pathlib import Path
+from typing import Callable
+
+parser = argparse.ArgumentParser(
+    description='Store multiple counters with different names.'
+)
+parser.add_argument(
+    '-l',
+    '--list',
+    action='store_true',
+    help='List all counters and their values.',
+)
+parser.add_argument(
+    '-i',
+    '--increment',
+    type=str,
+    help='Increase the given counter by 1.',
+)
+parser.add_argument(
+    '-d',
+    '--decrement',
+    type=str,
+    help='Decrease the given counter by 1.',
+)
+parser.add_argument(
+    '-r',
+    '--remove',
+    type=str,
+    help='Delete the given counter.',
+)
+HOME = os.getenv('HOME')
+# redefine this depending on desired path
+COUNTER_DATAFILE = Path(
+    HOME or '.',
+    'dotfiles/multicounter.json'
+)
+
+def mod_and_return_countstring(*,
+    counter_key: str,
+    op: Callable=lambda x: x + 1,
+    default_val: int=0
+) -> str:
+    try:
+        data[counter_key] = op(data[counter_key])
+    except KeyError:
+        data[counter_key] = default_val
+    COUNTER_DATAFILE.write_text(json.dumps(data, indent=4))
+    countstring = f'{counter_key}{str(data[counter_key]).zfill(3)}'
+    subprocess.run(f'echo "\\`{countstring}\\`" | pbcopy', shell=True)
+    print(countstring)
+    return countstring
+
+if len(sys.argv) == 1: # no args
+    parser.print_help()
+    exit()
+
+countstring=''
+try:
+    data = json.loads(COUNTER_DATAFILE.read_text())
+except FileNotFoundError:
+    COUNTER_DATAFILE.touch()
+    COUNTER_DATAFILE.write_text('{}')
+    data = {}
+
+if len(sys.argv) == 2 and sys.argv[1] != '--list': # default 1arg
+    countstring = mod_and_return_countstring(
+        counter_key=sys.argv[1],
+    )
+    exit()
+
+args = parser.parse_args()
+
+if args.list:
+    keys = sorted(data.keys(), key=data.get, reverse=True)
+    for counter_key in keys:
+        print(
+            (counter_key +
+            '\t' +
+            str(data[counter_key]).zfill(3)
+            ).expandtabs(8)
+        )
+    exit()
+
+if args.increment:
+    mod_and_return_countstring(
+        counter_key=args.increment.name,
+    )
+
+if args.decrement:
+    mod_and_return_countstring(
+        counter_key=args.decrement.name,
+        op=lambda x: max(0, x - 1)
+    )
+
+if args.remove:
+    del data[args.remove]
+    COUNTER_DATAFILE.write_text(json.dumps(data, indent=4))
