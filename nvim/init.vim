@@ -27,14 +27,19 @@ Plug 'hrsh7th/cmp-buffer' " use buffers as completion source
 Plug 'junegunn/fzf' " fzf vim integration
 Plug 'junegunn/fzf.vim' " fzf vim integration
 Plug 'szw/vim-maximizer' " Fullscreen the current pane
-Plug 'andweeb/presence.nvim' " Discord RPC integration
 call plug#end()
+source ~/dotfiles/nvim/treesitter-and-lspconfig.lua
 
 " theming and colours
-source ~/dotfiles/nvim/treesitter-config.lua
 let g:airline_highlighting_cache = 1
-let g:airline_extensions = ['tabline', 'branch']
+let g:airline_extensions = ['tabline']
 let g:airline#extensions#tabline#formatter = 'unique_tail'
+function GetBranch()
+    let l:fp = fnamemodify('%', ':h')
+    return trim(system("git -C " . fp . " branch --show-current 2>/dev/null"))
+endfunction
+autocmd BufEnter * let b:git_branch = GetBranch()
+let g:airline_section_b = airline#section#create(['%{b:git_branch}'])
 let g:airline_section_z = airline#section#create(['linenr', '/%3L'])
 let g:airline_theme='fruit_punch'
 set background=light
@@ -43,7 +48,6 @@ colo rose-pine
 set termguicolors
 
 " lsp related
-source ~/dotfiles/nvim/lsp-config.lua
 nnoremap Ï :lua vim.lsp.buf.format { async = true }<CR> " opt-shift-f
 nnoremap « :lua vim.diagnostic.goto_next()<CR> " opt-\
 nnoremap <space>. :lua vim.lsp.buf.code_action()<CR>
@@ -56,11 +60,8 @@ let g:fzf_buffers_jump = 1
 nnoremap <C-p> :Buffers<CR>
 nnoremap <C-o> :Files<CR>
 nnoremap <C-f> :Rg<CR>
-command! -bang Dotfiles call fzf#vim#files('~/dotfiles', <bang>0)
-nnoremap <leader>df :Dotfiles<CR>
+nnoremap <leader>df :Files ~/dotfiles<CR>
 noremap <leader>f :MaximizerToggle<CR>
-command -nargs=0 DiscordStartRPC lua package.loaded.presence:update()<CR>
-command -nargs=0 DiscordStopRPC lua package.loaded.presence:cancel()<CR>
 " filetree config
 let g:netrw_liststyle = 3
 let g:netrw_banner = 0
@@ -81,8 +82,9 @@ set autoindent " when start a new line, use same indent as previous line
 set noignorecase " make search case-sensitive
 set cursorcolumn " get a sense of where your cursor is without indentline
 set cursorline
-set splitright "new splits open to right/down - more intuitive
+set splitright " new splits open to right/down - more intuitive
 set splitbelow
+set autochdir " set working dir to dir of opened file
 
 " general bindings
 noremap k gk
