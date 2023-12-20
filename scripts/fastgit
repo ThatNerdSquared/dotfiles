@@ -1,10 +1,17 @@
 #!/bin/bash
 function reviewCycle() {
+    root=$(git rev-parse --show-toplevel 2>&1)
     param=$1[@]
     files=("${!param}")
-    for file in "${files[@]}";
+    for basefile in "${files[@]}";
     do
-        eval $VIEWER_CMD "$file"
+        file="$root/$basefile"
+
+        if [ -f "$file" ]; then
+            eval $VIEWER_CMD "$file"
+        else
+            echo "This file has been deleted."
+        fi
 
         ACTION=$(gum choose \
                     --header "What would you like to do with $file?" \
@@ -17,6 +24,10 @@ function reviewCycle() {
     done
 }
 
+function gumprint() {
+    gum style --border normal --padding "0 1" $1
+}
+
 # exit if not run in a git repo
 git status . > /dev/null 2>&1 || {
     gum log --structured --level error "Hmm, something went wrong. Is this a git repo?"
@@ -24,35 +35,48 @@ git status . > /dev/null 2>&1 || {
 }
 IFS=$'\n'
 
-gum style --border normal --padding "0 1" "OVERVIEW"
+OVERVIEW=$(git status --porcelain .)
+if [ -z "$OVERVIEW" ]; then
+    gumprint "🫶 Nothing to commit!"
+    exit 0
+fi
+gumprint "OVERVIEW"
 gum style \
     --border normal \
-    --margin "1 2" --padding "2 4" \
-    "$(git status --porcelain .)"
+    --padding "2 4" \
+    "$OVERVIEW"
 
-gum style --border normal --padding "0 1" "Reviewing changed files..."
 FILES=$(git diff --name-only)
-CHOSEN=($(echo "$FILES" | \
-            gum choose --no-limit \
-            --header "Which changed files would you like to review?"))
-#NOT_CHOSEN=$(echo ${FILES[@]} ${CHOSEN[@]} | tr ' ' '\n' | sort | uniq -u)
-VIEWER_CMD="git difftool --tool=nvimdiff -y"
-DISCARD_CMD="git restore"
-reviewCycle CHOSEN
+if [ -z "$FILES" ]; then
+    gumprint "🫶  No changed files!"
+else
+    gumprint "🧐 Reviewing changed files..."
+    CHOSEN=($(echo "$FILES" | \
+        gum choose --no-limit \
+        --header "Which changed files would you like to review?"))
+            #NOT_CHOSEN=$(echo ${FILES[@]} ${CHOSEN[@]} | tr ' ' '\n' | sort | uniq -u)
+            VIEWER_CMD="git difftool --tool=nvimdiff -y"
+            DISCARD_CMD="git restore"
+            reviewCycle CHOSEN
+fi
 
-gum style --border normal --padding "0 1" "Reviewing untracked files..."
 UNTRACKED=$(git ls-files --others --exclude-standard)
-U_CHOSEN=($(echo "$UNTRACKED" | \
-            gum choose \
-                --no-limit \
-                --header "Which untracked files would you like to review?"))
-VIEWER_CMD="bat --paging=always"
-DISCARD_CMD="rm"
-reviewCycle U_CHOSEN
+if [ -z "$UNTRACKED" ]; then
+    gumprint "🫶  No untracked files!"
+else
+    gumprint "🚀 Reviewing untracked files..."
+    U_CHOSEN=($(echo "$UNTRACKED" | \
+                gum choose \
+                    --no-limit \
+                    --header "Which untracked files would you like to review?"))
+    VIEWER_CMD="bat --paging=always"
+    DISCARD_CMD="rm"
+    reviewCycle U_CHOSEN
+fi
 
 gum style \
     --border normal \
-    --margin "1 2" --padding "2 4" \
+    --padding "2 4" \
     "$(git status .)"
 
 FINAL_ACTION=$(gum choose \
@@ -64,5 +88,5 @@ case $FINAL_ACTION in
    *) ;;
 esac
 
-gum style --border normal --padding "0 1" "🎉 Review complete!"
+gumprint "🎉 Review complete!"
 unset IFS
