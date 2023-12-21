@@ -12,9 +12,15 @@
 # @raycast.author ThatNerdSquared
 # @raycast.authorURL https://github.com/ThatNerdSquared
 
-import clipboard
+import subprocess
 
-input = clipboard.paste()
+input = subprocess.run(
+    'pbpaste',
+    shell=True,
+    text=True,
+    capture_output=True
+).stdout.strip()
+
 newText = ''
 
 for letterNum in range(len(input)):
@@ -23,4 +29,4 @@ for letterNum in range(len(input)):
 	else:
 		newText += input[letterNum].lower()
 
-clipboard.copy(newText)
+subprocess.run(f'echo "{newText}" | pbcopy', shell=True)

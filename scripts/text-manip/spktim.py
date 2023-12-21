@@ -12,10 +12,13 @@
 # @raycast.author ThatNerdSquared
 # @raycast.authorURL https://github.com/ThatNerdSquared
 
-import clipboard
+import subprocess
 
-text = clipboard.paste()
-wordNum = len(text.split())
-spktim = wordNum / 150
-
+text = subprocess.run(
+    'pbpaste',
+    shell=True,
+    text=True,
+    capture_output=True
+).stdout.strip().split()
+spktim = len(text) / 150
 print(spktim)

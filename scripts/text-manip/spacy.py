@@ -12,5 +12,13 @@
 # @raycast.author ThatNerdSquared
 # @raycast.authorURL https://github.com/ThatNerdSquared
 
-import clipboard
-clipboard.copy(' '.join(clipboard.paste()))
+import subprocess
+
+input = subprocess.run(
+    'pbpaste',
+    shell=True,
+    text=True,
+    capture_output=True
+).stdout.strip()
+newText = (' '.join(input))
+subprocess.run(f'echo "{newText}" | pbcopy', shell=True)

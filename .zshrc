@@ -101,6 +101,8 @@ tree() {
 concat-pdf() {
     pdfjam "$@" -o output.pdf
 }
+alias fmtjson="pbpaste | xargs | python3 -m json.tool | pbcopy"
+alias wco="pbpaste | xargs | wc -w"
 bvim() {
     nvim -u NONE $1
 }
