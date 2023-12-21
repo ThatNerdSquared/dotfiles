@@ -1,0 +1,72 @@
+#!/usr/bin/env python3
+import argparse
+import json
+import sys
+import uuid
+from datetime import datetime
+from pathlib import Path
+
+parser = argparse.ArgumentParser(description='Import items into Peregrine.')
+parser.add_argument(
+    '-p',
+    '--payload',
+    type=argparse.FileType('r'),
+    help='Loads a formatted markdown file with entries to be imported.',
+    required=True
+)
+parser.add_argument(
+    '-t',
+    '--tag',
+    type=str,
+    help='Add a tag to all items.',
+)
+parser.add_argument(
+    '-e',
+    '--exempt-date',
+    action='store_true',
+    help='Exempt the date.',
+)
+
+FP = "/Users/nathanyeung/Library/Containers/ca.nathanyeung.peregrine/Data/Documents/peregrinelog.json"
+DATA = json.loads(Path(FP).read_text())
+entries = DATA['entries']
+
+
+if len(sys.argv) == 1: # no args
+    parser.print_help()
+    exit()
+args = parser.parse_args()
+try:
+    raw_payloadfile = Path(args.payload.name).read_text()
+except:
+    print("No payload given!")
+    exit()
+
+raw_payloads = raw_payloadfile.split("%@%\n")
+for rpayload in raw_payloads:
+    spl = rpayload.splitlines()
+    if args.exempt_date:
+        date = datetime.now().isoformat()
+    else:
+        date = spl[0]
+        spl.pop(0)
+    tags = []
+    if args.tag:
+        spl.append(f"#{args.tag}")
+        tags.append(str(args.tag))
+    user_input = "\n".join(spl)
+    entries[str(uuid.uuid4())] = {
+        "date": date,
+        "input": user_input,
+        "isEncrypted": False,
+        "tags": tags,
+        "mentionedContacts": []
+    }
+
+final_entries = sorted(entries.values(), key=lambda x: x['date'])
+DATA['entries'] = final_entries
+full_result = json.dumps(DATA, indent=4)
+outfile = Path(Path.cwd(), f'{args.payload.name}.out')
+outfile.write_text(full_result)
+print(f"{len(raw_payloads)} entries imported!")
+print("Output written to", str(outfile))

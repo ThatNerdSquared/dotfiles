@@ -101,6 +101,7 @@ brew "glow" # aesthetic markdown reader CLI
 brew "eza" # replacement for exa, which i only use for the --tree flag
 brew "bat" # aesthetic version of cat
 # brew "fd" # user-friendly find, unused bc i want to use more standard version
+# curl https://raw.githubusercontent.com/thameera/vimv/master/vimv > ~/.local/bin/vimv && chmod +x ~/.local/bin/vimv
 brew "ffmpeg"
 brew "imagemagick"
 brew "bitwarden-cli"

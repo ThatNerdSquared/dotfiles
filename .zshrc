@@ -116,7 +116,7 @@ pirate() {
     yt-dlp $1 -x --audio-format mp3
 }
 trashme() {
-  mv $1 ~/.Trash
+      mv "$@" ~/.Trash
 }
 qlk() {
     qlmanage -p "$1" > /dev/null

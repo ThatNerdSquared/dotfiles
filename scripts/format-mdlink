@@ -1,0 +1,66 @@
+#!/usr/bin/env python3
+# Required parameters:
+# @raycast.schemaVersion 1
+# @raycast.title Format Link as Markdown
+# @raycast.mode silent
+
+# Optional parameters:
+# @raycast.icon 🔗
+
+# Documentation:
+# @raycast.author ThatNerdSquared
+# @raycast.authorURL https://github.com/ThatNerdSquared
+
+import subprocess
+import urllib.request
+from html.parser import HTMLParser
+
+class TitleParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.isTitle = False
+        self.title = None
+
+    def handle_starttag(self, tag: str, attrs) -> None:
+        if tag in ['og:title', 'title']:
+            self.isTitle = True
+
+    def handle_data(self, data: str) -> None:
+        if self.isTitle and self.title is None:
+            self.title = data
+            self.isTitle = False
+
+def specialHandling(*, title: str, original_url: str) -> str:
+    if original_url.startswith('https://github.com'):
+        title_parts = title.split(' ')
+        return title_parts[2][:-1]
+    return title
+
+# use of pbpaste here (and pbcopy later) is prolly not cross-platform
+urls = subprocess.run(
+    'pbpaste',
+    shell=True,
+    text=True,
+    capture_output=True
+).stdout.splitlines()
+result = []
+
+for raw_url in urls:
+    url = raw_url.strip()
+    try:
+        page = str(urllib.request.urlopen(url).read())
+    except ValueError:
+        print('Hmm, something went wrong. Are you sure this is a URL?')
+        exit(1)
+    parser = TitleParser()
+    parser.feed(page)
+    raw_title = parser.title if parser.title is not None else url
+    processed_title = specialHandling(
+        title=raw_title.strip(),
+        original_url=url
+    )
+    result.append(f'[{processed_title}]({url})')
+
+full_result = '\n'.join(result)
+subprocess.run(f'echo "{full_result}" | pbcopy', shell=True)
+print("Done!")

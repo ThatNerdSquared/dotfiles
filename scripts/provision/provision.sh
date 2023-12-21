@@ -38,32 +38,12 @@ volta install node@latest
 #curl -L https://iterm2.com/shell_integration/install_shell_integration_and_utilities.sh | bash
 
 cat << EOF
--------------------------
-🔌 symlinking dotfiles...
--------------------------
+----------------------------------
+💡 You may want to call
+provision/deploy-dotfiles-macos.sh
+to link your dotfiles.
+----------------------------------
 EOF
-
-declare -A filesToLocations=(
-    [".zshrc"]="~"
-    [".gitconfig"]="~"
-    ["sioyek/keys_user.config"]="~/Library/Application Support/sioyek/"
-    ["sioyek/prefs_user.config"]="~/Library/Application Support/sioyek/"
-    ["espanso"]="~/Library/Preferences/espanso"
-    ["vscode/settings.json"]="~/Library/Application Support/Code/User/"
-    ["vscode/keybindings.json"]="~/Library/Application Support/Code/User/"
-    # vscode extensions are included in the brewfile
-    ["cmus/rc"]="~/.config/cmus/"
-
-    ["nvim/init.vim"]="~/.config/nvim/"
-    ["nvim/colors/"]="~/.config/nvim/"
-    ["bindings/karabiner.json"]="~/.config/karabiner/"
-    ["spicetify/config-xpui.ini"]="~/.config/spicetify/"
-)
-
-for dotfileSet in "${filesToLocations[@]}"; do
-    ln -s "~/dotfiles/${dotfileSet[0]}" ${dotfileSet[1]}
-done
-
 
 cat << EOF
 ----------------------------------

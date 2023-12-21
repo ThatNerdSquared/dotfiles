@@ -2,7 +2,7 @@
 
 # Required parameters:
 # @raycast.schemaVersion 1
-# @raycast.title Launch Nukes
+# @raycast.title QuickQuit
 # @raycast.mode silent
 
 # Optional parameters:
@@ -12,9 +12,9 @@
 # @raycast.author ThatNerdSquared
 # @raycast.authorURL https://github.com/ThatNerdSquared
 
-import os
+import subprocess
 
-illegals = [
+TO_QUIT = [
     'mpv',
     'IINA',
     'Discord',
@@ -28,7 +28,7 @@ illegals = [
     'Steam',
 ]
 
-for app in illegals:
-    os.system(f'osascript -e \'quit app \"{app}\"\'')
+for app in TO_QUIT:
+    subprocess.run(f'osascript -e \'quit app \"{app}\"\'')
 
 print('Nuke launched successfully')
