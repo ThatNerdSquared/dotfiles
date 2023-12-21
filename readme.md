@@ -2,9 +2,10 @@
 
 This repo contains pretty much my entire software setup - everything from my
 scripts, editor configs, macOS settings, custom keyboard remaps, etc. Feel free
-to take a look around! Many configurations may be specific to my setup, such as
-macOS-specific paths, but they should be easily adaptable to other platforms
-(at least *nixes - Windows may be a different story).
+to take a look around! (don't mind the unhinged comments). Many configurations
+may be specific to my setup, such as macOS-specific paths, but they should be
+easily adaptable to other platforms (at least *nixes - Windows may be a
+different story).
 
 Generally, I don't want to spent too much time maintaining my config, so you
 won't find anything particularly complex in here - no TWMs, big configuration

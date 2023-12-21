@@ -1,6 +1,8 @@
 # OUT OF DATE. I WILL REPOPULATE THIS LATER AT SOME POINT.
 # spacy clipboard
-shift + alt + cmd - c: python3 ~/dotfiles/scripts/spacy.py
+shift + alt + cmd - c: python3 ~/dotfiles/scripts/text-manip/spacy.py
+
+alt - space: find ~/dotfiles/scripts -mindepth 1 -maxdepth 2 -type file -exec basename {} \; | choose | sh
 
 # TOUCHBAR TO KEYPAD
 alt - f13: python3 ~/dotfiles/scripts/touchbar-toggl.py

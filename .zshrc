@@ -22,6 +22,7 @@ export VOLTA_HOME="$HOME/.volta"
 export VOLTA_PATH="$HOME/.volta/bin"
 export SCRIPTS_PATH="$HOME/dotfiles/scripts"
 export HOMEBREW_PATH="/opt/homebrew/bin"
+# add volta installation, scripts, and homebrew to PATH
 export PATH="$VOLTA_HOME:$SCRIPTS_PATH:$HOMEBREW_PATH:$PATH"
 export OPENSSL_ROOT_DIR="/usr/bin/openssl"
 export BAT_THEME="Solarized (light)"
@@ -90,6 +91,13 @@ fp() {
     find "$folder" -mindepth 1 -maxdepth 2 \
     | fzf --preview 'bat {}' \
     | xargs open
+}
+scr() { # quickly execute a script in my scripts dir
+    find ~/dotfiles/scripts \
+        -mindepth 1 -maxdepth 2 \
+        -type file -exec basename {} \; \
+    | choose \
+    | sh
 }
 
 # actions

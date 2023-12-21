@@ -24,9 +24,11 @@ Plug 'hrsh7th/nvim-cmp' " completion support
 Plug 'hrsh7th/cmp-nvim-lsp' " use LSP as a completion source
 Plug 'hrsh7th/cmp-buffer' " use buffers as completion source
 " tooling
-Plug 'junegunn/fzf' " fzf vim integration
-Plug 'junegunn/fzf.vim' " fzf vim integration
-Plug 'szw/vim-maximizer' " Fullscreen the current pane
+" fzf vim integration
+Plug 'junegunn/fzf', { 'on': ['Buffers', 'Files', 'Rg'] }
+Plug 'junegunn/fzf.vim', { 'on': ['Buffers', 'Files', 'Rg'] }
+" Fullscreen the current pane
+Plug 'szw/vim-maximizer', { 'on': 'MaximizerToggle' }
 call plug#end()
 source ~/dotfiles/nvim/treesitter-and-lspconfig.lua
 
@@ -84,7 +86,7 @@ set cursorcolumn " get a sense of where your cursor is without indentline
 set cursorline
 set splitright " new splits open to right/down - more intuitive
 set splitbelow
-set autochdir " set working dir to dir of opened file
+"set autochdir " set working dir to dir of opened file
 " set working dir to dir in argument if provided
 if argc() == 1 && isdirectory(argv(0)) | cd `=argv(0)` | endif
 

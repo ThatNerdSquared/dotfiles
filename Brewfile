@@ -85,7 +85,7 @@ brew "qemu"
 brew "supabase/tap/supabase"
 brew "cloudflare-wrangler2"
 brew "neovide" # keeping this for now
-cask "sublime-merge"
+#cask "sublime-merge" # great git client, but macOS has opendiff
 
 # git tools
 brew "bfg" # cleanse data from a repo
@@ -196,11 +196,11 @@ cask "pika" # really nice colour picker with contrast report
 mas "Hyperduck", id: 6444667067 # share links to my mac from iOS
 cask "dozer"
 #mas "PDF Viewer", id: 1120099014 # i only use this to insert imgs into PDFS
-cask "pdfsam-basic" # i want to replace this with a script
-cask "rectangle" # window management by an awesome indie dev
+#cask "pdfsam-basic" # replaced with scripts
+#cask "rectangle" # window management by a great indie dev - now using raycast
 cask "transmission" # torrent
 cask "the-unarchiver" # can't remember what compression format i use this for
-mas "Microsoft Remote Desktop", id: 1295203466 # remote into windows machines
+#mas "Microsoft Remote Desktop", id: 1295203466 # remote into windows machines
 cask "hazeover" # dim everything except focused window
 cask "syntax-highlight" # syntax highlighting in quicklook
 mas "KeyLimePie", id: 1575163350 # show what keybinds you press on screen
@@ -211,7 +211,7 @@ cask "prince" # html->pdf
 mas "Microsoft PowerPoint", id: 462062816
 mas "Keynote", id: 409183694
 mas "Pages", id: 409201541
-mas "Goodnotes", id: 1444383602 # i no longer support digital handwriting
+#mas "Goodnotes", id: 1444383602 # i no longer support digital handwriting
 
 # vscode extensions
 vscode "mvllow.rose-pine" # theme of choice
