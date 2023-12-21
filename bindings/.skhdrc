@@ -1,14 +1,4 @@
-#.load "yabai-bindings-skhdrc"
-
-# safety on for widgets
-shift + ctrl - s: osascript -e "tell application id \"tracesOf.Uebersicht\" to set hidden of widget id \"Nerdsmirk-jsx\" to true"
-
-# safety off for widgets
-shift + ctrl + alt - s: osascript -e "tell application id \"tracesOf.Uebersicht\" to set hidden of widget id \"Nerdsmirk-jsx\" to false"
-
-# sticky/unsticky the window
-shift + ctrl + cmd - s: yabai -m window --toggle sticky
-
+# OUT OF DATE. I WILL REPOPULATE THIS LATER AT SOME POINT.
 # spacy clipboard
 shift + alt + cmd - c: python3 ~/dotfiles/scripts/spacy.py
 

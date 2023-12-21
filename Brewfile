@@ -76,6 +76,7 @@ brew "saulpw/vd/visidata" # TUI for viewing CSV/SQLite/xlsx/etc
 #cask "db-browser-for-sqlite" # unused bc i use visidata now
 cask "ngrok"
 brew "scc" # analyze no. of lines of code
+# https://github.com/thesephist/superstat
 mas "TestFlight", id: 899247664
 cask "postico" # native macOS postgres browser
 cask "utm"
@@ -114,6 +115,7 @@ brew "mpv"
 brew "htop"
 brew "graphviz"
 brew "gnuplot"
+brew "gs" # for compressing PDFs
 #brew "koekeishiya/formulae/yabai" # twm for macOS, i don't use this anymore
 brew "khanhas/tap/spicetify-cli"
 brew "mas" # install mac app store apps from the CLI

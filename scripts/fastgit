@@ -4,7 +4,7 @@ function reviewCycle() {
     files=("${!param}")
     for basefile in "${files[@]}";
     do
-        file="$(pwd)/$(basename "$basefile")"
+        file="$(pwd)/$basefile"
 
         echo "$file"
         if [ -f "$file" ]; then
