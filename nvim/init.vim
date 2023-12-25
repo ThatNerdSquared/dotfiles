@@ -63,6 +63,8 @@ nnoremap <C-p> :Buffers<CR>
 nnoremap <C-o> :Files<CR>
 nnoremap <C-f> :Rg<CR>
 nnoremap <leader>df :Files ~/dotfiles<CR>
+" mistyping :w brings up fzf's :Windows
+command -nargs=0 W silent echoerr "Not an editor cmd: W"
 noremap <leader>f :MaximizerToggle<CR>
 " filetree config
 let g:netrw_liststyle = 3

@@ -22,6 +22,11 @@ cmp.setup({
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<Tab>'] = cmp.mapping.confirm({ select = true })
     }),
+    view = { -- order completion entries bottom-to-top if popup is above cursor
+        entries = {name = 'custom', selection_order = 'near_cursor' }
+    },
+    -- highlight first completion entry
+    completion = { completeopt = 'menu,menuone,noinsert' }
 })
 
 -- Servers from :help lspconfig-all

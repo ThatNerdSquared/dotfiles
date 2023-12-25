@@ -2,6 +2,7 @@
 source "/opt/homebrew/opt/spaceship/spaceship.zsh"
 SPACESHIP_PROMPT_ORDER=(
   venv
+  conda
   user          # Username section - only shows when not login user
   dir           # Current directory section
   host          # Hostname section - only shows when SSH is active
@@ -123,7 +124,7 @@ importtimers() {
     cowsay "copy of timers-for-raycast imported!" | lolcat
 }
 pirate() {
-    yt-dlp $1 -x --audio-format mp3
+    yt-dlp -x --audio-format mp3 "$1"
 }
 trashme() {
       mv "$@" ~/.Trash
@@ -162,3 +163,18 @@ $(date) || Up for $(uptime | awk -F'( |,|:)+' '{print $5"d", $7"hr", $8"min"}')
 EOF
 }
 init-view
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
+        . "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/homebrew/Caskroom/miniconda/base/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<

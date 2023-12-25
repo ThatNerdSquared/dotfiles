@@ -67,6 +67,9 @@ brew "spaceship"
 brew "ripgrep"
 brew "coreutils"
 
+# science
+cask "miniconda"
+
 # dev setup (extended)
 cask "visual-studio-code" # «IDE»
 brew "docker", link: false
