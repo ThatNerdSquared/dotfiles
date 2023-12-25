@@ -103,12 +103,12 @@ if args.list:
 
 if args.increment:
     mod_and_return_countstring(
-        counter_key=args.increment.name,
+        counter_key=args.increment
     )
 
 if args.decrement:
     mod_and_return_countstring(
-        counter_key=args.decrement.name,
+        counter_key=args.decrement,
         op=lambda x: max(0, x - 1)
     )
 

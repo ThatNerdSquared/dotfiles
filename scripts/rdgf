@@ -12,6 +12,10 @@ DELETED_FILES=$(
 )
 CLEANED_FILENAMES="$(echo "$DELETED_FILES" | sed "s/delete mode [0-9]* //")"
 SELECTED=$(echo "$CLEANED_FILENAMES" | fzf | xargs) # xargs to trim whitespace
+if [ -z "$SELECTED" ]; then
+    echo "Operation canceled!"
+    exit
+fi
 FULL_SELECTED=$(echo "$REPO_ROOT/$SELECTED")
 INVOLVED_COMMITS=$(echo "$FULL_SELECTED" | xargs git log --oneline --all --)
 REVIVAL_HASH=$(echo "$INVOLVED_COMMITS" | fzf | awk -F' ' '{print $1}')

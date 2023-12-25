@@ -12,14 +12,15 @@ FILES_TO_LOCATIONS=(
     "bindings/.skhdrc:$HOME"
     "bindings/karabiner.json:$HOME/.config/karabiner"
     "cmus/rc:$HOME/.config/cmus"
-    "espanso/:$HOME/Library/Preferences"
+    "espanso:$HOME/Library/Preferences"
     "nvim/init.vim:$HOME/.config/nvim"
-    "nvim/colors/:$HOME/.config/nvim"
+    "nvim/colors:$HOME/.config/nvim"
     "sioyek/keys_user.config:$HOME/Library/Application Support/sioyek"
     "sioyek/prefs_user.config:$HOME/Library/Application Support/sioyek"
     "spicetify/config-xpui.ini:$HOME/.config/spicetify"
     "vscode/settings.json:$HOME/Library/Application Support/Code/User"
     "vscode/keybindings.json:$HOME/Library/Application Support/Code/User"
+    ".condarc:$HOME"
     # vscode extensions are included in the brewfile, so we don't store
     # extensions.json
 )

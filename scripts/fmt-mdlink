@@ -15,6 +15,9 @@ import subprocess
 import urllib.request
 from html.parser import HTMLParser
 
+# you need to set a user agent to prevent sites thinking this script is a bot
+USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:121.0) Gecko/20100101 Firefox/121.0'
+
 class TitleParser(HTMLParser):
     def __init__(self):
         super().__init__()
@@ -48,7 +51,11 @@ result = []
 for raw_url in urls:
     url = raw_url.strip()
     try:
-        page = str(urllib.request.urlopen(url).read())
+        req = urllib.request.Request(
+            url,
+            headers={ 'User-Agent' : USER_AGENT }
+        )
+        page = str(urllib.request.urlopen(req).read())
     except ValueError:
         print('Hmm, something went wrong. Are you sure this is a URL?')
         exit(1)
