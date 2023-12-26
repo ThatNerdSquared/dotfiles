@@ -104,6 +104,11 @@ noremap <silent> ˚ :m-2<CR> " opt-k
 noremap <silent> ∆ :m+1<CR> " opt-j
 vnoremap <silent> ˚ :m '<-2<CR>gv=gv " opt-k
 vnoremap <silent> ∆ :m '>+1<CR>gv=gv " opt-j
+inoremap ( ()<Esc>ha
+inoremap { {}<Esc>ha
+inoremap [ []<Esc>ha
+inoremap " ""<Esc>ha
+inoremap ' ''<Esc>ha
 function CreateRunPane()
     :50vsp
     :term
@@ -125,7 +130,8 @@ endfunction
 autocmd BufNewFile,BufRead *.dart call DartSettings()
 
 function JsSettings()
-    nnoremap Ï :silent %!npx prettier --stdin-filepath %<CR> " opt-shift-f
+    nnoremap Ï mzgggqG`z " opt-shift-f
+    setlocal formatprg=npx\ prettier\ --stdin-filepath\ %
     nnoremap <space>/ I//<ESC>
 endfunction
 autocmd BufNewFile,BufRead *.js,*.ts,*.jsx,*.tsx call JsSettings()

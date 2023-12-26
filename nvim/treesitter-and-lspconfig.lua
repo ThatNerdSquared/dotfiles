@@ -38,7 +38,6 @@ local lspservers = {
     'rust_analyzer',
     'r_language_server',
     'jsonls',
-    'emmet_ls',
     'cssls',
     'texlab',
 }
