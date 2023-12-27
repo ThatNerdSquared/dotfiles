@@ -12,18 +12,16 @@ let g:python3_host_prog="/opt/homebrew/bin/python3"
 
 " vim-plug initialization
 call plug#begin("~/.config/nvim/plugged")
-" theming
 Plug 'vim-airline/vim-airline' " statusline...
 Plug 'vim-airline/vim-airline-themes' " ...but make it aesthetic!
 Plug 'rose-pine/neovim' " colourscheme of choice
 " actually good syntax highlight
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-" LSP
 Plug 'neovim/nvim-lspconfig' " interact with LSP servers
 Plug 'hrsh7th/nvim-cmp' " completion support
 Plug 'hrsh7th/cmp-nvim-lsp' " use LSP as a completion source
 Plug 'hrsh7th/cmp-buffer' " use buffers as completion source
-" tooling
+Plug 'dense-analysis/ale' " linter/formatter integration
 " fzf vim integration
 Plug 'junegunn/fzf', { 'on': ['Buffers', 'Files', 'Rg'] }
 Plug 'junegunn/fzf.vim', { 'on': ['Buffers', 'Files', 'Rg'] }
@@ -50,7 +48,11 @@ colo rose-pine
 set termguicolors
 
 " lsp related
-nnoremap Ï :lua vim.lsp.buf.format { async = true }<CR> " opt-shift-f
+let g:ale_linters_explicit = 1
+let g:ale_use_neovim_diagnostics_api = 1
+nnoremap Ï :ALEFix<CR> " opt-shift-f
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
 nnoremap « :lua vim.diagnostic.goto_next()<CR> " opt-\
 nnoremap <space>. :lua vim.lsp.buf.code_action()<CR>
 nnoremap qf :lua vim.diagnostic.setqflist()<CR>
@@ -64,10 +66,9 @@ nnoremap <C-o> :Files<CR>
 nnoremap <C-f> :Rg<CR>
 nnoremap <leader>df :Files ~/dotfiles<CR>
 " mistyping :w brings up fzf's :Windows
-command -nargs=0 W silent echoerr "Not an editor cmd: W"
+command -nargs=0 W echoerr "Not an editor cmd: W"
 noremap <leader>f :MaximizerToggle<CR>
-" filetree config
-let g:netrw_liststyle = 3
+let g:netrw_liststyle = 3 " filetree config
 let g:netrw_banner = 0
 let g:netrw_browse_split = 2
 let g:netrw_winsize = 20
@@ -88,7 +89,6 @@ set cursorcolumn " get a sense of where your cursor is without indentline
 set cursorline
 set splitright " new splits open to right/down - more intuitive
 set splitbelow
-"set autochdir " set working dir to dir of opened file
 " set working dir to dir in argument if provided
 if argc() == 1 && isdirectory(argv(0)) | cd `=argv(0)` | endif
 
@@ -98,47 +98,42 @@ noremap j gj
 noremap <leader>[ gT
 noremap <leader>] gt
 noremap <leader><leader> :tabnew<CR>
+nnoremap <leader>s :&&<CR>
 command -nargs=0 Einit tabedit ~/dotfiles/nvim/init.vim
 command -nargs=0 Cp silent w !pbcopy
 noremap <silent> ˚ :m-2<CR> " opt-k
 noremap <silent> ∆ :m+1<CR> " opt-j
 vnoremap <silent> ˚ :m '<-2<CR>gv=gv " opt-k
 vnoremap <silent> ∆ :m '>+1<CR>gv=gv " opt-j
+" autopair
 inoremap ( ()<Esc>ha
 inoremap { {}<Esc>ha
 inoremap [ []<Esc>ha
 inoremap " ""<Esc>ha
 inoremap ' ''<Esc>ha
-function CreateRunPane()
-    :50vsp
-    :term
-    :copen
-    :lua vim.diagnostic.setqflist()
-endfunction
-nnoremap <leader>r :call CreateRunPane()<CR>
+autocmd TermOpen term://* startinsert
+nnoremap <leader>r :silent 50vsp \| term<CR>
+nnoremap gda :silent exec '!source ~/.zshrc && exec-in-new-iterm-tab fastgit' getcwd()<CR>
+nnoremap gdf :exec 'silent tabnew \| terminal fastgit ' expand('%:p')<CR>
 if has("nvim") " this block prevents issues with pressing <Esc> in terminal
 	au! TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
 	au! FileType fzf tunmap <buffer> <Esc>
 endif
 
 " lang-specific
+nnoremap <space>/ I# <esc>
+autocmd BufNewFile,BufRead *dart,*.js,*.ts,*.jsx,*.tsx nnoremap <space>/ I//<ESC>
+
 function DartSettings()
-    nnoremap <space>/ I//<ESC>
+    nnoremap Ï :lua vim.lsp.buf.format { async = true }<CR> " opt-shift-f
     set tabstop=2
     set shiftwidth=2
 endfunction
 autocmd BufNewFile,BufRead *.dart call DartSettings()
 
 function JsSettings()
-    nnoremap Ï mzgggqG`z " opt-shift-f
-    setlocal formatprg=npx\ prettier\ --stdin-filepath\ %
-    nnoremap <space>/ I//<ESC>
+    let b:ale_fixers = ['eslint', 'prettier']
 endfunction
 autocmd BufNewFile,BufRead *.js,*.ts,*.jsx,*.tsx call JsSettings()
 
-function PySettings()
-    nnoremap <space>/ I# <esc>
-    setlocal makeprg=flake8
-endfunction
-autocmd BufNewFile,BufRead *.py call PySettings()
-autocmd BufWritePost *.py silent make! <afile> | silent redraw!
+autocmd BufNewFile,BufRead *.py let b:ale_fixers = ['pyright', 'flake8', 'black']

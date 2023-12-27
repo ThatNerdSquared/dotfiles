@@ -152,6 +152,15 @@ alias listapps="osascript -e 'tell application \"System Events\" to get name of 
 quit() {
     osascript -e 'quit app "$1"'
 }
+exec-in-new-iterm-tab() {
+    osascript &>/dev/null <<EOF
+      tell application "iTerm"
+        activate
+        tell current window to set tb to create tab with default profile
+        tell current session of current window to write text "cd \"$2\" && \"$1\" && exit"
+      end tell
+EOF
+}
 
 # --- init view ---
 init-view() {
