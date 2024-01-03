@@ -22,10 +22,10 @@ Plug 'hrsh7th/nvim-cmp' " completion support
 Plug 'hrsh7th/cmp-nvim-lsp' " use LSP as a completion source
 Plug 'hrsh7th/cmp-buffer' " use buffers as completion source
 Plug 'dense-analysis/ale' " linter/formatter integration
-Plug 'kana/vim-smartinput' "autopair
+Plug 'kana/vim-smartinput' " autopair
 " fzf vim integration
-Plug 'junegunn/fzf', { 'on': ['Buffers', 'Files', 'Rg'] }
-Plug 'junegunn/fzf.vim', { 'on': ['Buffers', 'Files', 'Rg'] }
+Plug 'junegunn/fzf', { 'on': ['Buffers', 'Files', 'Rg', 'BLines'] }
+Plug 'junegunn/fzf.vim', { 'on': ['Buffers', 'Files', 'Rg', 'BLines'] }
 " Fullscreen the current pane
 Plug 'szw/vim-maximizer', { 'on': 'MaximizerToggle' }
 call plug#end()
@@ -66,6 +66,7 @@ nnoremap <C-p> :Buffers<CR>
 nnoremap <C-o> :Files<CR>
 nnoremap <C-f> :Rg<CR>
 nnoremap <leader>df :Files ~/dotfiles<CR>
+nnoremap <leader>h :silent BLines ^#<CR>
 " mistyping :w brings up fzf's :Windows
 command -nargs=0 W echoerr "Not an editor cmd: W"
 noremap <leader>f :MaximizerToggle<CR>
@@ -100,7 +101,8 @@ noremap j gj
 noremap <leader>[ gT
 noremap <leader>] gt
 noremap <leader><leader> :tabnew<CR>
-nnoremap <leader>s :&&<CR>
+nnoremap <leader>s :%&<CR>
+nnoremap <leader>ss :&&<CR>
 command -nargs=0 Einit tabedit ~/dotfiles/nvim/init.vim
 command -nargs=0 Cp silent w !pbcopy
 noremap <silent> ˚ :m-2<CR> " opt-k
@@ -109,7 +111,6 @@ autocmd TermOpen term://* startinsert
 nnoremap <leader>t :silent tabnew \| term<CR>
 nnoremap <leader>r :silent 50vsp \| term<CR>
 " fastgit integration
-"nnoremap gda :silent exec '!source ~/.zshrc && exec-in-new-iterm-tab fastgit' getcwd()<CR>
 nnoremap gda :silent tabnew \| terminal fastgit<CR>
 nnoremap gdf :exec 'silent tabnew \| terminal fastgit ' expand('%:p')<CR>
 function Check() " toggle markdown checkboxes
@@ -127,19 +128,16 @@ if has("nvim") " this block prevents issues with pressing <Esc> in terminal
 endif
 
 " lang-specific
+" comments
 nnoremap <space>/ I# <esc>
-autocmd BufNewFile,BufRead *dart,*.js,*.ts,*.jsx,*.tsx nnoremap <space>/ I//<ESC>
-
-function DartSettings()
+autocmd BufNewFile,BufRead *.dart,*.js,*.ts,*.jsx,*.tsx nnoremap <space>/ I//<ESC>
+function DartSettings() " use lsp formatting + 2-space indent for dart
     nnoremap Ï :lua vim.lsp.buf.format { async = true }<CR> " opt-shift-f
     set tabstop=2
     set shiftwidth=2
 endfunction
 autocmd BufNewFile,BufRead *.dart call DartSettings()
-
-function JsSettings()
-    let b:ale_fixers = ['eslint', 'prettier']
-endfunction
-autocmd BufNewFile,BufRead *.js,*.ts,*.jsx,*.tsx call JsSettings()
-
+" ale fixers
+autocmd BufNewFile,BufRead *.js,*.ts,*.jsx,*.tsx let b:ale_fixers = ['eslint', 'prettier']
 autocmd BufNewFile,BufRead *.py let b:ale_fixers = ['pyright', 'flake8', 'black']
+autocmd BufNewFile,BufRead *.qmd,*.md set spell
