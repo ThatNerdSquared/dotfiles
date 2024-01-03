@@ -22,6 +22,7 @@ Plug 'hrsh7th/nvim-cmp' " completion support
 Plug 'hrsh7th/cmp-nvim-lsp' " use LSP as a completion source
 Plug 'hrsh7th/cmp-buffer' " use buffers as completion source
 Plug 'dense-analysis/ale' " linter/formatter integration
+Plug 'kana/vim-smartinput' "autopair
 " fzf vim integration
 Plug 'junegunn/fzf', { 'on': ['Buffers', 'Files', 'Rg'] }
 Plug 'junegunn/fzf.vim', { 'on': ['Buffers', 'Files', 'Rg'] }
@@ -84,11 +85,12 @@ set breakindent " when hard-wrapping lines, continue at same visual indent
 set lbr " soft-wrap lines at whitespace
 set list " show tabchars
 set autoindent " when start a new line, use same indent as previous line
-set noignorecase " make search case-sensitive
+set ignorecase " make search non-case-sensitive
 set cursorcolumn " get a sense of where your cursor is without indentline
 set cursorline
 set splitright " new splits open to right/down - more intuitive
 set splitbelow
+set signcolumn=yes " always show signcolumn to prevent flickering
 " set working dir to dir in argument if provided
 if argc() == 1 && isdirectory(argv(0)) | cd `=argv(0)` | endif
 
@@ -103,18 +105,22 @@ command -nargs=0 Einit tabedit ~/dotfiles/nvim/init.vim
 command -nargs=0 Cp silent w !pbcopy
 noremap <silent> ˚ :m-2<CR> " opt-k
 noremap <silent> ∆ :m+1<CR> " opt-j
-vnoremap <silent> ˚ :m '<-2<CR>gv=gv " opt-k
-vnoremap <silent> ∆ :m '>+1<CR>gv=gv " opt-j
-" autopair
-inoremap ( ()<Esc>ha
-inoremap { {}<Esc>ha
-inoremap [ []<Esc>ha
-inoremap " ""<Esc>ha
-inoremap ' ''<Esc>ha
 autocmd TermOpen term://* startinsert
+nnoremap <leader>t :silent tabnew \| term<CR>
 nnoremap <leader>r :silent 50vsp \| term<CR>
-nnoremap gda :silent exec '!source ~/.zshrc && exec-in-new-iterm-tab fastgit' getcwd()<CR>
+" fastgit integration
+"nnoremap gda :silent exec '!source ~/.zshrc && exec-in-new-iterm-tab fastgit' getcwd()<CR>
+nnoremap gda :silent tabnew \| terminal fastgit<CR>
 nnoremap gdf :exec 'silent tabnew \| terminal fastgit ' expand('%:p')<CR>
+function Check() " toggle markdown checkboxes
+    let l:line=getline('.')
+    if l:line=~?'\s*-\s*\[\s*\].*'
+        s/\[\s*\]/[x]/
+    elseif l:line=~?'\s*-\s*\[x\].*'
+        s/\[x\]/[ ]/
+    endif
+endfunction
+nnoremap <silent> - :call Check()<CR>
 if has("nvim") " this block prevents issues with pressing <Esc> in terminal
 	au! TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
 	au! FileType fzf tunmap <buffer> <Esc>
