@@ -41,7 +41,7 @@ end
 require 'nvim-treesitter.configs'.setup {
     ensure_installed = {
         "c", "lua", "vim", "vimdoc", "query", -- necessary for treesitter
-        "dart", "typescript", "python", "rust", "r" -- my personal stack
+        "dart", "typescript", "python", "markdown_inline", "rust", "r"
     },
     sync_install = false, -- install parsers asynchronously
     auto_install = true, -- auto-install parsers when opening buffer

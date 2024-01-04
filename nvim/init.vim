@@ -13,7 +13,6 @@ let g:python3_host_prog="/opt/homebrew/bin/python3"
 " vim-plug initialization
 call plug#begin("~/.config/nvim/plugged")
 Plug 'rose-pine/neovim' " colourscheme of choice
-"Plug 'vim-airline/vim-airline' " colourscheme of choice
 " actually good syntax highlight
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'neovim/nvim-lspconfig' " interact with LSP servers
@@ -35,17 +34,18 @@ function GetBranch()
     let l:fp = fnamemodify('%', ':h')
     return trim(system("git -C " . fp . " branch --show-current 2>/dev/null"))
 endfunction
+set fillchars+=stl:─,stlnc:─
 set statusline=%#Substitute#%{&readonly?'[x]':''} " symbols for readonly, mod
-set statusline+=%#IncSearch#%{&readonly?'':'\ \ \ '}
-set statusline+=%#Substitute#%{&mod?'[+]':''}%#IncSearch#%{&mod?'':'\ \ \ \ '}::\ 
-set statusline+=%f\ :: " filepath
-set statusline+=\ b:%{GetBranch()}\ ::\  " current git branch
+set statusline+=%#SpecialChar#%{&readonly?'':'───'}
+set statusline+=%#IncSearch#%{&mod?'[+]':''}%#SpecialChar#%{&mod?'':'───'}
+set statusline+=%#Directory#─%f─ " filepath
+set statusline+=%#SpecialChar#─b:%{GetBranch()}── " current git branch
 let g:currentmode={
    \ 'n': 'nor', 'i': 'ins', 'c': 'cmd', 't': 'trm', 'v': 'vis', 'V': 'vli',
    \ "\<C-V>": 'vbl', 'R': 'rep', 'Rv': 'vre',
    \}
-set statusline+=tln:%L\ ::\ %{(g:currentmode[mode()])} " total lines, current mode
-autocmd BufWinEnter quickfix,loclist setlocal statusline=%#IncSearch#%q\ (%L)
+set statusline+=tln:%L──%{(g:currentmode[mode()])} " total lines, current mode
+autocmd BufWinEnter quickfix,loclist setlocal statusline=%#Directory#%q\ (%L)
 
 " theme
 set background=light
