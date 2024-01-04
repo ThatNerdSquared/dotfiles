@@ -12,9 +12,8 @@ let g:python3_host_prog="/opt/homebrew/bin/python3"
 
 " vim-plug initialization
 call plug#begin("~/.config/nvim/plugged")
-Plug 'vim-airline/vim-airline' " statusline...
-Plug 'vim-airline/vim-airline-themes' " ...but make it aesthetic!
 Plug 'rose-pine/neovim' " colourscheme of choice
+"Plug 'vim-airline/vim-airline' " colourscheme of choice
 " actually good syntax highlight
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'neovim/nvim-lspconfig' " interact with LSP servers
@@ -31,18 +30,24 @@ Plug 'szw/vim-maximizer', { 'on': 'MaximizerToggle' }
 call plug#end()
 source ~/dotfiles/nvim/treesitter-and-lspconfig.lua
 
-" theming and colours
-let g:airline_highlighting_cache = 1
-let g:airline_extensions = ['tabline']
-let g:airline#extensions#tabline#formatter = 'unique_tail'
+" statusline
 function GetBranch()
     let l:fp = fnamemodify('%', ':h')
     return trim(system("git -C " . fp . " branch --show-current 2>/dev/null"))
 endfunction
-autocmd BufEnter * let b:git_branch = GetBranch()
-let g:airline_section_b = airline#section#create(['%{b:git_branch}'])
-let g:airline_section_z = airline#section#create(['linenr', '/%3L'])
-let g:airline_theme='fruit_punch'
+set statusline=%#Substitute#%{&readonly?'[x]':''} " symbols for readonly, mod
+set statusline+=%#IncSearch#%{&readonly?'':'\ \ \ '}
+set statusline+=%#Substitute#%{&mod?'[+]':''}%#IncSearch#%{&mod?'':'\ \ \ \ '}::\ 
+set statusline+=%f\ :: " filepath
+set statusline+=\ b:%{GetBranch()}\ ::\  " current git branch
+let g:currentmode={
+   \ 'n': 'nor', 'i': 'ins', 'c': 'cmd', 't': 'trm', 'v': 'vis', 'V': 'vli',
+   \ "\<C-V>": 'vbl', 'R': 'rep', 'Rv': 'vre',
+   \}
+set statusline+=tln:%L\ ::\ %{(g:currentmode[mode()])} " total lines, current mode
+autocmd BufWinEnter quickfix,loclist setlocal statusline=%#IncSearch#%q\ (%L)
+
+" theme
 set background=light
 lua require('rose-pine').setup({ disable_italics = true })
 colo rose-pine
