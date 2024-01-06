@@ -1,22 +1,13 @@
-# set up spaceship prompt
-source "/opt/homebrew/opt/spaceship/spaceship.zsh"
-SPACESHIP_PROMPT_ORDER=(
-  venv
-  conda
-  user          # Username section - only shows when not login user
-  dir           # Current directory section
-  host          # Hostname section - only shows when SSH is active
-  git           # Git section (git_branch + git_status)
-  package       # Package version
-  dart          # Dart section
-  node          # Node.js section
-  xcode         # Xcode section
-  swift         # Swift section
-  battery       # Battery level and status
-  char          # Prompt character
-)
-SPACESHIP_HOST_PREFIX="@"
-SPACESHIP_PROMPT_ADD_NEWLINE=false
+# prompt
+set -o PROMPT_SUBST
+function nerdprompt() {
+    venv_prompt=$([ "$VIRTUAL_ENV" ] && echo "v:$(basename $(dirname "$VIRTUAL_ENV"))|")
+    conda_prompt=$([ "$CONDA_PREFIX" ] && echo "c:$(basename "$CONDA_PREFIX")")
+    git_branch=$(git -C $(pwd) branch --show-current 2>/dev/null)
+    is_dirty=$([ "$(git status --porcelain $(pwd) 2>/dev/null)" ] && echo " *")
+    echo %B%F{green}$venv_prompt$conda_prompt\ %f%F{cyan}%3~/%f\ %F{blue}"b:$git_branch$is_dirty"%f%b\ \—\>\ 
+}
+PS1="\$(nerdprompt)"
 
 # PATH and other env vars
 export VOLTA_HOME="$HOME/.volta"
@@ -30,6 +21,7 @@ export BAT_THEME="Solarized (light)"
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git/"'
 export VISUAL=nvim
 export EDITOR="$VISUAL"
+VIRTUAL_ENV_DISABLE_PROMPT='true'
 
 # load in some zsh goodies
 autoload zmv
@@ -38,6 +30,7 @@ autoload -U down-line-or-beginning-search
 
 # shell setup
 bindkey -v # enable vim keys in zsh
+setopt inc_append_history # add history immediately instead of at session end
 # enable substring search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
@@ -167,11 +160,23 @@ init-view() {
 cat << EOF
 ----------------------------------------------------
 🫶 Hello, $(whoami) @ $(hostname)!
-$(date) || Up for $(uptime | awk -F'( |,|:)+' '{print $5"d", $7"hr", $8"min"}')
+$(date) || Up for $(uptime | awk -F'( |,)+' '{print $4"d "$6 }')
 ----------------------------------------------------
 EOF
 }
 init-view
+
+info-view() {
+column -ts $'\t' << EOF
+dart: $(dart --version | awk -F' ' '{print $4}')	$(which dart)
+python3: $(python3 -V | sed "s/Python //")	$(which python3)
+nodejs: $(node -v | sed "s/v//")	$(which node)
+typescript: $(tsc -v | sed "s/Version //")	$(which tsc)
+rust: $(rustc -V | awk -F' ' '{print $2}')	$(which rustc)
+r: $(R --version | head -1 | awk -F' ' '{print $3}')	$(which R)
+go: $(go version | awk -F'( |go)+' '{print $3}')	$(which go)
+EOF
+}
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!

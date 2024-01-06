@@ -63,7 +63,6 @@ brew "neovim" # world's best text editor (let the flame wars begin!)
 cask "iterm2"
 brew "fzf"
 brew "gum"
-brew "spaceship"
 brew "ripgrep"
 brew "coreutils"
 

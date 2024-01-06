@@ -48,6 +48,7 @@ function nvimcommit() {
         git commit -m "$COMMIT_MSG"
         exit 0
     fi
+    gum confirm "Push all local commits?" && git push
 }
 
 function mainCycle() {
