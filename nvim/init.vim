@@ -3,8 +3,8 @@
 " vim-plug auto install
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
-silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 " Set python
@@ -24,8 +24,6 @@ Plug 'kana/vim-smartinput' " autopair
 " fzf vim integration
 Plug 'junegunn/fzf', { 'on': ['Buffers', 'Files', 'Rg', 'BLines'] }
 Plug 'junegunn/fzf.vim', { 'on': ['Buffers', 'Files', 'Rg', 'BLines'] }
-" Fullscreen the current pane
-Plug 'szw/vim-maximizer', { 'on': 'MaximizerToggle' }
 call plug#end()
 source ~/dotfiles/nvim/treesitter-and-lspconfig.lua
 
@@ -71,10 +69,9 @@ nnoremap <C-p> :Buffers<CR>
 nnoremap <C-o> :Files<CR>
 nnoremap <C-f> :Rg<CR>
 nnoremap <leader>df :Files ~/dotfiles<CR>
-nnoremap <leader>h :silent BLines ^#<CR>
+nnoremap eh :silent BLines ^#<CR>
 " mistyping :w brings up fzf's :Windows
 command -nargs=0 W echoerr "Not an editor cmd: W"
-noremap <leader>f :MaximizerToggle<CR>
 let g:netrw_liststyle = 3 " filetree config
 let g:netrw_banner = 0
 let g:netrw_browse_split = 2
@@ -105,6 +102,7 @@ noremap k gk
 noremap j gj
 noremap <leader>[ gT
 noremap <leader>] gt
+noremap <leader>f <C-W>\| <C-W>_ " maximize the current window
 noremap <leader><leader> :tabnew<CR>
 nnoremap <leader>s :%&<CR>
 nnoremap <leader>ss :&&<CR>
@@ -145,4 +143,5 @@ autocmd BufNewFile,BufRead *.dart call DartSettings()
 " ale fixers
 autocmd BufNewFile,BufRead *.js,*.ts,*.jsx,*.tsx let b:ale_fixers = ['eslint', 'prettier']
 autocmd BufNewFile,BufRead *.py let b:ale_fixers = ['pyright', 'flake8', 'black']
-autocmd BufNewFile,BufRead *.qmd,*.md set spell
+autocmd BufNewFile,BufRead *.qmd,*.md setlocal spell
+autocmd BufNewFile,BufRead *.qmd,*.md nnoremap <silent> <leader>v :exec 'silent tabnew \| term quarto preview' expand('%:p')<CR>

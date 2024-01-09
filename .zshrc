@@ -4,7 +4,7 @@ function nerdprompt() {
     venv_prompt=$([ "$VIRTUAL_ENV" ] && echo "v:$(basename $(dirname "$VIRTUAL_ENV"))|")
     conda_prompt=$([ "$CONDA_PREFIX" ] && echo "c:$(basename "$CONDA_PREFIX")")
     git_branch=$(git -C $(pwd) branch --show-current 2>/dev/null)
-    is_dirty=$([ "$(git status --porcelain $(pwd) 2>/dev/null)" ] && echo " *")
+    is_dirty=$([ "$(git status --porcelain $(pwd) 2>/dev/null)" ] && echo "*")
     echo %B%F{green}$venv_prompt$conda_prompt\ %f%F{cyan}%3~/%f\ %F{blue}"b:$git_branch$is_dirty"%f%b\ \—\>\ 
 }
 PS1="\$(nerdprompt)"

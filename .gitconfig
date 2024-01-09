@@ -27,7 +27,7 @@
     hres-final = clean -f
     unstg = restore --staged
     agamotto = rebase --committer-date-is-author-date -i
-    oops = commit --amend --no-edit
+    oops = commit --amend --no-edit --committer-date-is-author-date
 [init]
 	defaultBranch = main
 [core]
