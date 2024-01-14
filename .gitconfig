@@ -27,7 +27,7 @@
     hres-final = clean -f
     unstg = restore --staged
     agamotto = rebase --committer-date-is-author-date -i
-    oops = commit --amend --no-edit --committer-date-is-author-date
+    oops = commit --amend --date="$(git log -n 1 --format=%aD)"
 [init]
 	defaultBranch = main
 [core]

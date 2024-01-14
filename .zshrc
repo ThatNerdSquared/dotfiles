@@ -93,6 +93,13 @@ scr() { # quickly execute a script in my scripts dir
     | choose \
     | sh
 }
+ytwl() {
+    rg -F '[ ]' ~/heart-hands/02.lists/media-consumption-waitlist.md \
+        | fzf \
+        | sed 's/.*[\(]//g' \
+        | sed 's/)//' \
+        | xargs open
+}
 
 # actions
 alias fci="flutter analyze && dart format **/*.dart"

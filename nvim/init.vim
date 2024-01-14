@@ -79,6 +79,7 @@ let g:netrw_winsize = 20
 nnoremap <leader>e :Lexplore<CR>
 
 " general sets
+syntax off " treesitter or nothin baby
 set number relativenumber " relative-number line numbers
 set tabstop=4 " show tab character as 4 spaces wide
 set shiftwidth=4 " show indentation as 4 spaces wide
@@ -108,6 +109,7 @@ nnoremap <leader>s :%&<CR>
 nnoremap <leader>ss :&&<CR>
 command -nargs=0 Einit tabedit ~/dotfiles/nvim/init.vim
 command -nargs=0 Cp silent w !pbcopy
+nnoremap <silent> qq :bp \| bd #<CR>
 noremap <silent> ˚ :m-2<CR> " opt-k
 noremap <silent> ∆ :m+1<CR> " opt-j
 autocmd TermOpen term://* startinsert

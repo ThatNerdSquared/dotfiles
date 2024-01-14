@@ -63,7 +63,7 @@ for rpayload in raw_payloads:
         "mentionedContacts": []
     }
 
-final_entries = sorted(entries.values(), key=lambda x: x['date'])
+final_entries = {k: v for k, v in sorted(entries.items(), key=lambda x: x[1]['date'])}
 DATA['entries'] = final_entries
 full_result = json.dumps(DATA, indent=4)
 outfile = Path(Path.cwd(), f'{args.payload.name}.out')

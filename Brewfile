@@ -106,6 +106,7 @@ brew "bat" # aesthetic version of cat
 # brew "fd" # user-friendly find, unused bc i want to use more standard version
 # curl https://raw.githubusercontent.com/thameera/vimv/master/vimv > ~/.local/bin/vimv && chmod +x ~/.local/bin/vimv
 brew "ffmpeg"
+brew "slides" # show slides from markdown on the cli
 brew "imagemagick"
 brew "bitwarden-cli"
 brew "choose-gui" # really cool GUI fuzzy picker - chooses from stdin
