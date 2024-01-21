@@ -101,12 +101,17 @@ if argc() == 1 && isdirectory(argv(0)) | cd `=argv(0)` | endif
 " general bindings
 noremap k gk
 noremap j gj
+noremap gk k
+noremap gj j
+nnoremap ]] :bn<CR>
+nnoremap [[ :bp<CR>
 noremap <leader>[ gT
 noremap <leader>] gt
+noremap <C-u> <C-o> " rebind the previous jump binding bc i use it for fzf
 noremap <leader>f <C-W>\| <C-W>_ " maximize the current window
 noremap <leader><leader> :tabnew<CR>
-nnoremap <leader>s :%&<CR>
-nnoremap <leader>ss :&&<CR>
+nnoremap <leader>s :%&<CR> " repeat prev. substitution on current line
+nnoremap <leader>ss :&&<CR> " repeat prev. substitution on whole file
 command -nargs=0 Einit tabedit ~/dotfiles/nvim/init.vim
 command -nargs=0 Cp silent w !pbcopy
 nnoremap <silent> qq :bp \| bd #<CR>
@@ -122,8 +127,10 @@ function Check() " toggle markdown checkboxes
     let l:line=getline('.')
     if l:line=~?'\s*-\s*\[\s*\].*'
         s/\[\s*\]/[x]/
+        w
     elseif l:line=~?'\s*-\s*\[x\].*'
         s/\[x\]/[ ]/
+        w
     endif
 endfunction
 nnoremap <silent> - :call Check()<CR>
@@ -143,7 +150,8 @@ function DartSettings() " use lsp formatting + 2-space indent for dart
 endfunction
 autocmd BufNewFile,BufRead *.dart call DartSettings()
 " ale fixers
-autocmd BufNewFile,BufRead *.js,*.ts,*.jsx,*.tsx let b:ale_fixers = ['eslint', 'prettier']
+autocmd BufNewFile,BufRead *.js,*.ts,*.jsx,*.tsx,*.json let b:ale_fixers = ['eslint', 'prettier']
 autocmd BufNewFile,BufRead *.py let b:ale_fixers = ['pyright', 'flake8', 'black']
 autocmd BufNewFile,BufRead *.qmd,*.md setlocal spell
 autocmd BufNewFile,BufRead *.qmd,*.md nnoremap <silent> <leader>v :exec 'silent tabnew \| term quarto preview' expand('%:p')<CR>
+autocmd BufNewFile,BufRead *.qmd,*.md let b:ale_fixers = ['prettier']

@@ -3,6 +3,12 @@ matches:
     replace: "  - trigger: \n  replace: \"\""
   - trigger: /shrug
     replace: "¯\\_(ツ)_/¯"
+  - trigger: /yay
+    replace: "🫶🤩"
+  - trigger: /cute
+    replace: "😙✌️"
+  - trigger: /cmdkey
+    replace: "⌘"
   - trigger: /date
     replace: "{{dt}}"
     vars:

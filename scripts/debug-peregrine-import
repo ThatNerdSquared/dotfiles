@@ -65,6 +65,13 @@ for rpayload in raw_payloads:
 
 final_entries = {k: v for k, v in sorted(entries.items(), key=lambda x: x[1]['date'])}
 DATA['entries'] = final_entries
+
+if args.tag:
+    DATA['tags'][args.tag] = {
+        'autoEncrypt': False,
+        'count': len(raw_payloads)
+    }
+
 full_result = json.dumps(DATA, indent=4)
 outfile = Path(Path.cwd(), f'{args.payload.name}.out')
 outfile.write_text(full_result)

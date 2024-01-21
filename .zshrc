@@ -67,15 +67,15 @@ alias openp="open \
             '/Users/nathanyeung/Library/Containers/ca.nathanyeung.peregrine/Data/Documents'"
 alias loadios="open ios/Runner.xcworkspace" # open the iOS Xcode workspace for a flutter project
 ee() {
-    find ~/h4ck3r ~/dotfiles \
-        -mindepth 1 -maxdepth 2 \
+    find ~/h4ck3r ~/dotfiles ~/h4ck3r/incubator \
+        -mindepth 1 -maxdepth 1 \
         -type d \
     | fzf --preview 'eza --tree --git-ignore {}' \
     | xargs nvim
 }
 cc() {
-    find ~/h4ck3r ~/dotfiles \
-        -mindepth 1 -maxdepth 2 \
+    find ~/h4ck3r ~/dotfiles ~/h4ck3r/incubator \
+        -mindepth 1 -maxdepth 1 \
         -type d \
     | fzf --preview 'eza --tree --git-ignore {}' \
     | xargs code

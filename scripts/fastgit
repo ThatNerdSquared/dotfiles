@@ -46,6 +46,7 @@ function nvimcommit() {
     else
         COMMIT_MSG=$(gum write --placeholder "Commit msg (CTRL+D to finish)")
         git commit -m "$COMMIT_MSG"
+        gum confirm "Push all local commits?" && git push
         exit 0
     fi
     gum confirm "Push all local commits?" && git push
