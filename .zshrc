@@ -30,7 +30,10 @@ autoload -U down-line-or-beginning-search
 
 # shell setup
 bindkey -v # enable vim keys in zsh
-setopt inc_append_history # add history immediately instead of at session end
+HISTSIZE=999999999 # save as much history as possible
+SAVEHIST=$HISTSIZE
+setopt SHARE_HISTORY # both import new history and add history immediately between all sessions
+setopt EXTENDED_HISTORY # save timestamps to histfile
 # enable substring search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search

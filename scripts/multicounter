@@ -66,7 +66,7 @@ def mod_and_return_countstring(*,
         data[counter_key] = default_val
     COUNTER_DATAFILE.write_text(json.dumps(data, indent=4))
     countstring = f'{counter_key}{str(data[counter_key]).zfill(3)}'
-    subprocess.run(f'echo "\\`{countstring}\\`" | pbcopy', shell=True)
+    subprocess.run(f'printf %s "\\`{countstring}\\`" | pbcopy', shell=True)
     print(countstring)
     return countstring
 

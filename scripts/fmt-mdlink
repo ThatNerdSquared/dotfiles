@@ -68,6 +68,6 @@ for raw_url in urls:
     )
     result.append(f'[{processed_title}]({url})')
 
-full_result = '\n'.join(result)
-subprocess.run(f'echo "{full_result}" | pbcopy', shell=True)
+full_result = '\n'.join(result).strip()
+subprocess.run(f'printf %s "{full_result}" | pbcopy', shell=True)
 print("Done!")

@@ -21,4 +21,4 @@ input = subprocess.run(
     capture_output=True
 ).stdout.strip()
 newText = (' '.join(input))
-subprocess.run(f'echo "{newText}" | pbcopy', shell=True)
+subprocess.run(f'printf %s "{newText}" | pbcopy', shell=True)

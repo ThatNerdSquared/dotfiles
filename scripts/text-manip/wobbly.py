@@ -29,4 +29,4 @@ for letterNum in range(len(input)):
 	else:
 		newText += input[letterNum].lower()
 
-subprocess.run(f'echo "{newText}" | pbcopy', shell=True)
+subprocess.run(f'printf %s "{newText}" | pbcopy', shell=True)
