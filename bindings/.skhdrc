@@ -1,11 +1,8 @@
-# OUT OF DATE. I WILL REPOPULATE THIS LATER AT SOME POINT.
 # spacy clipboard
 shift + alt + cmd - c: python3 ~/dotfiles/scripts/text-manip/spacy.py
 
-alt - space: find ~/dotfiles/scripts -mindepth 1 -maxdepth 2 -type file -exec basename {} \; | choose | sh
+# open last downloaded file in downloads folder
+ctrl + cmd - d: open ~/Downloads/"$(ls -t ~/Downloads | head -1)"
 
-# TOUCHBAR TO KEYPAD
-alt - f13: python3 ~/dotfiles/scripts/touchbar-toggl.py
-alt - f14: python3 ~/dotfiles/scripts/touchbar-codespaces.py
-alt - f15: python3 ~/dotfiles/scripts/nukes.py
-alt - f16: /usr/bin/automator /Users/nathanyeung/Library/Services/NerdPods.workflow
+# open a pinned folder
+ctrl + cmd - o: open $(cat ~/dotfiles/pinned-folders.txt | choose)

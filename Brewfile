@@ -147,7 +147,7 @@ cask "logi-options-plus" # configure all the funky little buttons on mx master
 
 # the usual
 cask "firefox-developer-edition"
-cask "spotify"
+#cask "spotify"
 cask "sioyek" # PDF reader, amusingly low feature overlap w mainstream readers
 cask "zotero"
 mas "OneDrive", id: 823766827 # cannot believe i'm still paying for this tbh
@@ -182,8 +182,8 @@ cask "font-iosevka"
 
 # communication
 cask "signal"
-cask "discord"
-cask "slack"
+#cask "discord"
+#cask "slack"
 cask "zoom"
 
 # games

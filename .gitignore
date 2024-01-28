@@ -5,3 +5,4 @@ scripts/__pycache__/
 .vscode/
 Brewfile.lock.json
 multicounter.json
+pinned-folders.txt

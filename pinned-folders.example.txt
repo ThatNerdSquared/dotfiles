@@ -1,0 +1,5 @@
+/insert/paths/that/you/want/quick/access/to
+/one/path/per/line
+/absolute/paths/only
+/path/for/pinned/folders/keybind/1
+/path/for/pinned/folders/keybind/2
