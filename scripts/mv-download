@@ -1,0 +1,20 @@
+#!/bin/bash
+RED='\033[0;31m'
+
+defaultName=$(ls -t ~/Downloads | head -1)
+if [ -z "$defaultName" ]; then
+    echo -e "${RED}⚠️  Your downloads folder is empty!"
+    exit 1
+fi
+
+dialogOutput=$(osascript << EOF
+    display dialog "Rename File" default answer "$defaultName"
+EOF
+)
+
+newFileName=$(echo "$dialogOutput" | awk -F':' '{print $3}')
+newFolder=$(choose < ~/dotfiles/pinned-folders.txt)
+newFilepath="$newFolder/$newFileName"
+
+mv ~/Downloads/"$defaultName" "$newFilepath"
+open "$newFilepath"

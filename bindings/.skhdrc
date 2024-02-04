@@ -4,5 +4,8 @@ shift + alt + cmd - c: python3 ~/dotfiles/scripts/text-manip/spacy.py
 # open last downloaded file in downloads folder
 ctrl + cmd - d: open ~/Downloads/"$(ls -t ~/Downloads | head -1)"
 
+# rename last downloaded file, move to pinned folder, and open
+ctrl + alt + cmd - d: ~/dotfiles/scripts/mv-download
+
 # open a pinned folder
-ctrl + cmd - o: open $(cat ~/dotfiles/pinned-folders.txt | choose)
+ctrl + cmd - o: open "$(choose < ~/dotfiles/pinned-folders.txt)"
