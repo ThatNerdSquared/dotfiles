@@ -1,0 +1,11 @@
+#!/bin/bash
+RED='\033[0;31m'
+
+newFolder=$(choose < ~/dotfiles/pinned-folders.txt)
+if [ -z "$newFolder" ]; then
+    echo -e "${RED}⚠️  No folder selected!"
+    exit 1
+fi
+
+selectedItem=$(find "$newFolder" | sed 's!.*/!!' | choose)
+open "$newFolder/$selectedItem"

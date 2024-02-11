@@ -98,5 +98,45 @@
 		"key": "ctrl+f5",
 		"command": "-workbench.action.debug.run",
 		"when": "debuggersAvailable && debugState != 'initializing'"
+	},
+	{
+		"key": "alt+k",
+		"command": "editor.action.moveLinesUpAction",
+		"when": "editorTextFocus && !editorReadonly"
+	},
+	{
+		"key": "alt+up",
+		"command": "-editor.action.moveLinesUpAction",
+		"when": "editorTextFocus && !editorReadonly"
+	},
+	{
+		"key": "alt+k",
+		"command": "notebook.cell.moveUp",
+		"when": "notebookEditorFocused && !inputFocus"
+	},
+	{
+		"key": "alt+up",
+		"command": "-notebook.cell.moveUp",
+		"when": "notebookEditorFocused && !inputFocus"
+	},
+	{
+		"key": "alt+j",
+		"command": "editor.action.moveLinesDownAction",
+		"when": "editorTextFocus && !editorReadonly"
+	},
+	{
+		"key": "alt+down",
+		"command": "-editor.action.moveLinesDownAction",
+		"when": "editorTextFocus && !editorReadonly"
+	},
+	{
+		"key": "alt+j",
+		"command": "notebook.cell.moveDown",
+		"when": "notebookEditorFocused && !inputFocus"
+	},
+	{
+		"key": "alt+down",
+		"command": "-notebook.cell.moveDown",
+		"when": "notebookEditorFocused && !inputFocus"
 	}
 ]

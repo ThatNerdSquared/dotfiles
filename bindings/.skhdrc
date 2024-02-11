@@ -7,5 +7,11 @@ ctrl + cmd - d: open ~/Downloads/"$(ls -t ~/Downloads | head -1)"
 # rename last downloaded file, move to pinned folder, and open
 ctrl + alt + cmd - d: ~/dotfiles/scripts/mv-download
 
+# open a pinned link
+alt - space: ~/dotfiles/scripts/open-from-pinned-links
+
 # open a pinned folder
 ctrl + cmd - o: open "$(choose < ~/dotfiles/pinned-folders.txt)"
+
+# open file from pinned folder
+ctrl + alt + cmd - o: ~/dotfiles/scripts/open-from-pinned-folders

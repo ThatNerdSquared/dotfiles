@@ -15,7 +15,8 @@
     "workbench.colorTheme": "Rosé Pine Dawn",
     "workbench.preferredLightColorTheme": "Rosé Pine Dawn",
     "workbench.preferredDarkColorTheme": "Radical",
-    "editor.fontFamily": "iA Writer Quattro, Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontFamily": "DM Mono, iA Writer Quattro, Menlo, monospace",
+    "editor.fontSize": 13,
     "workbench.iconTheme": "quill-icons",
     "editor.lineNumbers": "relative",
     "editor.cursorStyle": "line",
@@ -23,6 +24,7 @@
     "workbench.activityBar.location": "top",
     "window.commandCenter": false,
     "workbench.editor.editorActionsLocation": "titleBar",
+    "workbench.layoutControl.enabled": false,
     "workbench.editor.showTabs": "single",
 
     // general settings
@@ -93,6 +95,7 @@
     "[python]": {
         "editor.defaultFormatter": "ms-python.python"
     },
+    "python.defaultInterpreterPath": "/Users/nathanyeung/h4ck3r/datasci-studio/.venv",
     "[markdown]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },

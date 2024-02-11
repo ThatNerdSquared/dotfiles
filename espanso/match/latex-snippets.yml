@@ -91,6 +91,8 @@ matches:
     replace: "[H_3O]"
   - trigger: /rlh
     replace: "\\rightleftharpoons "
+  - trigger: /sysvar
+    replace: "$\\Delta $|$_\\text{sys}$"
 # LaTeX document setup.
   - trigger: /btex
     replace: |

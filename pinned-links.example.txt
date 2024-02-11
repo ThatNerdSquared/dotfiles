@@ -1,0 +1,3 @@
+[insert markdown links for quick access](https://example.com)
+[one link per line](https://nathanyeung.ca)
+[https scheme required](https://github.com)

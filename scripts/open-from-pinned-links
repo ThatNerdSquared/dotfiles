@@ -1,0 +1,14 @@
+#!/bin/bash
+RED='\033[0;31m'
+
+LINKS=$(cat ~/dotfiles/pinned-links.txt)
+LINK_TITLES=$(echo "$LINKS" | sed "s/]([^)]*)//g" | sed 's/\[//g')
+
+CHOICE=$(echo "$LINK_TITLES" | choose)
+if [ -z "$CHOICE" ]; then
+    echo -e "${RED}⚠️  No link selected!"
+    exit 1
+fi
+
+LINK=$(grep -w "$CHOICE" ~/dotfiles/pinned-links.txt | head -1)
+open "$(echo "$LINK" | sed "s/[^(]*(//g" | sed "s/)//g" )"
