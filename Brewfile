@@ -177,6 +177,7 @@ cask "obs"
 #mas "Muse", id: 1501563902 # i keep this around to study the product design
 
 # fonts
+cask "font-dm-mono"
 cask "font-inconsolata-nerd-font"
 cask "font-iosevka"
 

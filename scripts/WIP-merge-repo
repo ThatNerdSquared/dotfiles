@@ -1,0 +1,13 @@
+#!/bin/bash
+: '
+cd a
+git filter-repo --to-subdirectory-filter a
+cd ..
+
+cd b
+git remote add a ../a
+git fetch a
+git merge --allow-unrelated-histories a/master
+git remote remove a
+'
+echo 'This script is still WIP!'
