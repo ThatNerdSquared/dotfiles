@@ -32,3 +32,8 @@ matches:
     replace: print($|$);
   - trigger: ;;pyr
     replace: print($|$)
+  - trigger: ;;qpy
+    replace: |
+      ```{python}
+      $|$
+      ```
