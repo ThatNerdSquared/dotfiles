@@ -9,7 +9,7 @@
     "security.workspace.trust.banner": "never",
     "diffEditor.ignoreTrimWhitespace": false,
     "keyboard.dispatch": "keyCode",
-    
+
     // theming
     "window.autoDetectColorScheme": true,
     "workbench.colorTheme": "Rosé Pine Dawn",
@@ -31,6 +31,7 @@
     "debug.onTaskErrors": "showErrors",
     "explorer.confirmDragAndDrop": false,
     "workbench.editor.splitInGroupLayout": "vertical",
+    "editor.stickyScroll.enabled": false,
     "editor.snippetSuggestions": "top",
     "editor.accessibilitySupport": "off",
     "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",

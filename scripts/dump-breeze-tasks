@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+import json
+from pathlib import Path
+
+datafile = Path(
+    Path.home(),
+    'Library/Containers/ca.nathanyeung.breeze/Data/Documents/breeze-data.json'
+)
+data = json.loads(datafile.read_text())
+
+tasks = []
+for task in data['tasks'].values():
+    match task['status']:
+        case 'todo':
+            tasks.append(f"- [ ] {task['title']}")
+        case 'wip':
+            tasks.append(f"- [-] {task['title']}")
+
+outfile = Path('breeze-taskdump.out')
+outfile.write_text('\n'.join(tasks))
+print('🥂 Tasks succesfully dumped to "breeze-task-dump.out"')

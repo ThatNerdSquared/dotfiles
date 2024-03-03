@@ -9,6 +9,8 @@ matches:
     replace: "😙✌️"
   - trigger: /cmdkey
     replace: "⌘"
+  - trigger: /erdos
+    replace: "erdős"
   - trigger: /date
     replace: "{{dt}}"
     vars:

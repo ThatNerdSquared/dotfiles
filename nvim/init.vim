@@ -126,7 +126,10 @@ nnoremap gdf :exec 'silent tabnew \| terminal fastgit ' expand('%:p')<CR>
 function Check() " toggle markdown checkboxes
     let l:line=getline('.')
     if l:line=~?'\s*-\s*\[\s*\].*'
-        s/\[\s*\]/[x]/
+        s/\[\s*\]/[-]/
+        w
+    elseif l:line=~?'\s*-\s*\[-\].*'
+        s/\[-\]/[x]/
         w
     elseif l:line=~?'\s*-\s*\[x\].*'
         s/\[x\]/[ ]/
