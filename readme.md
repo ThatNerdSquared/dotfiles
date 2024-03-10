@@ -49,9 +49,9 @@ exercise left to the reader :)
 <summary>Why iTerm2 instead of the default macOS Terminal?</summary>
 
 - hotkey window feature allows you to summon a terminal window anywhere
-- `cmd-opt-a` to receive a notification when a command finishes running (this
-  is a lifesaver when doing big package updates, cloning giant repos, etc)
-- advanced paste feature to quickly edit commands before running them
+- `cmd-opt-a` to receive a notification when a command finishes running (this is
+  a lifesaver when doing big package updates, cloning giant repos, etc)
+- advanced paste feature to quickly edit pasted commands before running them
 - shell integration (view images in the terminal!)
 - split view (ever wanted to run your frontend and backend in dev and see both
   processes at once?)
@@ -65,10 +65,10 @@ iTerm has.
 <summary>Why is your neovim config in vimscript instead of lua?</summary>
 
 I actually started out on vim, so this used to be a `.vimrc`. Later when I
-swapped to neovim (mainly for LSP), I couldn't be bothered to rewrite the
-config in lua. That's also why a lot of the plugins I use are vimscript plugins
-rather than newer lua-based ones. To this day, I still like keeping my config
-in vimscript - I think it might be less performant but I feel it's simpler and
+swapped to neovim (mainly for LSP), I couldn't be bothered to rewrite the config
+in lua. That's also why a lot of the plugins I use are vimscript plugins rather
+than newer lua-based ones. To this day, I still like keeping my config in
+vimscript - I think it might be less performant but I feel it's simpler and
 doesn't encourage overconfiguration in the same way a lua config would. I do
 still do some configuration in lua, though, mainly for plugins that can't be
 configured any other way - I just keep it in a separate file.

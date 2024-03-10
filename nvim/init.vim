@@ -156,5 +156,7 @@ autocmd BufNewFile,BufRead *.dart call DartSettings()
 autocmd BufNewFile,BufRead *.js,*.ts,*.jsx,*.tsx,*.json let b:ale_fixers = ['eslint', 'prettier']
 autocmd BufNewFile,BufRead *.py let b:ale_fixers = ['pyright', 'flake8', 'black']
 autocmd BufNewFile,BufRead *.qmd,*.md setlocal spell
+autocmd BufNewFile,BufRead *.qmd,*.md setlocal spellcapcheck=
 autocmd BufNewFile,BufRead *.qmd,*.md nnoremap <silent> <leader>v :exec 'silent tabnew \| term quarto preview' expand('%:p')<CR>
 autocmd BufNewFile,BufRead *.qmd,*.md let b:ale_fixers = ['prettier']
+autocmd BufNewFile,BufRead *.qmd,*.md set textwidth=80
