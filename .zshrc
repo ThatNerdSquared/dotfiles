@@ -114,6 +114,7 @@ concat-pdf() {
 }
 alias fmtjson="pbpaste | xargs | python3 -m json.tool | pbcopy"
 alias wco="pbpaste | xargs | wc -w"
+alias cleantex="trashme *.aux *.log *.out"
 bvim() {
     nvim -u NONE $1
 }

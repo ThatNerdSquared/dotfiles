@@ -180,6 +180,7 @@ cask "obs"
 cask "font-dm-mono"
 cask "font-inconsolata-nerd-font"
 cask "font-iosevka"
+cask "font-bad-script"
 
 # communication
 cask "signal"
