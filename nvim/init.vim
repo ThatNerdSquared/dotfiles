@@ -110,6 +110,7 @@ noremap <leader>] gt
 noremap <C-u> <C-o> " rebind the previous jump binding bc i use it for fzf
 noremap <leader>f <C-W>\| <C-W>_ " maximize the current window
 noremap <leader><leader> :tabnew<CR>
+nnoremap '' :enew<CR>
 nnoremap <leader>s :%&<CR> " repeat prev. substitution on current line
 nnoremap <leader>ss :&&<CR> " repeat prev. substitution on whole file
 command -nargs=0 Einit tabedit ~/dotfiles/nvim/init.vim

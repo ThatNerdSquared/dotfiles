@@ -113,8 +113,11 @@ concat-pdf() {
     pdfjam "$@" -o output.pdf
 }
 alias fmtjson="pbpaste | xargs | python3 -m json.tool | pbcopy"
-alias wco="pbpaste | xargs | wc -w"
-alias cleantex="trashme *.aux *.log *.out"
+alias wco="pbpaste | xargs "$1" | wc -w"
+preview-latex() {
+    fswatch -o $1 | xargs -n1 -I{} xelatex $1
+}
+alias cleantex="trashme *.aux | trashme *.log | trashme *.toc | trashme *.out"
 bvim() {
     nvim -u NONE $1
 }
