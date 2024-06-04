@@ -16,7 +16,7 @@
 	st = status
 	jj = pull
 	kk = push
-    ls = log --oneline
+    ls = ! git log --oneline --color=always | less -R
     ll = log
     it = init
     df = diff

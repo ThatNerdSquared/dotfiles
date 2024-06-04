@@ -27,7 +27,7 @@ cmp.setup({ -- init cmp sensibly
 -- Servers from :help lspconfig-all
 local lspservers = {
     'dartls', 'tsserver', 'eslint', 'pyright', 'rust_analyzer',
-    'r_language_server', 'jsonls', 'cssls', 'texlab',
+    'r_language_server', 'jsonls', 'cssls', 'texlab', 'gopls'
 }
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 -- disable snippets
@@ -41,7 +41,7 @@ end
 require 'nvim-treesitter.configs'.setup {
     ensure_installed = {
         "c", "lua", "vim", "vimdoc", "query", -- necessary for treesitter
-        "dart", "typescript", "python", "markdown_inline", "rust", "r"
+        "dart", "typescript", "python", "markdown_inline", "rust", "r", "go"
     },
     sync_install = false, -- install parsers asynchronously
     auto_install = true, -- auto-install parsers when opening buffer

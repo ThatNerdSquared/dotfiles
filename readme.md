@@ -48,6 +48,7 @@ exercise left to the reader :)
 <details>
 <summary>Why iTerm2 instead of the default macOS Terminal?</summary>
 
+- default macOS terminal doesn't properly display nvim colourschemes
 - hotkey window feature allows you to summon a terminal window anywhere
 - `cmd-opt-a` to receive a notification when a command finishes running (this is
   a lifesaver when doing big package updates, cloning giant repos, etc)

@@ -110,7 +110,7 @@ noremap <leader>] gt
 noremap <C-u> <C-o> " rebind the previous jump binding bc i use it for fzf
 noremap <leader>f <C-W>\| <C-W>_ " maximize the current window
 noremap <leader><leader> :tabnew<CR>
-nnoremap '' :enew<CR>
+nnoremap <silent> '' :enew<CR>
 nnoremap <leader>s :%&<CR> " repeat prev. substitution on current line
 nnoremap <leader>ss :&&<CR> " repeat prev. substitution on whole file
 command -nargs=0 Einit tabedit ~/dotfiles/nvim/init.vim
@@ -118,6 +118,8 @@ command -nargs=0 Cp silent w !pbcopy
 nnoremap <silent> qq :bp \| bd #<CR>
 noremap <silent> ˚ :m-2<CR> " opt-k
 noremap <silent> ∆ :m+1<CR> " opt-j
+nnoremap <leader>w {v}:w !wc -w<CR>
+vnoremap <leader>w :'<,'>:w !wc -w<CR>
 autocmd TermOpen term://* startinsert
 nnoremap <leader>t :silent tabnew \| term<CR>
 nnoremap <leader>r :silent 50vsp \| term<CR>
@@ -161,3 +163,6 @@ autocmd BufNewFile,BufRead *.qmd,*.md setlocal spellcapcheck=
 autocmd BufNewFile,BufRead *.qmd,*.md nnoremap <silent> <leader>v :exec 'silent tabnew \| term quarto preview' expand('%:p')<CR>
 autocmd BufNewFile,BufRead *.qmd,*.md let b:ale_fixers = ['prettier']
 autocmd BufNewFile,BufRead *.qmd,*.md set textwidth=80
+autocmd BufNewFile,BufRead *.bib set shiftwidth=2
+autocmd BufNewFile,BufRead *.bib set tabstop=2
+autocmd BufNewFile,BufRead *.go nnoremap Ï :lua vim.lsp.buf.format { async = true }<CR> " opt-shift-f
