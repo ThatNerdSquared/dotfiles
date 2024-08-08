@@ -12,7 +12,7 @@ let g:python3_host_prog="/opt/homebrew/bin/python3"
 
 " vim-plug initialization
 call plug#begin("~/.config/nvim/plugged")
-Plug 'rose-pine/neovim' " colourscheme of choice
+Plug 'rose-pine/neovim', { 'commit': '92762f4fa2144c05db760ea254f4c399a56a7ef5' } " colourscheme of choice
 " actually good syntax highlight
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'neovim/nvim-lspconfig' " interact with LSP servers
@@ -28,12 +28,13 @@ call plug#end()
 source ~/dotfiles/nvim/treesitter-and-lspconfig.lua
 
 " statusline
+lua require('rose-pine').setup({ disable_italics = true })
 function GetBranch()
     let l:fp = fnamemodify('%', ':h')
     return trim(system("git -C " . fp . " branch --show-current 2>/dev/null"))
 endfunction
 set fillchars+=stl:─,stlnc:─
-set statusline=%#Substitute#%{&readonly?'[x]':''} " symbols for readonly, mod
+set statusline=%#CurSearch#%{&readonly?'[x]':''} " symbols for readonly, mod
 set statusline+=%#SpecialChar#%{&readonly?'':'───'}
 set statusline+=%#IncSearch#%{&mod?'[+]':''}%#SpecialChar#%{&mod?'':'───'}
 set statusline+=%#Directory#─bn:%n──%f─ " buffer num, filepath
@@ -47,7 +48,6 @@ autocmd BufWinEnter quickfix,loclist setlocal statusline=%#Directory#%q\ (p:%L)
 
 " theme
 set background=light
-lua require('rose-pine').setup({ disable_italics = true })
 colo rose-pine
 set termguicolors
 
@@ -60,7 +60,8 @@ let g:ale_set_quickfix = 1
 nnoremap « :lua vim.diagnostic.goto_next()<CR> " opt-\
 nnoremap <space>. :lua vim.lsp.buf.code_action()<CR>
 nnoremap qf :lua vim.diagnostic.setqflist()<CR>
-nnoremap <leader>d :lua vim.lsp.buf.definition()<CR>
+nnoremap gd :lua vim.lsp.buf.definition()<CR>
+nnoremap gr :lua vim.lsp.buf.references()<CR>
 lua vim.diagnostic.config { float = { width = 90, border = "rounded" }, }
 
 " plugin bindings
@@ -77,7 +78,6 @@ let g:netrw_banner = 0
 let g:netrw_browse_split = 2
 let g:netrw_winsize = 20
 nnoremap <leader>e :Lexplore<CR>
-
 " general sets
 syntax off " treesitter or nothin baby
 set number relativenumber " relative-number line numbers
@@ -111,6 +111,10 @@ noremap <C-u> <C-o> " rebind the previous jump binding bc i use it for fzf
 noremap <leader>f <C-W>\| <C-W>_ " maximize the current window
 noremap <leader><leader> :tabnew<CR>
 nnoremap <silent> '' :enew<CR>
+nnoremap <space>/ gcc
+nnoremap <C-k> :cp<CR>
+nnoremap <C-j> :cn<CR>
+nnoremap cc :noh<CR>
 nnoremap <leader>s :%&<CR> " repeat prev. substitution on current line
 nnoremap <leader>ss :&&<CR> " repeat prev. substitution on whole file
 command -nargs=0 Einit tabedit ~/dotfiles/nvim/init.vim
@@ -146,17 +150,20 @@ if has("nvim") " this block prevents issues with pressing <Esc> in terminal
 endif
 
 " lang-specific
-" comments
-nnoremap <space>/ I# <esc>
-autocmd BufNewFile,BufRead *.dart,*.js,*.ts,*.jsx,*.tsx nnoremap <space>/ I//<ESC>
 function DartSettings() " use lsp formatting + 2-space indent for dart
     nnoremap Ï :lua vim.lsp.buf.format { async = true }<CR> " opt-shift-f
     set tabstop=2
     set shiftwidth=2
 endfunction
 autocmd BufNewFile,BufRead *.dart call DartSettings()
+function WebDevSettings()
+    let b:ale_fixers = ['eslint', 'prettier']
+    set tabstop=2
+    set shiftwidth=2
+endfunction
+autocmd BufNewFile,BufRead *.js,*.ts,*.jsx,*.tsx,*.mjs,*.css call WebDevSettings()
+autocmd BufNewFile,BufRead *.json let b:ale_fixers = ['eslint', 'prettier']
 " ale fixers
-autocmd BufNewFile,BufRead *.js,*.ts,*.jsx,*.tsx,*.json let b:ale_fixers = ['eslint', 'prettier']
 autocmd BufNewFile,BufRead *.py let b:ale_fixers = ['pyright', 'flake8', 'black']
 autocmd BufNewFile,BufRead *.qmd,*.md setlocal spell
 autocmd BufNewFile,BufRead *.qmd,*.md setlocal spellcapcheck=

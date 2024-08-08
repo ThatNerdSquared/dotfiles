@@ -5,7 +5,7 @@ function nerdprompt() {
     conda_prompt=$([ "$CONDA_PREFIX" ] && echo "c:$(basename "$CONDA_PREFIX")")
     git_branch=$(git -C $(pwd) branch --show-current 2>/dev/null)
     is_dirty=$([ "$(git status --porcelain $(pwd) 2>/dev/null)" ] && echo "*")
-    echo %B%F{green}$venv_prompt$conda_prompt\ %f%F{cyan}%3~/%f\ %F{blue}"b:$git_branch$is_dirty"%f%b\ \—\>\ 
+    echo %B%F{green}$venv_prompt$conda_prompt\ %f%F{cyan}%3~/%f\ %F{blue}"b:$git_branch$is_dirty"%f%b\ \-\>\ 
 }
 PS1="\$(nerdprompt)"
 
@@ -13,8 +13,9 @@ PS1="\$(nerdprompt)"
 export VOLTA_PATH="$HOME/.volta/bin"
 export SCRIPTS_PATH="$HOME/dotfiles/scripts"
 export HOMEBREW_PATH="/opt/homebrew/bin"
+export PSQL_PATH="/opt/homebrew/opt/postgresql@16/bin"
 # add volta installation, scripts, and homebrew to PATH
-export PATH="$VOLTA_PATH:$SCRIPTS_PATH:$HOMEBREW_PATH:$PATH"
+export PATH="$VOLTA_PATH:$SCRIPTS_PATH:$HOMEBREW_PATH:$PSQL_PATH:$PATH"
 export OPENSSL_ROOT_DIR="/usr/bin/openssl"
 export BAT_THEME="Solarized (light)"
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git/"'
@@ -105,6 +106,7 @@ ytwl() {
 
 # actions
 alias fci="flutter analyze && dart format **/*.dart"
+alias gs="git branch --list | fzf | xargs git checkout"
 tree() {
     ! [ -z "$1" ] && folder="$1" || folder=.
     eza --tree --git-ignore -a "$folder"
@@ -118,6 +120,9 @@ preview-latex() {
     fswatch -o $1 | xargs -n1 -I{} xelatex $1
 }
 alias cleantex="trashme *.aux | trashme *.log | trashme *.toc | trashme *.out"
+ff() {
+    nvim "$(fzf --preview 'bat {}')"
+}
 bvim() {
     nvim -u NONE $1
 }

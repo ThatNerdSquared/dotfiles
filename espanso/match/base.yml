@@ -4,7 +4,7 @@ matches:
   - trigger: /shrug
     replace: "¯\\_(ツ)_/¯"
   - trigger: /yay
-    replace: "🫶🤩"
+    replace: "🤩🫶"
   - trigger: /cute
     replace: "😙✌️"
   - trigger: /cmdkey
