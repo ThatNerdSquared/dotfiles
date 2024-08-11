@@ -12,23 +12,38 @@ let g:python3_host_prog="/opt/homebrew/bin/python3"
 
 " vim-plug initialization
 call plug#begin("~/.config/nvim/plugged")
-Plug 'rose-pine/neovim', { 'commit': '92762f4fa2144c05db760ea254f4c399a56a7ef5' } " colourscheme of choice
-" actually good syntax highlight
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'neovim/nvim-lspconfig' " interact with LSP servers
-Plug 'hrsh7th/nvim-cmp' " completion support
-Plug 'hrsh7th/cmp-nvim-lsp' " use LSP as a completion source
-Plug 'hrsh7th/cmp-buffer' " use buffers as completion source
-Plug 'dense-analysis/ale' " linter/formatter integration
+if has('nvim')
+    Plug 'rose-pine/neovim', { 'commit': '92762f4fa2144c05db760ea254f4c399a56a7ef5' } " colourscheme of choice
+    " actually good syntax highlight
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    Plug 'neovim/nvim-lspconfig' " interact with LSP servers
+    Plug 'hrsh7th/nvim-cmp' " completion support
+    Plug 'hrsh7th/cmp-nvim-lsp' " use LSP as a completion source
+    Plug 'hrsh7th/cmp-buffer' " use buffers as completion source
+endif
+"Plug 'dense-analysis/ale' " linter/formatter integration
 Plug 'kana/vim-smartinput' " autopair
 " fzf vim integration
 Plug 'junegunn/fzf', { 'on': ['Buffers', 'Files', 'Rg', 'BLines'] }
 Plug 'junegunn/fzf.vim', { 'on': ['Buffers', 'Files', 'Rg', 'BLines'] }
 call plug#end()
-source ~/dotfiles/nvim/treesitter-and-lspconfig.lua
+if has('nvim')
+    source ~/dotfiles/nvim/treesitter-and-lspconfig.lua
+endif
+
+" theme
+set termguicolors
+if has('nvim')
+    set background=light
+    lua require('rose-pine').setup({ disable_italics = true })
+    colo rose-pine
+elseif has("patch-9.0.1488")
+    colo wildcharm
+else
+    colo elflord
+endif
 
 " statusline
-lua require('rose-pine').setup({ disable_italics = true })
 function GetBranch()
     let l:fp = fnamemodify('%', ':h')
     return trim(system("git -C " . fp . " branch --show-current 2>/dev/null"))
@@ -46,11 +61,6 @@ let g:currentmode={
 set statusline+=tln:%L──%{(g:currentmode[mode()])} " total lines, current mode
 autocmd BufWinEnter quickfix,loclist setlocal statusline=%#Directory#%q\ (p:%L)
 
-" theme
-set background=light
-colo rose-pine
-set termguicolors
-
 " lsp related
 let g:ale_linters_explicit = 1
 let g:ale_use_neovim_diagnostics_api = 1
@@ -62,7 +72,9 @@ nnoremap <space>. :lua vim.lsp.buf.code_action()<CR>
 nnoremap qf :lua vim.diagnostic.setqflist()<CR>
 nnoremap gd :lua vim.lsp.buf.definition()<CR>
 nnoremap gr :lua vim.lsp.buf.references()<CR>
-lua vim.diagnostic.config { float = { width = 90, border = "rounded" }, }
+if has('nvim')
+    lua vim.diagnostic.config { float = { width = 90, border = "rounded" }, }
+endif
 
 " plugin bindings
 let g:fzf_buffers_jump = 1
@@ -75,11 +87,22 @@ nnoremap eh :silent BLines ^#<CR>
 command -nargs=0 W echoerr "Not an editor cmd: W"
 let g:netrw_liststyle = 3 " filetree config
 let g:netrw_banner = 0
-let g:netrw_browse_split = 2
+"let g:netrw_browse_split = 2
 let g:netrw_winsize = 20
-nnoremap <leader>e :Lexplore<CR>
+nnoremap <leader>e :Explore<CR>
 " general sets
-syntax off " treesitter or nothin baby
+if has('nvim')
+    syntax off " treesitter or nothin baby
+else
+    syntax on
+endif
+" allows auto-switching regex engine (prevents hangs when highlighting TS)
+set regexpengine=0
+set ttimeoutlen=50
+set incsearch
+set hlsearch
+set laststatus=2
+set hidden
 set number relativenumber " relative-number line numbers
 set tabstop=4 " show tab character as 4 spaces wide
 set shiftwidth=4 " show indentation as 4 spaces wide
@@ -114,7 +137,7 @@ nnoremap <silent> '' :enew<CR>
 nnoremap <space>/ gcc
 nnoremap <C-k> :cp<CR>
 nnoremap <C-j> :cn<CR>
-nnoremap cc :noh<CR>
+nnoremap cc :silent nohlsearch\| echo "Search cleared!"<CR>
 nnoremap <leader>s :%&<CR> " repeat prev. substitution on current line
 nnoremap <leader>ss :&&<CR> " repeat prev. substitution on whole file
 command -nargs=0 Einit tabedit ~/dotfiles/nvim/init.vim
@@ -124,7 +147,9 @@ noremap <silent> ˚ :m-2<CR> " opt-k
 noremap <silent> ∆ :m+1<CR> " opt-j
 nnoremap <leader>w {v}:w !wc -w<CR>
 vnoremap <leader>w :'<,'>:w !wc -w<CR>
-autocmd TermOpen term://* startinsert
+if has('nvim')
+    autocmd TermOpen term://* startinsert
+endif
 nnoremap <leader>t :silent tabnew \| term<CR>
 nnoremap <leader>r :silent 50vsp \| term<CR>
 " fastgit integration
