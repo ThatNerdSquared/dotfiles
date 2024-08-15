@@ -21,7 +21,6 @@ if has('nvim')
     Plug 'hrsh7th/cmp-nvim-lsp' " use LSP as a completion source
     Plug 'hrsh7th/cmp-buffer' " use buffers as completion source
 endif
-"Plug 'dense-analysis/ale' " linter/formatter integration
 Plug 'kana/vim-smartinput' " autopair
 " fzf vim integration
 Plug 'junegunn/fzf', { 'on': ['Buffers', 'Files', 'Rg', 'BLines'] }
@@ -61,12 +60,21 @@ let g:currentmode={
 set statusline+=tln:%L──%{(g:currentmode[mode()])} " total lines, current mode
 autocmd BufWinEnter quickfix,loclist setlocal statusline=%#Directory#%q\ (p:%L)
 
+function FullFileFormat()
+    let l:winstate = winsaveview()
+    normal gggqG
+    if v:shell_error > 0
+        silent undo
+        redraw
+        echoerr 'Formatter could not be applied!'
+    endif
+    call winrestview(l:winstate)
+    echomsg 'formatter "' . &formatprg . '" successfully applied!'
+endfunction
+
 " lsp related
-let g:ale_linters_explicit = 1
-let g:ale_use_neovim_diagnostics_api = 1
-nnoremap Ï :ALEFix<CR> " opt-shift-f
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
+" opt-shift-f
+nnoremap Ï :call FullFileFormat()<CR>
 nnoremap « :lua vim.diagnostic.goto_next()<CR> " opt-\
 nnoremap <space>. :lua vim.lsp.buf.code_action()<CR>
 nnoremap qf :lua vim.diagnostic.setqflist()<CR>
@@ -103,6 +111,7 @@ set incsearch
 set hlsearch
 set laststatus=2
 set hidden
+set nocompatible
 set number relativenumber " relative-number line numbers
 set tabstop=4 " show tab character as 4 spaces wide
 set shiftwidth=4 " show indentation as 4 spaces wide
@@ -173,28 +182,48 @@ if has("nvim") " this block prevents issues with pressing <Esc> in terminal
 	au! TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
 	au! FileType fzf tunmap <buffer> <Esc>
 endif
+nnoremap <Space>r :make<CR>
+function GuardedLocalMake()
+    " oh my god bruh
+    " https://github.com/microsoft/TypeScript/issues/27379
+    if &makeprg == 'npx tsc'
+        echoerr "location list not supported for tsc!" 
+    else
+        lmake %<CR>
+    endif
+endfunction
+nnoremap <Space>l :call GuardedLocalMake()<CR>
+nnoremap <leader>v :exec "silent tabnew \| term " . g:livebuildprg <CR>
 
 " lang-specific
 function DartSettings() " use lsp formatting + 2-space indent for dart
-    nnoremap Ï :lua vim.lsp.buf.format { async = true }<CR> " opt-shift-f
     set tabstop=2
     set shiftwidth=2
+    setlocal formatprg=dart\ format\ -o\ show
 endfunction
 autocmd BufNewFile,BufRead *.dart call DartSettings()
 function WebDevSettings()
-    let b:ale_fixers = ['eslint', 'prettier']
+    nnoremap <leader>l :compiler eslint<CR>
+    " convert to custom compiler later
+    nnoremap <leader>r :compiler tsc \| set makeprg=npx\ tsc<CR>
     set tabstop=2
     set shiftwidth=2
+    set formatexpr=
+    setlocal formatprg=npx\ prettier\ --stdin-filepath\ %
+    set path=src/**,tests/**
 endfunction
 autocmd BufNewFile,BufRead *.js,*.ts,*.jsx,*.tsx,*.mjs,*.css call WebDevSettings()
-autocmd BufNewFile,BufRead *.json let b:ale_fixers = ['eslint', 'prettier']
-" ale fixers
-autocmd BufNewFile,BufRead *.py let b:ale_fixers = ['pyright', 'flake8', 'black']
+autocmd BufNewFile,BufRead *.json setlocal formatprg=npx\ prettier\ --stdin-filepath\ %
+autocmd BufNewFile,BufRead *.py setlocal makeprg=python3\ -m\ flake8
 autocmd BufNewFile,BufRead *.qmd,*.md setlocal spell
 autocmd BufNewFile,BufRead *.qmd,*.md setlocal spellcapcheck=
-autocmd BufNewFile,BufRead *.qmd,*.md nnoremap <silent> <leader>v :exec 'silent tabnew \| term quarto preview' expand('%:p')<CR>
-autocmd BufNewFile,BufRead *.qmd,*.md let b:ale_fixers = ['prettier']
+autocmd BufNewFile,BufRead *.qmd,*.md let g:livebuildprg = "quarto preview " . expand("%:p")
+autocmd BufNewFile,BufRead *.qmd,*.md setlocal formatprg=npx\ prettier\ --stdin-filepath\ %
 autocmd BufNewFile,BufRead *.qmd,*.md set textwidth=80
 autocmd BufNewFile,BufRead *.bib set shiftwidth=2
 autocmd BufNewFile,BufRead *.bib set tabstop=2
-autocmd BufNewFile,BufRead *.go nnoremap Ï :lua vim.lsp.buf.format { async = true }<CR> " opt-shift-f
+autocmd BufNewFile,BufRead *.go setlocal formatprg=gofmt
+let g:cwd_basename = fnamemodify(getcwd(), ':t')
+if g:cwd_basename == "workday-calendar-extension"
+    let g:livebuildprg = "yarn dev-firefox"
+endif

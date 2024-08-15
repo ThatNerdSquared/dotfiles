@@ -1,0 +1,53 @@
+cexpr? lexpr?   lmake
+
+:help diffsplit
+:help development
+
+
+    :e, :find, :Explore vs file system explorer (e.g. NERDTree)
+
+    include (:ijump, isearch, ilist), define (:djump, :dsearch, :dlist) vs Find references, Go to Definition
+
+    keywordprg vs LSP's Hover
+
+    quickfix window vs inline diagnostics
+
+    grepprg vs fuzzy finder tools
+
+    makeprg vs IDE compiler
+
+
+
+Until, that is, you type :make and your makefile has a recipe that prompts. Or you type :%!sudo tee % and sudo wants your password. Or you type %!ssh linode tee testdata and oh no ssh wants your password.
+
+
+:tselect, :ijump?
+
+
+ In my experience, the support for the LSP protocol is not sufficiently mature to have a great experience. Add to that the fact that LSP servers often need many dependencies and consume too many resources, I'd rather have 90% of the functionality with native features: define (go to definition), include or includeexpr (find all references), K (for hover), :vimgrep + cdo (rename variable globally), :make (compiler errors), :lmake (linter errors)
+
+    ex
+    view
+    vimdiff
+    :shell
+
+
+
+use r! to test APIs in-editor? no need for iurl
+    https://stackoverflow.com/questions/40289706/execute-selection-from-script-in-vim/40290101#40290101
+    https://rwx.gg/tools/editors/vi/how/magic/
+
+
+https://www.reddit.com/r/vim/comments/pf3w3y/poor_mans_linter/
+
+show quickfix errors in editor/signcolumn
+    https://github.com/dhruvasagar/vim-markify
+    https://github.com/tomtom/quickfixsigns_vim
+    https://gist.github.com/BoltsJ/5942ecac7f0b0e9811749ef6e19d2176
+    https://github.com/bfrg/vim-qf-diagnostics
+    https://gitlab.com/hauleth/qfx.vim
+
+
+
+
+https://superuser.com/questions/698671/making-vim-use-the-alternate-screen
