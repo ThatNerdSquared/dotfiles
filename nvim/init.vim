@@ -13,15 +13,11 @@ let g:python3_host_prog="/opt/homebrew/bin/python3"
 " vim-plug initialization
 call plug#begin("~/.config/nvim/plugged")
 if has('nvim')
-    Plug 'rose-pine/neovim', { 'commit': '92762f4fa2144c05db760ea254f4c399a56a7ef5' } " colourscheme of choice
     " actually good syntax highlight
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-    Plug 'neovim/nvim-lspconfig' " interact with LSP servers
-    Plug 'hrsh7th/nvim-cmp' " completion support
-    Plug 'hrsh7th/cmp-nvim-lsp' " use LSP as a completion source
-    Plug 'hrsh7th/cmp-buffer' " use buffers as completion source
 endif
 Plug 'kana/vim-smartinput' " autopair
+Plug 'natebosch/vim-lsc'
 " fzf vim integration
 Plug 'junegunn/fzf', { 'on': ['Buffers', 'Files', 'Rg', 'BLines'] }
 Plug 'junegunn/fzf.vim', { 'on': ['Buffers', 'Files', 'Rg', 'BLines'] }
@@ -32,10 +28,17 @@ endif
 
 " theme
 set termguicolors
+
+" Vertical bar in insert mode  
+let &t_SI = "\<Esc>[6 q"
+" Underline in replace mode
+let &t_SR = "\<Esc>[4 q"
+" Block in other modes
+let &t_EI = "\<Esc>[2 q"
+
 if has('nvim')
     set background=light
-    lua require('rose-pine').setup({ disable_italics = true })
-    colo rose-pine
+    colo rosepine_dawn
 elseif has("patch-9.0.1488")
     colo wildcharm
 else
@@ -75,14 +78,28 @@ endfunction
 " lsp related
 " opt-shift-f
 nnoremap Ï :call FullFileFormat()<CR>
-nnoremap « :lua vim.diagnostic.goto_next()<CR> " opt-\
-nnoremap <space>. :lua vim.lsp.buf.code_action()<CR>
-nnoremap qf :lua vim.diagnostic.setqflist()<CR>
-nnoremap gd :lua vim.lsp.buf.definition()<CR>
-nnoremap gr :lua vim.lsp.buf.references()<CR>
-if has('nvim')
-    lua vim.diagnostic.config { float = { width = 90, border = "rounded" }, }
-endif
+let g:lsc_autocomplete_length = 1
+let g:ts_lsp = 'typescript-language-server --stdio'
+let g:lsc_server_commands = {
+    \ 'typescript': g:ts_lsp,
+    \ 'typescriptreact': g:ts_lsp,
+    \ 'javascript': g:ts_lsp,
+    \ 'javascriptreact': g:ts_lsp,
+    \ 'dart': 'dart language-server',
+    \ 'css': 'vscode-css-language-server --stdio'
+    \}
+let g:lsc_auto_map = {
+    \ 'GoToDefinition': 'gd',
+    \ 'GoToDefinitionSplit': 'gD',
+    \ 'FindReferences': 'gr',
+    \ 'FindCodeActions': '<space>.',
+    \ 'ShowHover': v:true,
+    \}
+inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
+nnoremap « :lafter<CR> " opt-\
+nnoremap » :lbefore<CR> " opt-shift-\
+nnoremap qf :cwindow<CR>
+nnoremap qr :lwindow<CR>
 
 " plugin bindings
 let g:fzf_buffers_jump = 1
@@ -98,7 +115,10 @@ let g:netrw_banner = 0
 "let g:netrw_browse_split = 2
 let g:netrw_winsize = 20
 nnoremap <leader>e :Explore<CR>
+
+" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " general sets
+" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 if has('nvim')
     syntax off " treesitter or nothin baby
 else
@@ -112,6 +132,11 @@ set hlsearch
 set laststatus=2
 set hidden
 set nocompatible
+set history=10000
+set showcmd
+set wildmenu
+set wildoptions=pum
+set listchars=tab:>\ ,trail:•,nbsp:+
 set number relativenumber " relative-number line numbers
 set tabstop=4 " show tab character as 4 spaces wide
 set shiftwidth=4 " show indentation as 4 spaces wide
@@ -160,7 +185,6 @@ if has('nvim')
     autocmd TermOpen term://* startinsert
 endif
 nnoremap <leader>t :silent tabnew \| term<CR>
-nnoremap <leader>r :silent 50vsp \| term<CR>
 " fastgit integration
 nnoremap gda :silent tabnew \| terminal fastgit<CR>
 nnoremap gdf :exec 'silent tabnew \| terminal fastgit ' expand('%:p')<CR>
