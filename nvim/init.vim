@@ -18,6 +18,8 @@ if has('nvim')
 endif
 Plug 'kana/vim-smartinput' " autopair
 Plug 'natebosch/vim-lsc'
+Plug 'tpope/vim-dispatch'
+Plug 'dhruvasagar/vim-markify'
 " fzf vim integration
 Plug 'junegunn/fzf', { 'on': ['Buffers', 'Files', 'Rg', 'BLines'] }
 Plug 'junegunn/fzf.vim', { 'on': ['Buffers', 'Files', 'Rg', 'BLines'] }
@@ -36,14 +38,17 @@ let &t_SR = "\<Esc>[4 q"
 " Block in other modes
 let &t_EI = "\<Esc>[2 q"
 
-if has('nvim')
+try
     set background=light
     colo rosepine_dawn
-elseif has("patch-9.0.1488")
-    colo wildcharm
-else
-    colo elflord
-endif
+catch
+    set background=dark
+    if has("patch-9.0.1488")
+        colo wildcharm
+    else
+        colo elflord
+    endif
+endtry
 
 " statusline
 function GetBranch()
@@ -79,6 +84,7 @@ endfunction
 " opt-shift-f
 nnoremap Ï :call FullFileFormat()<CR>
 let g:lsc_autocomplete_length = 1
+let g:lsc_diagnostic_highlights = v:false
 let g:ts_lsp = 'typescript-language-server --stdio'
 let g:lsc_server_commands = {
     \ 'typescript': g:ts_lsp,
@@ -90,16 +96,20 @@ let g:lsc_server_commands = {
     \}
 let g:lsc_auto_map = {
     \ 'GoToDefinition': 'gd',
-    \ 'GoToDefinitionSplit': 'gD',
     \ 'FindReferences': 'gr',
     \ 'FindCodeActions': '<space>.',
     \ 'ShowHover': v:true,
     \}
+nnoremap gD :vertical LSClientGoToDefinitionSplit<CR>
 inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
-nnoremap « :lafter<CR> " opt-\
-nnoremap » :lbefore<CR> " opt-shift-\
 nnoremap qf :cwindow<CR>
 nnoremap qr :lwindow<CR>
+set completeopt=menu,menuone,popup
+let g:markify_autocmd = 1
+let g:markify_error_text = '██'
+let g:markify_info_text = '██'
+
+
 
 " plugin bindings
 let g:fzf_buffers_jump = 1
@@ -152,6 +162,7 @@ set cursorline
 set splitright " new splits open to right/down - more intuitive
 set splitbelow
 set signcolumn=yes " always show signcolumn to prevent flickering
+set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 " set working dir to dir in argument if provided
 if argc() == 1 && isdirectory(argv(0)) | cd `=argv(0)` | endif
 
@@ -171,14 +182,17 @@ nnoremap <silent> '' :enew<CR>
 nnoremap <space>/ gcc
 nnoremap <C-k> :cp<CR>
 nnoremap <C-j> :cn<CR>
+nnoremap ˚ :lprevious<CR> " opt-k
+nnoremap ∆ :lnext<CR> " opt-j
+nnoremap <CR><CR> :cc<CR>
 nnoremap cc :silent nohlsearch\| echo "Search cleared!"<CR>
 nnoremap <leader>s :%&<CR> " repeat prev. substitution on current line
 nnoremap <leader>ss :&&<CR> " repeat prev. substitution on whole file
 command -nargs=0 Einit tabedit ~/dotfiles/nvim/init.vim
 command -nargs=0 Cp silent w !pbcopy
 nnoremap <silent> qq :bp \| bd #<CR>
-noremap <silent> ˚ :m-2<CR> " opt-k
-noremap <silent> ∆ :m+1<CR> " opt-j
+noremap <silent> <A-Up> :m-2<CR>
+noremap <silent> <A-Down> :m+1<CR>
 nnoremap <leader>w {v}:w !wc -w<CR>
 vnoremap <leader>w :'<,'>:w !wc -w<CR>
 if has('nvim')
@@ -206,12 +220,13 @@ if has("nvim") " this block prevents issues with pressing <Esc> in terminal
 	au! TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
 	au! FileType fzf tunmap <buffer> <Esc>
 endif
-nnoremap <Space>r :make<CR>
+nnoremap <Space>r :Make<CR>
 function GuardedLocalMake()
     " oh my god bruh
     " https://github.com/microsoft/TypeScript/issues/27379
     if &makeprg == 'npx tsc'
-        echoerr "location list not supported for tsc!" 
+        echoerr "location list not supported for tsc!"
+        LSClientWindowDiagnostics
     else
         lmake %<CR>
     endif

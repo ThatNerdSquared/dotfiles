@@ -43,6 +43,7 @@ https://www.reddit.com/r/vim/comments/pf3w3y/poor_mans_linter/
 show quickfix errors in editor/signcolumn
     https://github.com/dhruvasagar/vim-markify
     https://github.com/tomtom/quickfixsigns_vim
+        eliminated as it still uses vimball as primary distribution method
     https://gist.github.com/BoltsJ/5942ecac7f0b0e9811749ef6e19d2176
     https://github.com/bfrg/vim-qf-diagnostics
     https://gitlab.com/hauleth/qfx.vim
