@@ -1,6 +1,6 @@
 " filetype-specific conf for markdown and friends (quarto, r markdown, etc)
 
-setlocal spell
+setlocal spell spelllang=en_ca
 setlocal spellcapcheck=
 let g:livebuildprg = "quarto preview " . expand("%:p")
 setlocal formatprg=npx\ prettier\ --stdin-filepath\ %

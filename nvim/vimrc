@@ -1,40 +1,36 @@
-" ThatNerd's init.vim 2.0
+" ThatNerd's vimrc 3.0
+
+" INITIAL SETTINGS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" {{{1
+let g:python3_host_prog="/opt/homebrew/bin/python3"
 
 " vim-plug auto install
+" ~~~~~~~~~~~~~~~~~~~~~{{{2
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
     silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
+" }}}2
+" }}}1
 
-" Set python
-let g:python3_host_prog="/opt/homebrew/bin/python3"
 
-" vim-plug initialization
-call plug#begin("~/.config/nvim/plugged")
+" VIM-PLUG INIT ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" {{{
+call plug#begin()
 if has('nvim')
-    " actually good syntax highlight
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 endif
-Plug 'kana/vim-smartinput' " autopair
+Plug 'kana/vim-smartinput'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'tpope/vim-dispatch'
 Plug 'dhruvasagar/vim-markify'
-" fzf vim integration
 Plug 'junegunn/fzf', { 'on': ['Buffers', 'Files', 'Rg', 'BLines'] }
 Plug 'junegunn/fzf.vim', { 'on': ['Buffers', 'Files', 'Rg', 'BLines'] }
 call plug#end()
-
-if has('nvim')
-    source ~/dotfiles/nvim/treesitter-and-lspconfig.lua
-    autocmd TermOpen term://* startinsert
-    " these prevents issues with pressing <Esc> in terminal
-	au! TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
-	au! FileType fzf tunmap <buffer> <Esc>
-    syntax off " treesitter or nothin baby
-endif
+" }}}
 
 
 " PLUGIN CONFIG ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
