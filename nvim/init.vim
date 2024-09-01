@@ -162,8 +162,6 @@ command -nargs=0 Cp silent w !pbcopy
 nnoremap <silent> qq :bp \| bd #<CR>
 noremap <silent> <A-Up> :m-2<CR>
 noremap <silent> <A-Down> :m+1<CR>
-nnoremap <leader>w {v}:w !wc -w<CR>
-vnoremap <leader>w :'<,'>:w !wc -w<CR>
 if has('nvim')
     autocmd TermOpen term://* startinsert
     " these prevents issues with pressing <Esc> in terminal
@@ -174,20 +172,6 @@ nnoremap <leader>t :silent tabnew \| term<CR>
 " fastgit integration
 nnoremap gda :silent tabnew \| terminal fastgit<CR>
 nnoremap gdf :exec 'silent tabnew \| terminal fastgit ' expand('%:p')<CR>
-function Check() " toggle markdown checkboxes
-    let l:line=getline('.')
-    if l:line=~?'\s*-\s*\[\s*\].*'
-        s/\[\s*\]/[-]/
-        w
-    elseif l:line=~?'\s*-\s*\[-\].*'
-        s/\[-\]/[x]/
-        w
-    elseif l:line=~?'\s*-\s*\[x\].*'
-        s/\[x\]/[ ]/
-        w
-    endif
-endfunction
-nnoremap <silent> - :call Check()<CR>
 nnoremap <Space>r :Make<CR>
 function GuardedLocalMake()
     " oh my god bruh
@@ -202,37 +186,6 @@ endfunction
 nnoremap <Space>l :call GuardedLocalMake()<CR>
 nnoremap <leader>v :exec "silent tabnew \| term " . g:livebuildprg <CR>
 
-" lang-specific
-function DartSettings()
-    set tabstop=2
-    set shiftwidth=2
-    set path=lib/**,test/**,,,
-    nnoremap <leader>l :set makeprg=flutter\ analyze<CR>
-    nnoremap <leader>r :compiler dart<CR>
-    setlocal formatprg=dart\ format\ -o\ show
-endfunction
-autocmd BufNewFile,BufRead *.dart call DartSettings()
-function WebDevSettings()
-    nnoremap <leader>l :compiler eslint<CR>
-    " convert to custom compiler later
-    nnoremap <leader>r :compiler tsc \| set makeprg=npx\ tsc<CR>
-    set tabstop=2
-    set shiftwidth=2
-    set formatexpr=
-    setlocal formatprg=npx\ prettier\ --stdin-filepath\ %
-    set path=src/**,tests/**
-endfunction
-autocmd BufNewFile,BufRead *.js,*.ts,*.jsx,*.tsx,*.mjs,*.css call WebDevSettings()
-autocmd BufNewFile,BufRead *.json setlocal formatprg=npx\ prettier\ --stdin-filepath\ %
-autocmd BufNewFile,BufRead *.py setlocal makeprg=python3\ -m\ flake8
-autocmd BufNewFile,BufRead *.qmd,*.md setlocal spell
-autocmd BufNewFile,BufRead *.qmd,*.md setlocal spellcapcheck=
-autocmd BufNewFile,BufRead *.qmd,*.md let g:livebuildprg = "quarto preview " . expand("%:p")
-autocmd BufNewFile,BufRead *.qmd,*.md setlocal formatprg=npx\ prettier\ --stdin-filepath\ %
-autocmd BufNewFile,BufRead *.qmd,*.md set textwidth=80
-autocmd BufNewFile,BufRead *.bib set shiftwidth=2
-autocmd BufNewFile,BufRead *.bib set tabstop=2
-autocmd BufNewFile,BufRead *.go setlocal formatprg=gofmt
 " project-specific conf
 let g:cwd_basename = fnamemodify(getcwd(), ':t')
 if g:cwd_basename == "workday-calendar-extension"
