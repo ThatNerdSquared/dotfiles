@@ -17,7 +17,9 @@ if has('nvim')
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 endif
 Plug 'kana/vim-smartinput' " autopair
-Plug 'natebosch/vim-lsc'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'prabirshrestha/vim-lsp'
 Plug 'tpope/vim-dispatch'
 Plug 'dhruvasagar/vim-markify'
 " fzf vim integration
@@ -83,28 +85,45 @@ endfunction
 " lsp related
 " opt-shift-f
 nnoremap Ï :call FullFileFormat()<CR>
-let g:lsc_autocomplete_length = 1
-let g:lsc_diagnostic_highlights = v:false
-let g:ts_lsp = 'typescript-language-server --stdio'
-let g:lsc_server_commands = {
-    \ 'typescript': g:ts_lsp,
-    \ 'typescriptreact': g:ts_lsp,
-    \ 'javascript': g:ts_lsp,
-    \ 'javascriptreact': g:ts_lsp,
-    \ 'dart': 'dart language-server',
-    \ 'css': 'vscode-css-language-server --stdio'
-    \}
-let g:lsc_auto_map = {
-    \ 'GoToDefinition': 'gd',
-    \ 'FindReferences': 'gr',
-    \ 'FindCodeActions': '<space>.',
-    \ 'ShowHover': v:true,
-    \}
-nnoremap gD :vertical LSClientGoToDefinitionSplit<CR>
+let g:asyncomplete_auto_popup = 1
+let g:asyncomplete_auto_completeopt="menu,menuone,popup,noinsert"
+let g:lsp_use_native_client = 1
+let g:lsp_diagnostics_highlights_insert_mode_enabled = 0
+let g:lsp_diagnostics_signs_enabled = 0
+let g:lsp_document_code_action_signs_enabled = 0
+au User lsp_setup call lsp#register_server({
+    \ 'name': 'typescript-language-server',
+    \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+    \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+    \ 'whitelist': ['typescript', 'typescript.tsx', 'typescriptreact', 'javascript', 'javascriptreact'],
+    \ })
+" see:
+" - https://github.com/prabirshrestha/vim-lsp/issues/1505#issuecomment-2110455309
+" - https://github.com/prabirshrestha/vim-lsp/issues/1056#issuecomment-766236707
+function! Css_capabilities()
+    let l:caps = lsp#default_get_supported_capabilities({})
+    let l:caps.textDocument.completion.completionItem.snippetSupport = v:true
+    return l:caps
+endfunction
+au User lsp_setup call lsp#register_server({
+    \ 'name': 'css-languageserver',
+    \ 'cmd': {server_info->[&shell, &shellcmdflag, 'vscode-css-language-server --stdio']},
+    \ 'capabilities': Css_capabilities(),
+    \ 'whitelist': ['css'],
+    \ })
+au User lsp_setup call lsp#register_server({
+    \ 'name': 'dart-language-server',
+    \ 'cmd': {server_info->[&shell, &shellcmdflag, 'dart language-server']},
+    \ 'whitelist': ['dart'],
+    \ })
+noremap gd <plug>(lsp-definition)
+noremap gr <plug>(lsp-references)
+noremap <Space>. <plug>(lsp-code-action-float)
+set keywordprg=:LspHover
 inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
 nnoremap qf :cwindow<CR>
 nnoremap qr :lwindow<CR>
-set completeopt=menu,menuone,popup
+set completeopt=menu,menuone,popup,noinsert
 let g:markify_autocmd = 1
 let g:markify_error_text = '██'
 let g:markify_info_text = '██'
@@ -147,6 +166,7 @@ set showcmd
 set wildmenu
 set wildoptions=pum
 set listchars=tab:>\ ,trail:•,nbsp:+
+set noshowmode
 set number relativenumber " relative-number line numbers
 set tabstop=4 " show tab character as 4 spaces wide
 set shiftwidth=4 " show indentation as 4 spaces wide
@@ -226,18 +246,21 @@ function GuardedLocalMake()
     " https://github.com/microsoft/TypeScript/issues/27379
     if &makeprg == 'npx tsc'
         echoerr "location list not supported for tsc!"
-        LSClientWindowDiagnostics
+        LspDocumentDiagnostics
     else
-        lmake %<CR>
+        lmake %
     endif
 endfunction
 nnoremap <Space>l :call GuardedLocalMake()<CR>
 nnoremap <leader>v :exec "silent tabnew \| term " . g:livebuildprg <CR>
 
 " lang-specific
-function DartSettings() " use lsp formatting + 2-space indent for dart
+function DartSettings()
     set tabstop=2
     set shiftwidth=2
+    set path=lib/**,test/**,,,
+    nnoremap <leader>l :set makeprg=flutter\ analyze<CR>
+    nnoremap <leader>r :compiler dart<CR>
     setlocal formatprg=dart\ format\ -o\ show
 endfunction
 autocmd BufNewFile,BufRead *.dart call DartSettings()
@@ -262,6 +285,7 @@ autocmd BufNewFile,BufRead *.qmd,*.md set textwidth=80
 autocmd BufNewFile,BufRead *.bib set shiftwidth=2
 autocmd BufNewFile,BufRead *.bib set tabstop=2
 autocmd BufNewFile,BufRead *.go setlocal formatprg=gofmt
+" project-specific conf
 let g:cwd_basename = fnamemodify(getcwd(), ':t')
 if g:cwd_basename == "workday-calendar-extension"
     let g:livebuildprg = "yarn dev-firefox"

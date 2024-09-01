@@ -1,3 +1,4 @@
+--[[
 -- LSPCONFIG
 local lspconfig = require('lspconfig')
 local cmp = require('cmp')
@@ -36,6 +37,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = false
 for _, server in pairs(lspservers) do
     lspconfig[server].setup { capabilities = capabilities }
 end
+]]--
 
 -- TREESITTER
 require 'nvim-treesitter.configs'.setup {
