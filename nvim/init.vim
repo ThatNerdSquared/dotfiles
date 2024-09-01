@@ -26,41 +26,29 @@ Plug 'dhruvasagar/vim-markify'
 Plug 'junegunn/fzf', { 'on': ['Buffers', 'Files', 'Rg', 'BLines'] }
 Plug 'junegunn/fzf.vim', { 'on': ['Buffers', 'Files', 'Rg', 'BLines'] }
 call plug#end()
+
 if has('nvim')
     source ~/dotfiles/nvim/treesitter-and-lspconfig.lua
+    autocmd TermOpen term://* startinsert
+    " these prevents issues with pressing <Esc> in terminal
+	au! TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
+	au! FileType fzf tunmap <buffer> <Esc>
+    syntax off " treesitter or nothin baby
 endif
 
-" theme
-set termguicolors
 
-" Vertical bar in insert mode  
-let &t_SI = "\<Esc>[6 q"
-" Underline in replace mode
-let &t_SR = "\<Esc>[4 q"
-" Block in other modes
-let &t_EI = "\<Esc>[2 q"
+" PLUGIN CONFIG ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" {{{1
 
-try
-    set background=light
-    colo rosepine_dawn
-catch
-    set background=dark
-    if has("patch-9.0.1488")
-        colo wildcharm
-    else
-        colo elflord
-    endif
-endtry
-
-
-" lsp related
-nnoremap qf :cwindow<CR>
-nnoremap qr :lwindow<CR>
+" vim-markify config
+" ~~~~~~~~~~~~~~~~~~{{{2
 let g:markify_autocmd = 1
 let g:markify_error_text = '██'
 let g:markify_info_text = '██'
+" }}}2
 
-" plugin bindings
+" fzf.vim config
+" ~~~~~~~~~~~~~~{{{2
 let g:fzf_buffers_jump = 1
 nnoremap <C-p> :Buffers<CR>
 nnoremap <C-o> :Files<CR>
@@ -69,78 +57,135 @@ nnoremap <leader>df :Files ~/dotfiles<CR>
 nnoremap eh :silent BLines ^#<CR>
 " mistyping :w brings up fzf's :Windows
 command -nargs=0 W echoerr "Not an editor cmd: W"
-let g:netrw_liststyle = 3 " filetree config
+" }}}2
+
+" Netrw config
+" ~~~~~~~~~~~~{{{2
+let g:netrw_liststyle = 3
 let g:netrw_banner = 0
 let g:netrw_winsize = 20
 nnoremap <leader>e :Explore<CR>
+" }}}2
+" }}}1
 
-" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-" general sets
-" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-if has('nvim')
-    syntax off " treesitter or nothin baby
-endif
+
+" COLOURSCHEME + VISUALS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" {{{1
+set termguicolors
+set background=light
+colo rosepine_dawn
+"other themes i find nice for dark mode
+"set background=dark
+"colo wildcharm
+"colo elflord
+
+" Cursor customization
+" ~~~~~~~~~~~~~~~~~~~~{{{2
+" Vertical bar in insert mode
+let &t_SI = "\<Esc>[6 q"
+" Underline in replace mode
+let &t_SR = "\<Esc>[4 q"
+" Block in other modes
+let &t_EI = "\<Esc>[2 q"
+" }}}2
+" }}}1
+
+
+" OPTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" {{{1
+
+" general options
+" ~~~~~~~~~~~~~~~{{{2
+set ignorecase " make search non-case-sensitive
+set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 set completeopt=menu,menuone,popup,noinsert
 set wildoptions=pum
+" }}}2
+
+" UI options
+" ~~~~~~~~~~~~~~~{{{2
+set number relativenumber " relative-number line numbers
+set cursorline
+set cursorcolumn " get a sense of where your cursor is without indentline
+set splitright " new splits open to right/down - more intuitive
+set splitbelow
+set signcolumn=yes " always show signcolumn to prevent flickering
+set list " show tabchars
 set listchars=tab:>\ ,trail:•,nbsp:+
 set noshowmode
-set number relativenumber " relative-number line numbers
+" }}}2
+
+" indentation options
+" ~~~~~~~~~~~~~~~{{{2
 set tabstop=4 " show tab character as 4 spaces wide
 set shiftwidth=0 " follow tabstop
 set expandtab " insert spaces on <Tab>
 set foldmethod=indent
 set breakindent " when hard-wrapping lines, continue at same visual indent
-set lbr " soft-wrap lines at whitespace
-set list " show tabchars
 set autoindent " when start a new line, use same indent as previous line
-set ignorecase " make search non-case-sensitive
-set cursorcolumn " get a sense of where your cursor is without indentline
-set cursorline
-set splitright " new splits open to right/down - more intuitive
-set splitbelow
-set signcolumn=yes " always show signcolumn to prevent flickering
-set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
-" set working dir to dir in argument if provided
-if argc() == 1 && isdirectory(argv(0)) | cd `=argv(0)` | endif
+set lbr " soft-wrap lines at whitespace
+" }}}2
+" }}}1
 
-" general bindings
+
+" MAPPINGS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" {{{1
+
+" general mappings
+" ~~~~~~~~~~~~~~~~{{{2
 noremap k gk
 noremap j gj
 noremap gk k
 noremap gj j
-nnoremap ]] :bn<CR>
-nnoremap [[ :bp<CR>
-noremap <leader>[ gT
-noremap <leader>] gt
-noremap <C-u> <C-o> " rebind the previous jump binding bc i use it for fzf
-noremap <leader>f <C-W>\| <C-W>_ " maximize the current window
-noremap <leader><leader> :tabnew<CR>
-nnoremap <silent> '' :enew<CR>
-nnoremap <space>/ gcc
-nnoremap <C-k> :cp<CR>
-nnoremap <C-j> :cn<CR>
-inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
-nnoremap ˚ :lprevious<CR> " opt-k
-nnoremap ∆ :lnext<CR> " opt-j
-nnoremap <CR><CR> :cc<CR>
+" rebind the previous jump binding bc i use it for fzf
+noremap <C-u> <C-o>
+" maximize the current window
+noremap <leader>f <C-W>\| <C-W>_
 nnoremap cc :silent nohlsearch\| echo "Search cleared!"<CR>
-nnoremap <leader>s :%&<CR> " repeat prev. substitution on current line
-nnoremap <leader>ss :&&<CR> " repeat prev. substitution on whole file
-command -nargs=0 Einit tabedit ~/dotfiles/nvim/init.vim
-command -nargs=0 Cp silent w !pbcopy
-nnoremap <silent> qq :bp \| bd #<CR>
+" }}}2
+
+" editing mappings
+" ~~~~~~~~~~~~~~~~{{{2
+" repeat prev. substitution on current line
+nnoremap <leader>s :%&<CR>
+" repeat prev. substitution on whole file
+nnoremap <leader>ss :&&<CR>
 noremap <silent> <A-Up> :m-2<CR>
 noremap <silent> <A-Down> :m+1<CR>
-if has('nvim')
-    autocmd TermOpen term://* startinsert
-    " these prevents issues with pressing <Esc> in terminal
-	au! TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
-	au! FileType fzf tunmap <buffer> <Esc>
-endif
-nnoremap <leader>t :silent tabnew \| term<CR>
+nnoremap <space>/ gcc
+" }}}2
 
-" project-specific conf
-let g:cwd_basename = fnamemodify(getcwd(), ':t')
-if g:cwd_basename == "workday-calendar-extension"
-    let g:livebuildprg = "yarn dev-firefox"
-endif
+" buffer + tab management mappings
+" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{{{2
+nnoremap ]] :bn<CR>
+nnoremap [[ :bp<CR>
+nnoremap <silent> '' :enew<CR>
+nnoremap <silent> qq :bp \| bd #<CR>
+noremap <leader>[ gT
+noremap <leader>] gt
+noremap <leader><leader> :tabnew<CR>
+" open a terminal tab
+nnoremap <leader>t :silent tabnew \| term<CR>
+" }}}2
+
+" quickfix + completion mappings
+" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{{{2
+inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
+nnoremap qf :cwindow<CR>
+nnoremap <C-k> :cp<CR>
+nnoremap <C-j> :cn<CR>
+nnoremap <CR><CR> :cc<CR>
+nnoremap qr :lwindow<CR>
+nnoremap ˚ :lprevious<CR> " opt-k
+nnoremap ∆ :lnext<CR> " opt-j
+" }}}2
+" }}}1
+
+
+" MISC ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" {{{
+command -nargs=0 Einit tabedit $MYVIMRC
+command -nargs=0 Cp silent w !pbcopy
+" set working dir to dir in argument if provided
+if argc() == 1 && isdirectory(argv(0)) | cd `=argv(0)` | endif
+" }}}
