@@ -174,10 +174,7 @@ nnoremap gda :silent tabnew \| terminal fastgit<CR>
 nnoremap gdf :exec 'silent tabnew \| terminal fastgit ' expand('%:p')<CR>
 nnoremap <Space>r :Make<CR>
 function GuardedLocalMake()
-    " oh my god bruh
-    " https://github.com/microsoft/TypeScript/issues/27379
-    if &makeprg == 'npx tsc'
-        echoerr "location list not supported for tsc!"
+    if b:force_current_lsp_diagnostics == 1
         LspDocumentDiagnostics
     else
         lmake %
