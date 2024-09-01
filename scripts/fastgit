@@ -9,7 +9,7 @@ function reviewCycle() {
         file="$root/$p_basefile"
 
         if git ls-files --error-unmatch "$file" > /dev/null 2>&1; then
-            VIEWER_CMD="git difftool --tool=nvimdiff -y"
+            VIEWER_CMD="git difftool --tool=vimdiff -y"
             DISCARD_CMD="git restore"
         else
             VIEWER_CMD="bat --paging=always"

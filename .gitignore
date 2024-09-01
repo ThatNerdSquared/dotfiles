@@ -7,3 +7,9 @@ Brewfile.lock.json
 multicounter.json
 pinned-folders.txt
 pinned-links.txt
+
+# vim
+vim/autoload/plug.vim
+vim/plugged/
+vim/.netrwhist
+vim/spell/*.spl

@@ -19,7 +19,7 @@ export PATH="$VOLTA_PATH:$SCRIPTS_PATH:$HOMEBREW_PATH:$PSQL_PATH:$PATH"
 export OPENSSL_ROOT_DIR="/usr/bin/openssl"
 export BAT_THEME="Solarized (light)"
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git/"'
-export VISUAL=nvim
+export VISUAL=vim
 export EDITOR="$VISUAL"
 VIRTUAL_ENV_DISABLE_PROMPT='true'
 
@@ -57,7 +57,7 @@ alias lo="ls -d .*" # only show hidden files
 
 # -- quick open --
 # open my personal documents repo
-alias hh="echo '/Users/nathanyeung/heart-hands' | xargs nvim"
+alias hh="$EDITOR '/Users/nathanyeung/heart-hands'"
 # open jupyterlab in current directory
 alias studio="source .venv/bin/activate && jupyter lab --no-browser"
 # open my personal data repo
@@ -70,11 +70,12 @@ alias openp="open \
             '/Users/nathanyeung/Library/Containers/ca.nathanyeung.peregrine/Data/Documents'"
 alias loadios="open ios/Runner.xcworkspace" # open the iOS Xcode workspace for a flutter project
 ee() {
+    $EDITOR $(
     find ~/h4ck3r ~/dotfiles ~/h4ck3r/incubator \
         -mindepth 1 -maxdepth 1 \
         -type d \
-    | fzf --preview 'eza --tree --git-ignore {}' \
-    | xargs nvim
+    | fzf --preview 'eza --tree --git-ignore {}'
+    )
 }
 cc() {
     find ~/h4ck3r ~/dotfiles ~/h4ck3r/incubator \
@@ -121,10 +122,10 @@ preview-latex() {
 }
 alias cleantex="trashme *.aux | trashme *.log | trashme *.toc | trashme *.out"
 ff() {
-    nvim "$(fzf --preview 'bat {}')"
+    $EDITOR "$(fzf --preview 'bat {}')"
 }
 bvim() {
-    nvim -u NONE $1
+    $EDITOR -u NONE $1
 }
 importtimers() {
     cd ~/h4ck3r/extensions/extensions
