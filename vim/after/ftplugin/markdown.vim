@@ -7,24 +7,26 @@ setlocal formatprg=npx\ prettier\ --stdin-filepath\ %
 setlocal textwidth=80
 
 " count words in paragraph
-nnoremap cw {v}:w !wc -w<CR>
+nnoremap cw {v}:write !wc -w<CR>
 " count words in file
 nnoremap caw :!wc -w %<CR>
 " count words in selection
-vnoremap cw :'<,'>:w !wc -w<CR>
+vnoremap cw :'<,'>:write !wc -w<CR>
+" open corresponding bibtex file for current doc
+command! -nargs=0 Bib vsplit %:r.bib
 nnoremap <silent> - :call ToggleMarkdownCheckboxes()<CR>
 
 " toggle markdown checkboxes
 function ToggleMarkdownCheckboxes()
     let l:line=getline('.')
     if l:line=~?'\s*-\s*\[\s*\].*'
-        s/\[\s*\]/[-]/
-        w
+        substitute/\[\s*\]/[-]/
+        write
     elseif l:line=~?'\s*-\s*\[-\].*'
-        s/\[-\]/[x]/
-        w
+        substitute/\[-\]/[x]/
+        write
     elseif l:line=~?'\s*-\s*\[x\].*'
-        s/\[x\]/[ ]/
-        w
+        substitute/\[x\]/[ ]/
+        write
     endif
 endfunction

@@ -6,11 +6,13 @@ nnoremap <Space>l :call GuardedLocalMake()<CR>
 nnoremap <leader>v :exec "silent tabnew \| term " . g:livebuildprg <CR>
 
 " git integration
+" git blame command, inspired by romainl's 'super cheap git blame' gist
+command! -range GB echo system("git -C " . shellescape(expand('%:p:h')) . " blame -L <line1>,<line2> " . expand('%:t'))
 " these rely on fastgit
 nnoremap gda :silent tabnew \| terminal fastgit<CR>
 nnoremap gdf :exec 'silent tabnew \| terminal fastgit ' expand('%:p')<CR>
 
-function FullFileFormat()
+function! FullFileFormat()
     let l:winstate = winsaveview()
     normal gggqG
     if v:shell_error > 0
@@ -22,8 +24,8 @@ function FullFileFormat()
     echomsg 'formatter "' . &formatprg . '" successfully applied!'
 endfunction
 
-function GuardedLocalMake()
-    if b:force_current_lsp_diagnostics == 1
+function! GuardedLocalMake()
+    if b:force_lsp_diagnostics == 1
         LspDocumentDiagnostics
     else
         lmake %

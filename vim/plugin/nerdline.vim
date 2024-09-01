@@ -1,6 +1,6 @@
 " my custom statusline.
 
-function GetBranch()
+function! GetBranch()
     let l:fp = fnamemodify('%', ':h')
     return trim(system("git -C " . fp . " branch --show-current 2>/dev/null"))
 endfunction
@@ -16,4 +16,4 @@ let g:currentmode={
    \ "\<C-V>": 'vbl', 'R': 'rep', 'Rv': 'vre',
    \}
 set statusline+=tln:%L──%{(g:currentmode[mode()])} " total lines, current mode
-autocmd BufWinEnter quickfix,loclist setlocal statusline=%#Directory#%q\ (p:%L)
+autocmd! BufWinEnter quickfix,loclist setlocal statusline=%#Directory#%q\ (p:%L)

@@ -18,8 +18,8 @@ exercise left to the reader :)
 - find a comprehensive list of the tools I use in the
   [Brewfile](https://github.com/ThatNerdSquared/dotfiles/blob/main/Brewfile)
 - check out my
-  [init.vim](https://github.com/ThatNerdSquared/dotfiles/blob/main/nvim/init.vim)
-  and laugh at my feeble attempt to avoid the neovim rabbit hole
+  [vim config](https://github.com/ThatNerdSquared/dotfiles/blob/main/vim)
+  and laugh at my feeble attempt to avoid the vim rabbit hole
 - the answer to how I can type $\LaTeX$ so fast can be found in
   [latex-snippets.yml](https://github.com/ThatNerdSquared/dotfiles/blob/main/espanso/match/latex-snippets.yml)
 - if you've ever borrowed my laptop and wondered why the keyboard is so
@@ -61,17 +61,4 @@ exercise left to the reader :)
 
 Other terminal apps are either too fancy or don't have the native feel that
 iTerm has.
-</details>
-<details>
-<summary>Why is your neovim config in vimscript instead of lua?</summary>
-
-I actually started out on vim, so this used to be a `.vimrc`. Later when I
-swapped to neovim (mainly for LSP), I couldn't be bothered to rewrite the config
-in lua. That's also why a lot of the plugins I use are vimscript plugins rather
-than newer lua-based ones. To this day, I still like keeping my config in
-vimscript - I think it might be less performant but I feel it's simpler and
-doesn't encourage overconfiguration in the same way a lua config would. I do
-still do some configuration in lua, though, mainly for plugins that can't be
-configured any other way - I just keep it in a separate file.
-
 </details>
