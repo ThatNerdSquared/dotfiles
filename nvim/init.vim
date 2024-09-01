@@ -52,25 +52,10 @@ catch
     endif
 endtry
 
-function FullFileFormat()
-    let l:winstate = winsaveview()
-    normal gggqG
-    if v:shell_error > 0
-        silent undo
-        redraw
-        echoerr 'Formatter could not be applied!'
-    endif
-    call winrestview(l:winstate)
-    echomsg 'formatter "' . &formatprg . '" successfully applied!'
-endfunction
 
 " lsp related
-" opt-shift-f
-nnoremap Ï :call FullFileFormat()<CR>
-inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
 nnoremap qf :cwindow<CR>
 nnoremap qr :lwindow<CR>
-set completeopt=menu,menuone,popup,noinsert
 let g:markify_autocmd = 1
 let g:markify_error_text = '██'
 let g:markify_info_text = '██'
@@ -95,6 +80,7 @@ nnoremap <leader>e :Explore<CR>
 if has('nvim')
     syntax off " treesitter or nothin baby
 endif
+set completeopt=menu,menuone,popup,noinsert
 set wildoptions=pum
 set listchars=tab:>\ ,trail:•,nbsp:+
 set noshowmode
@@ -133,6 +119,7 @@ nnoremap <silent> '' :enew<CR>
 nnoremap <space>/ gcc
 nnoremap <C-k> :cp<CR>
 nnoremap <C-j> :cn<CR>
+inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
 nnoremap ˚ :lprevious<CR> " opt-k
 nnoremap ∆ :lnext<CR> " opt-j
 nnoremap <CR><CR> :cc<CR>
@@ -151,19 +138,6 @@ if has('nvim')
 	au! FileType fzf tunmap <buffer> <Esc>
 endif
 nnoremap <leader>t :silent tabnew \| term<CR>
-" fastgit integration
-nnoremap gda :silent tabnew \| terminal fastgit<CR>
-nnoremap gdf :exec 'silent tabnew \| terminal fastgit ' expand('%:p')<CR>
-nnoremap <Space>r :Make<CR>
-function GuardedLocalMake()
-    if b:force_current_lsp_diagnostics == 1
-        LspDocumentDiagnostics
-    else
-        lmake %
-    endif
-endfunction
-nnoremap <Space>l :call GuardedLocalMake()<CR>
-nnoremap <leader>v :exec "silent tabnew \| term " . g:livebuildprg <CR>
 
 " project-specific conf
 let g:cwd_basename = fnamemodify(getcwd(), ':t')

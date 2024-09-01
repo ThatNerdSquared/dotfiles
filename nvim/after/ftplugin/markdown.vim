@@ -12,10 +12,10 @@ nnoremap cw {v}:w !wc -w<CR>
 nnoremap caw :!wc -w %<CR>
 " count words in selection
 vnoremap cw :'<,'>:w !wc -w<CR>
+nnoremap <silent> - :call ToggleMarkdownCheckboxes()<CR>
 
 " toggle markdown checkboxes
-nnoremap <silent> - :call Check()<CR>
-function Check()
+function ToggleMarkdownCheckboxes()
     let l:line=getline('.')
     if l:line=~?'\s*-\s*\[\s*\].*'
         s/\[\s*\]/[-]/
