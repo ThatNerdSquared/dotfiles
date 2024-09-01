@@ -85,41 +85,6 @@ endfunction
 " lsp related
 " opt-shift-f
 nnoremap Ï :call FullFileFormat()<CR>
-let g:asyncomplete_auto_popup = 1
-let g:asyncomplete_auto_completeopt="menu,menuone,popup,noinsert"
-let g:lsp_use_native_client = 1
-let g:lsp_diagnostics_highlights_insert_mode_enabled = 0
-let g:lsp_diagnostics_signs_enabled = 0
-let g:lsp_document_code_action_signs_enabled = 0
-au User lsp_setup call lsp#register_server({
-    \ 'name': 'typescript-language-server',
-    \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-    \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
-    \ 'whitelist': ['typescript', 'typescript.tsx', 'typescriptreact', 'javascript', 'javascriptreact'],
-    \ })
-" see:
-" - https://github.com/prabirshrestha/vim-lsp/issues/1505#issuecomment-2110455309
-" - https://github.com/prabirshrestha/vim-lsp/issues/1056#issuecomment-766236707
-function! Css_capabilities()
-    let l:caps = lsp#default_get_supported_capabilities({})
-    let l:caps.textDocument.completion.completionItem.snippetSupport = v:true
-    return l:caps
-endfunction
-au User lsp_setup call lsp#register_server({
-    \ 'name': 'css-languageserver',
-    \ 'cmd': {server_info->[&shell, &shellcmdflag, 'vscode-css-language-server --stdio']},
-    \ 'capabilities': Css_capabilities(),
-    \ 'whitelist': ['css'],
-    \ })
-au User lsp_setup call lsp#register_server({
-    \ 'name': 'dart-language-server',
-    \ 'cmd': {server_info->[&shell, &shellcmdflag, 'dart language-server']},
-    \ 'whitelist': ['dart'],
-    \ })
-noremap gd <plug>(lsp-definition)
-noremap gr <plug>(lsp-references)
-noremap <Space>. <plug>(lsp-code-action-float)
-set keywordprg=:LspHover
 inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
 nnoremap qf :cwindow<CR>
 nnoremap qr :lwindow<CR>
@@ -127,8 +92,6 @@ set completeopt=menu,menuone,popup,noinsert
 let g:markify_autocmd = 1
 let g:markify_error_text = '██'
 let g:markify_info_text = '██'
-
-
 
 " plugin bindings
 let g:fzf_buffers_jump = 1
@@ -141,7 +104,6 @@ nnoremap eh :silent BLines ^#<CR>
 command -nargs=0 W echoerr "Not an editor cmd: W"
 let g:netrw_liststyle = 3 " filetree config
 let g:netrw_banner = 0
-"let g:netrw_browse_split = 2
 let g:netrw_winsize = 20
 nnoremap <leader>e :Explore<CR>
 
@@ -150,26 +112,13 @@ nnoremap <leader>e :Explore<CR>
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 if has('nvim')
     syntax off " treesitter or nothin baby
-else
-    syntax on
 endif
-" allows auto-switching regex engine (prevents hangs when highlighting TS)
-set regexpengine=0
-set ttimeoutlen=50
-set incsearch
-set hlsearch
-set laststatus=2
-set hidden
-set nocompatible
-set history=10000
-set showcmd
-set wildmenu
 set wildoptions=pum
 set listchars=tab:>\ ,trail:•,nbsp:+
 set noshowmode
 set number relativenumber " relative-number line numbers
 set tabstop=4 " show tab character as 4 spaces wide
-set shiftwidth=4 " show indentation as 4 spaces wide
+set shiftwidth=0 " follow tabstop
 set expandtab " insert spaces on <Tab>
 set foldmethod=indent
 set breakindent " when hard-wrapping lines, continue at same visual indent
@@ -217,6 +166,9 @@ nnoremap <leader>w {v}:w !wc -w<CR>
 vnoremap <leader>w :'<,'>:w !wc -w<CR>
 if has('nvim')
     autocmd TermOpen term://* startinsert
+    " these prevents issues with pressing <Esc> in terminal
+	au! TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
+	au! FileType fzf tunmap <buffer> <Esc>
 endif
 nnoremap <leader>t :silent tabnew \| term<CR>
 " fastgit integration
@@ -236,10 +188,6 @@ function Check() " toggle markdown checkboxes
     endif
 endfunction
 nnoremap <silent> - :call Check()<CR>
-if has("nvim") " this block prevents issues with pressing <Esc> in terminal
-	au! TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
-	au! FileType fzf tunmap <buffer> <Esc>
-endif
 nnoremap <Space>r :Make<CR>
 function GuardedLocalMake()
     " oh my god bruh
