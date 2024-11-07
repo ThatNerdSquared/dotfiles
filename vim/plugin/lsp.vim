@@ -1,4 +1,6 @@
 " asyncomplete + vim-lsp settings
+" let g:lsp_log_verbose = 1
+" let g:lsp_log_file = expand('~/vim-lsp.log')
 let g:asyncomplete_auto_popup = 1
 let g:asyncomplete_auto_completeopt="menu,menuone,popup,noinsert"
 let g:lsp_use_native_client = 1
@@ -61,4 +63,18 @@ function! s:register_lsp_servers()
         \ 'cmd': {server_info->['gopls', '-remote=auto']},
         \ 'allowlist': ['go', 'gomod'],
         \ })
+
+    call lsp#register_server({
+        \ 'name': 'eclipse.jdt.ls',
+        \ 'cmd': {server_info->[
+        \     'jdtls',
+        \     '-configuration',
+        \     expand('~/jdtls-cache/confs'),
+        \     '-data',
+        \     expand('~/jdtls-cache/data'),
+        \ ]},
+        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.git/'))},
+        \ 'whitelist': ['java'],
+        \ })
+
 endfunction

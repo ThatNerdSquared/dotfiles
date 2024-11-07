@@ -12,7 +12,8 @@ set incsearch
 set hlsearch
 set laststatus=2
 set hidden
-set nocompatible
+set mouse=a
+set backspace=indent,eol,start
 set history=10000
 set showcmd
 set wildmenu

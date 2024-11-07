@@ -96,6 +96,8 @@ set ignorecase " make search non-case-sensitive
 set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 set completeopt=menu,menuone,popup,noinsert
 set wildoptions=pum
+let g:rmd_dynamic_comments = 0
+let g:matchparen_timeout = 20
 " }}}2
 
 " UI options
@@ -138,6 +140,12 @@ nnoremap <C-u> <C-o>
 " maximize the current window
 nnoremap <leader>f <C-W>\| <C-W>_
 nnoremap cc :nohlsearch \| echo "Search cleared!"<CR>
+if !has('nvim')
+    augroup TerminalMaps
+        autocmd!
+        autocmd TerminalOpen * tnoremap <buffer> <Esc> <c-\><c-n>
+    augroup END
+endif
 " }}}2
 
 " editing mappings
@@ -181,6 +189,7 @@ nnoremap ∆ :lnext<CR> " opt-j
 " {{{
 command! -nargs=0 Einit tabedit $MYVIMRC
 command! -nargs=0 Cp silent w !pbcopy
+command! -nargs=0 ShowColors :source $VIMRUNTIME/syntax/hitest.vim
 " set working dir to dir in argument if provided
 if argc() == 1 && isdirectory(argv(0)) | cd `=argv(0)` | endif
 " }}}

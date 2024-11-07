@@ -5,6 +5,7 @@ function! GetBranch()
     return trim(system("git -C " . fp . " branch --show-current 2>/dev/null"))
 endfunction
 
+let g:current_git_branch = ""
 set fillchars+=stl:─,stlnc:─
 set statusline=%#CurSearch#%{&readonly?'[x]':''} " symbols for readonly, mod
 set statusline+=%#SpecialChar#%{&readonly?'':'───'}
