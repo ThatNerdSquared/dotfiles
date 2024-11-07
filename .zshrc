@@ -71,7 +71,7 @@ alias openp="open \
 alias loadios="open ios/Runner.xcworkspace" # open the iOS Xcode workspace for a flutter project
 ee() {
     $EDITOR $(
-    find ~/h4ck3r ~/dotfiles ~/h4ck3r/incubator \
+    find ~/h4ck3r ~/dotfiles ~/h4ck3r/incubator ~/h4ck3r/ubc \
         -mindepth 1 -maxdepth 1 \
         -type d \
     | fzf --preview 'eza --tree --git-ignore {}'

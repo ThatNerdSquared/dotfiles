@@ -25,7 +25,7 @@ function! FullFileFormat()
 endfunction
 
 function! GuardedLocalMake()
-    if b:force_lsp_diagnostics == 1
+    if exists("b:force_lsp_diagnostics") && b:force_lsp_diagnostics == 1
         LspDocumentDiagnostics
     else
         lmake %

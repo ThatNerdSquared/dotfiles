@@ -85,7 +85,7 @@
         "typescriptreact"
     ],
     "[json]": {
-        "editor.defaultFormatter": "vscode.json-language-features"
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[typescript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -142,5 +142,26 @@
                 }
             }
         ]
+    },
+    // shit i need to add for cpsc210
+    "update.mode": "none",
+    "extensions.autoCheckUpdates": false,
+    "java.checkstyle.autocheck": false,
+    "java.debug.settings.stepping.skipClasses": [
+        "$JDK",
+        "$Libraries",
+        "java.lang.ClassLoader"
+    ],
+    "editor.detectIndentation": false,
+    "editor.minimap.enabled": false,
+    "testing.coverageToolbarEnabled": true,
+    "[java]": {
+        "editor.defaultFormatter": "redhat.java"
+    },
+    "java.test.config": {
+        "coverage": {"appendResult": false}
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     }
 }

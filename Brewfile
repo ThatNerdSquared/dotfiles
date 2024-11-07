@@ -20,7 +20,7 @@ brew "vscode-langservers-extracted"
 brew "python@3.10"
 brew "pyright"
 brew "r"
-brew "rustup-init"
+brew "rustup"
 brew "rust-analyzer"
 brew "michaeleisel/zld/zld" # faster rust linking
 brew "cocoapods" # swift pkg manager
@@ -29,20 +29,19 @@ brew "bash-language-server"
 
 # language toolchains (extended)
 mas "Xcode", id: 497799835
-brew "poetry" # alternate python pkg manager (mostly unused)
 #brew "trunk" # WASM bundler for rust
 brew "go"
+brew "gopls"
 brew "openjdk"
 cask "adoptopenjdk8"
-#brew "maven" # don't need this right now but i forsee needing it for CPSC210
+brew "jdtls"
+#brew "maven"
 cask "racket" # i took one cs course that needed this, might remove later
 brew "cmake"
-brew "lua" # required for wireshark
-brew "lua-language-server"
 #brew "arduino-cli" # back in the day i needed this for high school assignments
 brew "qt"
-brew "ruby" # required for cocoapods
-brew "gcc" # required for R
+brew "ruby"
+brew "gcc"
 brew "meson" # i'm actually not entirely sure why i have this on hand, but it
              # seems useful so i'm gonna keep it for now
 
@@ -53,13 +52,14 @@ cask "quarto"
 cask "mactex"
 brew "texlab"
 brew "mdbook"
+brew "zola"
 
 # dbs
 brew "mysql"
 brew "postgresql@16" # is this outdated?
 
 # dev setup (minimal)
-brew "neovim" # world's best text editor (let the flame wars begin!)
+brew "vim" # world's best text editor (let the flame wars begin!)
 cask "iterm2"
 brew "fzf"
 brew "gum"
@@ -70,6 +70,7 @@ brew "coreutils"
 cask "miniconda"
 
 # dev setup (extended)
+brew "neovim" # occasionally i want to use treesitter
 cask "visual-studio-code" # «IDE»
 brew "docker", link: false
 cask "docker"
@@ -80,13 +81,13 @@ cask "ngrok"
 brew "scc" # analyze no. of lines of code
 # https://github.com/thesephist/superstat
 mas "TestFlight", id: 899247664
-cask "postico" # native macOS postgres browser
+#cask "postico" # native macOS postgres browser, i use visidata now
 cask "utm"
 brew "wireshark"
 brew "qemu"
 brew "supabase/tap/supabase"
 brew "cloudflare-wrangler2"
-brew "neovide" # keeping this for now
+#brew "neovide" # neat neovim gui, but why gui if vim
 #cask "sublime-merge" # great git client, but macOS has opendiff
 
 # git tools
@@ -126,12 +127,12 @@ brew "mas" # install mac app store apps from the CLI
 #brew "tmux" # can't be bothered to learn how this works
 #brew "defaultbrowser" # now that i don't browser-hop this isn't as necessary
 brew "gifski"
-brew "wifi-password" # exactly what it says on the tin
 brew "ranger"
 #brew "neofetch" # FOR THE AESTHETICS 😤
 brew "speedtest-cli"
 brew "asciinema" # better terminal recording
 brew "links"
+brew "fswatch"
 
 # cli games - i don't really use these but they're cool ig
 #brew "gnu-chess"
@@ -143,35 +144,37 @@ brew "koekeishiya/formulae/skhd" # global keybinds
 cask "espanso" # text expansion
 cask "karabiner-elements" # low-level keyboard remaps
 cask "keyboardcleantool" # lock keyboard keys
-cask "logi-options-plus" # configure all the funky little buttons on mx master
+cask "logi-options+" # configure all the funky little buttons on mx master -
+                     # this is a horrible piece of software and should die in a
+                     # fire
 
 # the usual
-cask "firefox-developer-edition"
+cask "firefox@developer-edition"
 cask "spotify"
 cask "sioyek" # PDF reader, amusingly low feature overlap w mainstream readers
 cask "zotero"
 mas "OneDrive", id: 823766827 # cannot believe i'm still paying for this tbh
 cask "iina" # native GUI wrapper around mpv
 cask "raycast" # best launcher on macOS (let the flame wars begin!)
-mas "Bitwarden", id: 1352778147 # it ain't great, but it's FOSS, and it works
+cask "bitwarden" # it ain't great, but it's FOSS, and it works
 mas "Microsoft Excel", id: 462058435 # i prefer jupyter notebooks tbh
 mas "Microsoft Word", id: 462054704 # unfortunately, other ppl don't use .md
 mas "Drafts", id: 1435957248 # store snippets of text between iOS/macOS
 cask "calibre"
 cask "chromium" # for webdev testing on chromium
 cask "dropbox" # i use this to sync books to my kobo
-cask "mochi" # flashcards
+#cask "mochi" # flashcards - don't really need this nowadays
 
 # creative
 cask "affinity-designer"
 cask "figma"
 cask "blender"
-cask "canva"
 mas "DaVinci Resolve", id: 571213070
 mas "Pastel", id: 413897608 # save color palettes (+ why native != better)
 cask "gifcapture"
 cask "musescore"
-cask "obs"
+#cask "canva" # terribly nerfed design software
+#cask "obs" # built-in screen record is good enough mostly
 #cask "shotcut" # i use resolve now
 #cask "scrivener" # never actually bought this, now i just use nvim
 #mas "Muse", id: 1501563902 # i keep this around to study the product design
@@ -181,12 +184,13 @@ cask "font-dm-mono"
 cask "font-inconsolata-nerd-font"
 cask "font-iosevka"
 cask "font-bad-script"
+cask "font-xkcd"
 
 # communication
 cask "signal"
+cask "zoom"
 #cask "discord"
 #cask "slack"
-cask "zoom"
 
 # games
 cask "steam"
@@ -213,9 +217,9 @@ cask "adobe-digital-editions" # get un-DRMed ebooks
 cask "prince" # html->pdf
 
 # stuff i keep to open up old files
-mas "Microsoft PowerPoint", id: 462062816
 mas "Keynote", id: 409183694
 mas "Pages", id: 409201541
+#mas "Microsoft PowerPoint", id: 462062816 # haven't needed it in ages
 #mas "Goodnotes", id: 1444383602 # i no longer support digital handwriting
 
 # vscode extensions
@@ -260,3 +264,15 @@ vscode "kortina.vscode-markdown-notes" # enable wikilinks
 vscode "gera2ld.markmap-vscode" # render a bullet list as a mindmap
 vscode "jloow.vscode-criticmarkup"
 vscode "ban.spellright"
+
+# this stuff is required for CPSC210, will probably discard it later
+brew "checkstyle"
+brew "plantuml"
+cask "temurin@11"
+vscode "redhat.java"
+vscode "shengchen.vscode-checkstyle"
+vscode "vscjava.vscode-gradle"
+vscode "vscjava.vscode-java-debug"
+vscode "vscjava.vscode-java-dependency"
+vscode "vscjava.vscode-java-pack"
+vscode "vscjava.vscode-java-test"

@@ -3,8 +3,10 @@ matches:
     replace: "\\frac{$|$}{}"
   - trigger: /dfr
     replace: "\\dfrac{$|$}{}"
-  - trigger: /bigparen
+  - trigger: /bigp
     replace: "\\left($|$\\right)"
+  - trigger: /bigb
+    replace: "\\left[$|$\\right]"
   - trigger: /halfr
     replace: "\\frac{$|$}{2}"
   - trigger: /recp
@@ -57,6 +59,12 @@ matches:
       \end{align*}
   - trigger: /drv
     replace: "\\frac{d}{dx}"
+  - trigger: /xpd
+    replace: "\\frac{\\partial $|$}{\\partial x}"
+  - trigger: /ypd
+    replace: "\\frac{\\partial $|$}{\\partial y}"
+  - trigger: /zpd
+    replace: "\\frac{\\partial $|$}{\\partial z}"
   - trigger: /sq
     replace: "\\sqrt{$|$}"
   - trigger: /cit
@@ -71,6 +79,8 @@ matches:
     replace: "^{$|$}"
   - trigger: /cong
     replace: "\\cong"
+  - trigger: /vec
+    replace: "\\vec{$|$}"
 # Trig
   - trigger: /sin
     replace: "\\sin(\\theta)"
@@ -80,8 +90,6 @@ matches:
     replace: "\\tan(\\theta)"
   - trigger: /csc
     replace: "\\csc(\\theta)"
-  - trigger: /sec
-    replace: "\\sec(\\theta)"
   - trigger: /cot
     replace: "\\cot(\\theta)"
   - trigger: /pifr
