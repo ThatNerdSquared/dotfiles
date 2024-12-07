@@ -18,7 +18,7 @@ brew "typescript-language-server"
 brew "vscode-langservers-extracted"
 # npm install -g emmet-ls
 brew "python@3.10"
-brew "pyright"
+brew "python-lsp-server"
 brew "r"
 brew "rustup"
 brew "rust-analyzer"
@@ -185,12 +185,13 @@ cask "font-inconsolata-nerd-font"
 cask "font-iosevka"
 cask "font-bad-script"
 cask "font-xkcd"
+cask "font-inter"
 
 # communication
 cask "signal"
 cask "zoom"
-#cask "discord"
-#cask "slack"
+cask "discord"
+cask "slack"
 
 # games
 cask "steam"

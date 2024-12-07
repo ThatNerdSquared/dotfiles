@@ -77,4 +77,9 @@ function! s:register_lsp_servers()
         \ 'whitelist': ['java'],
         \ })
 
+    call lsp#register_server({
+        \ 'name': 'pylsp',
+        \ 'cmd': {server_info->['pylsp']},
+        \ 'whitelist': ['python'],
+        \ })
 endfunction
