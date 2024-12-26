@@ -17,6 +17,7 @@ brew "volta" # nodejs manager
 brew "typescript-language-server"
 brew "vscode-langservers-extracted"
 # npm install -g emmet-ls
+# npm install -g @astrojs/language-server
 brew "python@3.10"
 brew "python-lsp-server"
 brew "r"
