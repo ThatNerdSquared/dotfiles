@@ -124,6 +124,7 @@ set noshowmode
 " indentation options
 " ~~~~~~~~~~~~~~~{{{2
 set tabstop=4 " show tab character as 4 spaces wide
+set softtabstop=-1 " allow backspace to remove full indent levels
 set shiftwidth=0 " follow tabstop
 set expandtab " insert spaces on <Tab>
 set foldmethod=indent

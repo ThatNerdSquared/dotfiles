@@ -15,6 +15,7 @@ vnoremap cw :'<,'>:write !wc -w<CR>
 " open corresponding bibtex file for current doc
 command! -nargs=0 Bib vsplit %:r.bib
 nnoremap <silent> - :call ToggleMarkdownCheckboxes()<CR>
+nnoremap sw :exec "Open https://duckduckgo.com/?q=" . expand("<cWORD>")<CR>
 
 " toggle markdown checkboxes
 function ToggleMarkdownCheckboxes()
