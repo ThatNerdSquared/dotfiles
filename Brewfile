@@ -39,7 +39,7 @@ brew "jdtls"
 #brew "maven"
 cask "racket" # i took one cs course that needed this, might remove later
 brew "cmake"
-#brew "arduino-cli" # back in the day i needed this for high school assignments
+brew "arduino-cli"
 brew "qt"
 brew "ruby"
 brew "gcc"

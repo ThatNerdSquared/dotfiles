@@ -90,4 +90,10 @@ function! s:register_lsp_servers()
         \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'package.json'))},
         \ 'whitelist': ['astro'],
         \ })
+
+    call lsp#register_server({
+        \ 'name': 'rust-analyzer',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'rust-analyzer']},
+        \ 'whitelist': ['rust'],
+        \ })
 endfunction
