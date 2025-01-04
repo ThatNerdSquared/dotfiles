@@ -5,7 +5,6 @@ if has('nvim')
     finish
 endif
 
-syntax on
 set regexpengine=0
 set ttimeoutlen=50
 set incsearch

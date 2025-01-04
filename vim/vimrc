@@ -74,6 +74,14 @@ colorscheme rosepine_dawn
 "set background=dark
 "colorscheme wildcharm
 "colorscheme elflord
+syntax on
+highlight LspErrorHighlight guifg=Red gui=undercurl ctermfg=9 cterm=underline
+highlight LspWarningHighlight guifg=Red gui=undercurl ctermfg=9 cterm=underline
+highlight LspInformationHighlight guifg=DodgerBlue gui=undercurl ctermfg=12 cterm=underline
+highlight LspHintHighlight guifg=SeaGreen gui=undercurl ctermfg=12 cterm=underline
+highlight SpellBad guifg=Red gui=undercurl ctermfg=9 cterm=underline
+highlight SpellLocal guifg=SeaGreen gui=undercurl ctermfg=12 cterm=underline
+highlight SpellRare guifg=SeaGreen gui=undercurl ctermfg=12 cterm=underline
 
 " Cursor customization
 " ~~~~~~~~~~~~~~~~~~~~{{{2
@@ -174,13 +182,15 @@ nnoremap <leader>t :silent tabnew \| terminal<CR>
 " quickfix + completion mappings
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{{{2
 inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
-nnoremap qf :cwindow<CR>
+nnoremap qf :cclose<CR>
 nnoremap <C-k> :cprevious<CR>
 nnoremap <C-j> :cnext<CR>
 nnoremap <CR><CR> :cc<CR>
-nnoremap qr :lwindow<CR>
-nnoremap ˚ :lprevious<CR> " opt-k
-nnoremap ∆ :lnext<CR> " opt-j
+nnoremap qr :lclose<CR>
+nnoremap  :lprevious<CR>
+" opt-shift-k
+nnoremap Ô :lnext<CR>
+" opt-shift-j
 " }}}2
 " }}}1
 

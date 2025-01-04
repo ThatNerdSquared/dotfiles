@@ -7,6 +7,8 @@ let g:lsp_use_native_client = 1
 let g:lsp_diagnostics_highlights_insert_mode_enabled = 0
 let g:lsp_diagnostics_signs_enabled = 0
 let g:lsp_document_code_action_signs_enabled = 0
+let g:lsp_diagnostics_virtual_text_enabled = 0
+let g:lsp_diagnostics_float_cursor = 1
 set keywordprg=:LspHover
 
 " preferred mappings
@@ -14,6 +16,10 @@ nnoremap gd <plug>(lsp-definition)
 nnoremap <silent> gD :rightbelow vertical LspDefinition<CR>
 nnoremap gr <plug>(lsp-references)
 nnoremap <Space>. <plug>(lsp-code-action-float)
+nnoremap ˚ <plug>(lsp-previous-diagnostic)
+" opt-k
+nnoremap ∆ <plug>(lsp-next-diagnostic)
+" opt-j
 
 " some LSPs don't provide completion unless you tell them you support
 " snippets.
