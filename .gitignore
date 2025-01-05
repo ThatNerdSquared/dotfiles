@@ -13,3 +13,4 @@ vim/autoload/plug.vim
 vim/plugged/
 vim/.netrwhist
 vim/spell/*.spl
+vim/vimswp

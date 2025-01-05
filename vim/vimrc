@@ -104,6 +104,7 @@ set ignorecase " make search non-case-sensitive
 set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 set completeopt=menu,menuone,popup,noinsert
 set wildoptions=pum
+set directory=~/dotfiles/vim/vimswp
 let g:rmd_dynamic_comments = 0
 let g:matchparen_timeout = 20
 " }}}2
