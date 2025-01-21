@@ -3,6 +3,7 @@
 setlocal spell spelllang=en_ca
 setlocal spellcapcheck=
 let g:livebuildprg = "quarto preview " . expand("%:p")
+command! -nargs=0 SetCurrentPreview let g:livebuildprg = "quarto preview " . expand("%:p")
 setlocal formatprg=npx\ prettier\ --stdin-filepath\ %
 setlocal textwidth=80
 
@@ -16,6 +17,7 @@ vnoremap cw :'<,'>:write !wc -w<CR>
 command! -nargs=0 Bib vsplit %:r.bib
 nnoremap <silent> - :call ToggleMarkdownCheckboxes()<CR>
 nnoremap sw :exec "Open https://duckduckgo.com/?q=" . expand("<cWORD>")<CR>
+nnoremap <Space>pp {jI**QUESTION: <ESC>$a**<ESC>j0v}:norm <<I- <ESC>:w<CR>$<CR>
 
 " toggle markdown checkboxes
 function ToggleMarkdownCheckboxes()

@@ -21,6 +21,10 @@ matches:
     replace: "\\textbf{$|$} \\\\\n"
   - trigger: /=>
     replace: "\\rightarrow "
+  - trigger: /bm
+    replace: "\\mathbb{$|$}"
+  - trigger: /rspace
+    replace: "\\mathbb{R}"
   - trigger: /ltx
     replace: "\\text{$|$}"
   - trigger: /nf
@@ -115,3 +119,10 @@ matches:
       \begin{itemize}
           \item $|$
       \end{itemize}
+# linalg
+  - trigger: /colvec
+    replace: "\\begin{pmatrix} $|$ \\end{pmatrix}"
+  - trigger: /spanvec
+    replace: "\\text{span}\\{$|$\\}"
+  - trigger: /sset
+    replace: "\\{$|$ \\mid\\}"

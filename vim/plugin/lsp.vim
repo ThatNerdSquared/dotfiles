@@ -73,6 +73,8 @@ function! s:register_lsp_servers()
     call lsp#register_server({
         \ 'name': 'eclipse.jdt.ls',
         \ 'cmd': {server_info->[
+        \     &shell,
+        \     &shellcmdflag,
         \     'jdtls',
         \     '-configuration',
         \     expand('~/jdtls-cache/confs'),
@@ -85,7 +87,7 @@ function! s:register_lsp_servers()
 
     call lsp#register_server({
         \ 'name': 'pylsp',
-        \ 'cmd': {server_info->['pylsp']},
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'pylsp']},
         \ 'whitelist': ['python'],
         \ })
 
@@ -101,5 +103,11 @@ function! s:register_lsp_servers()
         \ 'name': 'rust-analyzer',
         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'rust-analyzer']},
         \ 'whitelist': ['rust'],
+        \ })
+
+    call lsp#register_server({
+        \ 'name': 'clangd',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'clangd', '-background-index']},
+        \ 'whitelist': ['c', 'cpp'],
         \ })
 endfunction

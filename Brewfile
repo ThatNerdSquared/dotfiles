@@ -267,14 +267,5 @@ vscode "gera2ld.markmap-vscode" # render a bullet list as a mindmap
 vscode "jloow.vscode-criticmarkup"
 vscode "ban.spellright"
 
-# this stuff is required for CPSC210, will probably discard it later
-brew "checkstyle"
-brew "plantuml"
-cask "temurin@11"
-vscode "redhat.java"
-vscode "shengchen.vscode-checkstyle"
-vscode "vscjava.vscode-gradle"
-vscode "vscjava.vscode-java-debug"
-vscode "vscjava.vscode-java-dependency"
-vscode "vscjava.vscode-java-pack"
-vscode "vscjava.vscode-java-test"
+# for cpsc213
+cask "temurin@8"

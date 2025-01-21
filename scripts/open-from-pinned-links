@@ -10,5 +10,5 @@ if [ -z "$CHOICE" ]; then
     exit 1
 fi
 
-LINK=$(grep -w "$CHOICE" ~/dotfiles/pinned-links.txt | head -1)
+LINK=$(grep -w "\[$CHOICE\]" ~/dotfiles/pinned-links.txt | head -1)
 open "$(echo "$LINK" | sed "s/[^(]*(//g" | sed "s/)//g" )"

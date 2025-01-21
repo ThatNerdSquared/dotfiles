@@ -132,7 +132,7 @@ importtimers() {
     rm -rf timers
     cp -r ~/h4ck3r/timers-for-raycast ./timers
     cd timers/
-    rm -rf .DS_Store .git/ .gitignore .vscode .idea
+    rm -rf .DS_Store .git/ .vscode .idea
     cowsay "copy of timers-for-raycast imported!" | lolcat
 }
 pirate() {
