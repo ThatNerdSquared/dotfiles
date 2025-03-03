@@ -120,9 +120,14 @@ matches:
           \item $|$
       \end{itemize}
 # linalg
-  - trigger: /colvec
+  - trigger: /pmat
     replace: "\\begin{pmatrix} $|$ \\end{pmatrix}"
   - trigger: /spanvec
     replace: "\\text{span}\\{$|$\\}"
   - trigger: /sset
     replace: "\\{$|$ \\mid\\}"
+  - trigger: /ccase
+    replace: |
+      \begin{cases}
+          $|$ \\
+      \end{cases}

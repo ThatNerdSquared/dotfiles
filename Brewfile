@@ -88,6 +88,7 @@ brew "wireshark"
 brew "qemu"
 brew "supabase/tap/supabase"
 brew "cloudflare-wrangler2"
+cask "sf-symbols"
 #brew "neovide" # neat neovim gui, but why gui if vim
 #cask "sublime-merge" # great git client, but macOS has opendiff
 
