@@ -86,8 +86,9 @@ function! s:register_lsp_servers()
         \ })
 
     call lsp#register_server({
-        \ 'name': 'pylsp',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'pylsp']},
+        \ 'name': 'basedpyright',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'basedpyright-langserver --stdio']},
+        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.git/'))},
         \ 'whitelist': ['python'],
         \ })
 

@@ -1,5 +1,6 @@
 nmap <A-S-f> Ï
 nnoremap Ï :call FullFileFormat()<CR>
+nnoremap <Space>m :make<CR>
 nnoremap <Space>r :Make<CR>
 nnoremap <Space>l :call GuardedLocalMake()<CR>
 " useful for executing a long-running build process
