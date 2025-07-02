@@ -45,7 +45,7 @@ urls = subprocess.run(
     shell=True,
     text=True,
     capture_output=True
-).stdout.splitlines()
+).stdout.strip().splitlines()
 result = []
 
 for raw_url in urls:

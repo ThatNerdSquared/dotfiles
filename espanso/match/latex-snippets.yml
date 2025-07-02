@@ -85,6 +85,8 @@ matches:
     replace: "\\cong"
   - trigger: /vec
     replace: "\\vec{$|$}"
+  - trigger: /opn
+    replace: "\\operatorname{$|$}"
 # Trig
   - trigger: /sin
     replace: "\\sin(\\theta)"
@@ -131,3 +133,5 @@ matches:
       \begin{cases}
           $|$ \\
       \end{cases}
+  - trigger: /dett
+    replace: "\\operatorname{det}(A)"

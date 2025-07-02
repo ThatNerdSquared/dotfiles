@@ -19,7 +19,7 @@ brew "vscode-langservers-extracted"
 # npm install -g emmet-ls
 # npm install -g @astrojs/language-server
 brew "python@3.10"
-brew "python-lsp-server"
+brew "basedpyright"
 brew "r"
 brew "rustup"
 brew "rust-analyzer"
@@ -34,10 +34,10 @@ mas "Xcode", id: 497799835
 brew "go"
 brew "gopls"
 brew "openjdk"
-cask "adoptopenjdk8"
+# cask "temurin@8"
 brew "jdtls"
 #brew "maven"
-cask "racket" # i took one cs course that needed this, might remove later
+brew "racket" # i took one cs course that needed this, might remove later
 brew "cmake"
 brew "arduino-cli"
 brew "qt"
@@ -73,8 +73,7 @@ cask "miniconda"
 # dev setup (extended)
 brew "neovim" # occasionally i want to use treesitter
 cask "visual-studio-code" # «IDE»
-brew "docker", link: false
-cask "docker"
+brew "docker"
 brew "gh"
 brew "saulpw/vd/visidata" # TUI for viewing CSV/SQLite/xlsx/etc
 #cask "db-browser-for-sqlite" # unused bc i use visidata now
@@ -89,6 +88,7 @@ brew "qemu"
 brew "supabase/tap/supabase"
 brew "cloudflare-wrangler2"
 cask "sf-symbols"
+brew "cargo-binstall" # for dioxus cli for igem
 #brew "neovide" # neat neovim gui, but why gui if vim
 #cask "sublime-merge" # great git client, but macOS has opendiff
 
@@ -169,6 +169,7 @@ cask "dropbox" # i use this to sync books to my kobo
 
 # creative
 cask "affinity-designer"
+cask "affinity-photo"
 cask "figma"
 cask "blender"
 mas "DaVinci Resolve", id: 571213070
@@ -178,7 +179,7 @@ cask "musescore"
 #cask "canva" # terribly nerfed design software
 #cask "obs" # built-in screen record is good enough mostly
 #cask "shotcut" # i use resolve now
-#cask "scrivener" # never actually bought this, now i just use nvim
+#cask "scrivener" # never actually bought this, now i just use vim
 #mas "Muse", id: 1501563902 # i keep this around to study the product design
 
 # fonts
@@ -194,6 +195,7 @@ cask "signal"
 cask "zoom"
 cask "discord"
 cask "slack"
+cask "microsoft-outlook" # for igem email
 
 # games
 cask "steam"
@@ -202,7 +204,7 @@ cask "the-battle-for-wesnoth"
 cask "tetrio"
 
 # handy little utilities
-cask "flux" # ensure my eyes remain intact
+cask "flux-app" # ensure my eyes remain intact
 cask "imageoptim" # legendary image compression
 cask "pika" # really nice colour picker with contrast report
 mas "Hyperduck", id: 6444667067 # share links to my mac from iOS
@@ -267,6 +269,3 @@ vscode "kortina.vscode-markdown-notes" # enable wikilinks
 vscode "gera2ld.markmap-vscode" # render a bullet list as a mindmap
 vscode "jloow.vscode-criticmarkup"
 vscode "ban.spellright"
-
-# for cpsc213
-cask "temurin@8"
