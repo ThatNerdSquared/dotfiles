@@ -71,17 +71,17 @@ alias openp="open \
 alias loadios="open ios/Runner.xcworkspace" # open the iOS Xcode workspace for a flutter project
 ee() {
     $EDITOR $(
-    find ~/h4ck3r ~/dotfiles ~/h4ck3r/incubator ~/h4ck3r/ubc \
+    find ~/h4ck3r ~/dotfiles ~/h4ck3r/incubator \
         -mindepth 1 -maxdepth 1 \
         -type d \
-    | fzf --preview 'eza --tree --git-ignore {}'
+    | fzf --preview 'tree --gitignore -a -I .git {}'
     )
 }
 cc() {
     find ~/h4ck3r ~/dotfiles ~/h4ck3r/incubator \
         -mindepth 1 -maxdepth 1 \
         -type d \
-    | fzf --preview 'eza --tree --git-ignore {}' \
+    | fzf --preview 'tree --gitignore -a -I .git {}' \
     | xargs code
 }
 fp() {
@@ -108,10 +108,7 @@ ytwl() {
 # actions
 alias fci="flutter analyze && dart format **/*.dart"
 alias gs="git branch --list | fzf | xargs git checkout"
-tree() {
-    ! [ -z "$1" ] && folder="$1" || folder=.
-    eza --tree --git-ignore -a "$folder"
-}
+alias tree="tree --gitignore -a -I .git --gitfile=\"$HOME\"/.gitignore_global"
 concat-pdf() {
     pdfjam "$@" -o output.pdf
 }

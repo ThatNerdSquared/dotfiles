@@ -31,6 +31,7 @@ brew "bash-language-server"
 # language toolchains (extended)
 mas "Xcode", id: 497799835
 #brew "trunk" # WASM bundler for rust
+brew "cargo-cache" # cli for safely clearing out .cargo
 brew "go"
 brew "gopls"
 brew "openjdk"
@@ -104,7 +105,7 @@ brew "hledger" # make sure i don't accidentally go broke
 brew "yt-dlp"
 brew "ocrmypdf" # god looked at the PDF and said, LET THERE BE SELECTABLE TEXT
 brew "glow" # aesthetic markdown reader CLI
-brew "eza" # replacement for exa, which i only use for the --tree flag
+brew "tree" # nice listing of directory structure
 brew "bat" # aesthetic version of cat
 # brew "fd" # user-friendly find, unused bc i want to use more standard version
 # curl https://raw.githubusercontent.com/thameera/vimv/master/vimv > ~/.local/bin/vimv && chmod +x ~/.local/bin/vimv
@@ -153,7 +154,9 @@ cask "logi-options+" # configure all the funky little buttons on mx master -
 # the usual
 cask "firefox@developer-edition"
 cask "spotify"
-cask "sioyek" # PDF reader, amusingly low feature overlap w mainstream readers
+#cask "sioyek" # PDF reader, amusingly low feature overlap w mainstream readers
+# currently using alpha build of sioyek:
+# https://github.com/ahrm/sioyek/releases/tag/sioyek3-alpha0
 cask "zotero"
 mas "OneDrive", id: 823766827 # cannot believe i'm still paying for this tbh
 cask "iina" # native GUI wrapper around mpv
