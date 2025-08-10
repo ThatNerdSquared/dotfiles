@@ -20,8 +20,6 @@ endif
 call plug#begin()
 Plug 'kana/vim-smartinput'
 Plug 'tpope/vim-commentary'
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-dispatch'
 Plug 'dhruvasagar/vim-markify'
 Plug 'prabirshrestha/asyncomplete.vim'
@@ -42,18 +40,6 @@ call plug#end()
 let g:markify_autocmd = 1
 let g:markify_error_text = '██'
 let g:markify_info_text = '██'
-" }}}2
-
-" fzf.vim config
-" ~~~~~~~~~~~~~~{{{2
-let g:fzf_buffers_jump = 1
-nnoremap <C-p> :Buffers<CR>
-nnoremap <C-o> :Files<CR>
-nnoremap <C-f> :Rg<CR>
-nnoremap <leader>df :Files ~/dotfiles<CR>
-nnoremap <silent> eh :BLines ^#<CR>
-" mistyping :w brings up fzf's :Windows
-command -nargs=0 W echoerr "Not an editor cmd: W"
 " }}}2
 
 " Netrw config
@@ -105,6 +91,7 @@ set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 set completeopt=menu,menuone,popup,noinsert
 set wildoptions=pum
 set directory=~/dotfiles/vim/vimswp
+set path=.,,.github/**
 let g:rmd_dynamic_comments = 0
 let g:matchparen_timeout = 20
 " }}}2
@@ -145,8 +132,6 @@ nnoremap k gk
 nnoremap j gj
 nnoremap gk k
 nnoremap gj j
-" rebind the previous jump binding bc i use it for fzf
-nnoremap <C-u> <C-o>
 " maximize the current window
 nnoremap <leader>f <C-W>\| <C-W>_
 nnoremap cc :nohlsearch \| echo "Search cleared!"<CR>
@@ -174,6 +159,9 @@ nnoremap ]] :bnext<CR>
 nnoremap [[ :bprevious<CR>
 nnoremap <silent> '' :enew<CR>
 nnoremap <silent> qq :bprevious \| bdelete #<CR>
+nnoremap sf :find 
+nnoremap sg :b 
+nnoremap <leader>df :e ~/dotfiles/**/
 nnoremap <leader>[ gT
 nnoremap <leader>] gt
 noremap <leader><leader> :tabnew<CR>

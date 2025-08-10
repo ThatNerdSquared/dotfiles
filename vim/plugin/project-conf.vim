@@ -2,6 +2,14 @@
 
 let g:cwd_basename = fnamemodify(getcwd(), ':t')
 
+if g:cwd_basename == "ny-www"
+    set path+=templates/**,content/**,static/**
+endif
+
+if g:cwd_basename == "dotfiles"
+    set path+=vim/,vim/after/**,vim/colors/**,vim/compiler/**,vim/plugin/**,vim/spell/**,scripts/**,bindings/**,sioyek/**
+endif
+
 if g:cwd_basename == "firmware-poc2"
     let g:livebuildprg = "dx serve --package entrypoint"
 endif
