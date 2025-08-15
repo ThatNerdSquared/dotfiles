@@ -13,6 +13,14 @@ matches:
     replace: "🫶"
   - trigger: /pensive
     replace: "😔"
+  - trigger: /sob
+    replace: "😭"
+  - trigger: /plead
+    replace: "🥺"
+  - trigger: /skull
+    replace: "💀"
+  - trigger: /sparkle
+    replace: "✨"
   - trigger: /cmdkey
     replace: "⌘"
   - trigger: /erdos

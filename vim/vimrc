@@ -101,8 +101,8 @@ let g:matchparen_timeout = 20
 set number relativenumber " relative-number line numbers
 set cursorline
 set cursorcolumn " get a sense of where your cursor is without indentline
-set splitright " new splits open to right/down - more intuitive
-set splitbelow
+" set splitright " new splits open to right/down - more intuitive
+" set splitbelow
 set signcolumn=yes " always show signcolumn to prevent flickering
 set list " show tabchars
 set listchars=tab:>\ ,trail:•,nbsp:+
@@ -134,7 +134,6 @@ nnoremap gk k
 nnoremap gj j
 " maximize the current window
 nnoremap <leader>f <C-W>\| <C-W>_
-nnoremap cc :nohlsearch \| echo "Search cleared!"<CR>
 if !has('nvim')
     augroup TerminalMaps
         autocmd!
@@ -146,40 +145,37 @@ endif
 " editing mappings
 " ~~~~~~~~~~~~~~~~{{{2
 " repeat prev. substitution on current line
-nnoremap <leader>s :%&<CR>
+nnoremap gs :%&<CR>
 " repeat prev. substitution on whole file
-nnoremap <leader>ss :&&<CR>
-nnoremap <silent> <A-Up> :m-2<CR>
-nnoremap <silent> <A-Down> :m+1<CR>
+nnoremap gss :&&<CR>
 " }}}2
 
 " buffer + tab management mappings
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{{{2
-nnoremap ]] :bnext<CR>
-nnoremap [[ :bprevious<CR>
 nnoremap <silent> '' :enew<CR>
 nnoremap <silent> qq :bprevious \| bdelete #<CR>
 nnoremap sf :find 
 nnoremap sg :b 
 nnoremap <leader>df :e ~/dotfiles/**/
+nnoremap <silent> sn :new \| setlocal buftype=nofile bufhidden=wipe noswapfile<CR>
 nnoremap <leader>[ gT
 nnoremap <leader>] gt
 noremap <leader><leader> :tabnew<CR>
-" open a terminal tab
-nnoremap <leader>t :silent tabnew \| terminal<CR>
+" " open a terminal tab
+" nnoremap <leader>t :silent tabnew \| terminal<CR>
 " }}}2
 
 " quickfix + completion mappings
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{{{2
 inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
 nnoremap qf :cclose<CR>
-nnoremap <C-k> :cprevious<CR>
-nnoremap <C-j> :cnext<CR>
+nnoremap <Space>k :cprevious<CR>
+nnoremap <Space>j :cnext<CR>
 nnoremap <CR><CR> :cc<CR>
-nnoremap qr :lclose<CR>
-nnoremap  :lprevious<CR>
+" nnoremap qr :lclose<CR>
+" nnoremap  :lprevious<CR>
 " opt-shift-k
-nnoremap Ô :lnext<CR>
+" nnoremap Ô :lnext<CR>
 " opt-shift-j
 " }}}2
 " }}}1
@@ -187,7 +183,6 @@ nnoremap Ô :lnext<CR>
 
 " MISC ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " {{{
-command! -nargs=0 Einit tabedit $MYVIMRC
 command! -nargs=0 Cp silent w !pbcopy
 command! -nargs=0 ShowColors :source $VIMRUNTIME/syntax/hitest.vim
 " set working dir to dir in argument if provided

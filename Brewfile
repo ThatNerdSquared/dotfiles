@@ -110,6 +110,7 @@ brew "bat" # aesthetic version of cat
 # brew "fd" # user-friendly find, unused bc i want to use more standard version
 # curl https://raw.githubusercontent.com/thameera/vimv/master/vimv > ~/.local/bin/vimv && chmod +x ~/.local/bin/vimv
 brew "ffmpeg"
+brew "openconnect" # use this for ubc vpn to connect to hpc cluster when off-campus
 brew "slides" # show slides from markdown on the cli
 brew "imagemagick"
 brew "bitwarden-cli"
@@ -179,6 +180,7 @@ mas "DaVinci Resolve", id: 571213070
 mas "Pastel", id: 413897608 # save color palettes (+ why native != better)
 cask "gifcapture"
 cask "musescore"
+cask "sim-daltonism"
 #cask "canva" # terribly nerfed design software
 #cask "obs" # built-in screen record is good enough mostly
 #cask "shotcut" # i use resolve now
@@ -192,6 +194,8 @@ cask "font-iosevka"
 cask "font-bad-script"
 cask "font-xkcd"
 cask "font-inter"
+cask "font-funnel-display"
+cask "font-schibsted-grotesk"
 
 # communication
 cask "signal"

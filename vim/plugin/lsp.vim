@@ -13,13 +13,15 @@ set keywordprg=:LspHover
 
 " preferred mappings
 nnoremap gd <plug>(lsp-definition)
-nnoremap <silent> gD :rightbelow vertical LspDefinition<CR>
+" nnoremap <silent> gD :rightbelow vertical LspDefinition<CR>
+nnoremap <silent> gD :vertical LspDefinition<CR>
 nnoremap gr <plug>(lsp-references)
 nnoremap <Space>. <plug>(lsp-code-action-float)
 nnoremap ˚ <plug>(lsp-previous-diagnostic)
 " opt-k
 nnoremap ∆ <plug>(lsp-next-diagnostic)
 " opt-j
+nnoremap gl <plug>(lsp-document-symbol-search)
 
 " some LSPs don't provide completion unless you tell them you support
 " snippets.
@@ -32,7 +34,7 @@ function! s:force_snippet_support()
     return l:caps
 endfunction
 
-au User lsp_setup call s:register_lsp_servers()
+autocmd User lsp_setup call s:register_lsp_servers()
 
 " for help setting up new servers check
 " https://github.com/prabirshrestha/vim-lsp/wiki/Servers
