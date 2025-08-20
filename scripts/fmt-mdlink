@@ -37,6 +37,9 @@ def specialHandling(*, title: str, original_url: str) -> str:
     if original_url.startswith('https://github.com'):
         title_parts = title.split(' ')
         return title_parts[2][:-1]
+    title = title.replace(r'\xe2\x80\x98', '\'')
+    title = title.replace(r'\xe2\x80\x99', '\'')
+    title = title.replace(r'\xe2\x80\x93', '—')
     return title
 
 # use of pbpaste here (and pbcopy later) is prolly not cross-platform

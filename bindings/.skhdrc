@@ -1,5 +1,5 @@
 # spacy clipboard
-shift + alt + cmd - c: python3 ~/dotfiles/scripts/text-manip/spacy.py
+shift + alt + cmd - c: python3 ~/dotfiles/scripts/fmt-mdlink
 
 # open last downloaded file in downloads folder
 ctrl + cmd - d: open ~/Downloads/"$(ls -t ~/Downloads | head -1)"

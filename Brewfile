@@ -7,7 +7,6 @@ tap "homebrew/cask-versions"
 tap "homebrew/services"
 tap "khanhas/tap"
 tap "koekeishiya/formulae"
-tap "michaeleisel/zld"
 tap "supabase/tap"
 tap "saulpw/vd"
 
@@ -23,10 +22,9 @@ brew "basedpyright"
 brew "r"
 brew "rustup"
 brew "rust-analyzer"
-brew "michaeleisel/zld/zld" # faster rust linking
 brew "cocoapods" # swift pkg manager
 brew "carthage" # another swift pkg manager
-brew "bash-language-server"
+brew "shellcheck"
 
 # language toolchains (extended)
 mas "Xcode", id: 497799835

@@ -1,4 +1,11 @@
 #!/bin/bash
+
+print_err() {
+    red_escape_code='\033[0;31m'
+    echo -e "${red_escape_code}${1}"
+}
+
+
 function reviewCycle() {
     param=$1[@]
     files=("${!param}")
@@ -113,7 +120,7 @@ function mainCycle() {
 
 # exit if not run in a git repo
 git status . > /dev/null 2>&1 || {
-    gum log --structured --level error "Hmm, something went wrong. Is this a git repo?"
+    print_err "Hmm, something went wrong. Is this a git repo?"
     exit 1
 }
 IFS=$'\n'
