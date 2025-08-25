@@ -39,6 +39,13 @@ matches:
         type: date
         params:
           format: "%H:%M"
+  - trigger: /sfet
+    replace: "{{dt}}"
+    vars:
+      - name: dt
+        type: date
+        params:
+          format: "%H-%M-%S"
   - trigger: /iso
     replace: "{{dt}}"
     vars:
