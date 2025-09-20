@@ -132,6 +132,7 @@ nnoremap k gk
 nnoremap j gj
 nnoremap gk k
 nnoremap gj j
+nnoremap cc :nohlsearch<CR>
 " maximize the current window
 nnoremap <leader>f <C-W>\| <C-W>_
 if !has('nvim')
@@ -144,9 +145,9 @@ endif
 
 " editing mappings
 " ~~~~~~~~~~~~~~~~{{{2
-" repeat prev. substitution on current line
-nnoremap gs :%&<CR>
 " repeat prev. substitution on whole file
+nnoremap gs :%&<CR>
+" repeat prev. substitution on current line
 nnoremap gss :&&<CR>
 " }}}2
 

@@ -117,7 +117,7 @@ alias wco="pbpaste | xargs "$1" | wc -w"
 preview-latex() {
     fswatch -o $1 | xargs -n1 -I{} xelatex $1
 }
-alias cleantex="trashme *.aux | trashme *.log | trashme *.toc | trashme *.out"
+alias cleantex="rm *.aux; rm *.log; rm *.toc; rm *.out"
 ff() {
     $EDITOR "$(fzf --preview 'bat {}')"
 }

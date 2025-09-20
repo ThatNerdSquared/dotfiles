@@ -127,7 +127,9 @@ matches:
   - trigger: /spanvec
     replace: "\\text{span}\\{$|$\\}"
   - trigger: /sset
-    replace: "\\{$|$ \\mid\\}"
+    replace: "\\{ $|$ \\}"
+  - trigger: /smset
+    replace: "\\{ $|$ \\mid  \\}"
   - trigger: /ccase
     replace: |
       \begin{cases}
