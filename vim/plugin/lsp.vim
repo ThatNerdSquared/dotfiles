@@ -94,13 +94,13 @@ function! s:register_lsp_servers()
         \ 'whitelist': ['python'],
         \ })
 
-    call lsp#register_server({
-        \ 'name': 'astro',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'astro-ls --stdio']},
-        \ 'initialization_options': { 'typescript': { 'tsdk': lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'package.json') .. '/node_modules/typescript/lib' } },
-        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'package.json'))},
-        \ 'whitelist': ['astro'],
-        \ })
+    " call lsp#register_server({
+    "     \ 'name': 'astro',
+    "     \ 'cmd': {server_info->[&shell, &shellcmdflag, 'astro-ls --stdio']},
+    "     \ 'initialization_options': { 'typescript': { 'tsdk': lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'package.json') .. '/node_modules/typescript/lib' } },
+    "     \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'package.json'))},
+    "     \ 'whitelist': ['astro'],
+    "     \ })
 
     call lsp#register_server({
         \ 'name': 'rust-analyzer',
