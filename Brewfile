@@ -43,7 +43,6 @@ brew "qt"
 brew "ruby"
 brew "gcc"
 brew "wxmaxima" # for my biomathematics course
-cask "rstudio" # for stats course, will remove later
 brew "meson" # i'm actually not entirely sure why i have this on hand, but it
              # seems useful so i'm gonna keep it for now
 
@@ -200,9 +199,7 @@ cask "font-schibsted-grotesk"
 # communication
 cask "signal"
 cask "zoom"
-cask "discord"
 cask "slack"
-cask "microsoft-outlook" # for igem email
 
 # games
 cask "steam"

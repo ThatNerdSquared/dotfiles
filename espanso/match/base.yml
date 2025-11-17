@@ -19,8 +19,18 @@ matches:
     replace: "🥺"
   - trigger: /skull
     replace: "💀"
-  - trigger: /sparkle
+  - trigger: /sparkles
     replace: "✨"
+  - trigger: /relieved
+    replace: "😌"
+  - trigger: /bowcute
+    replace: "🎀"
+  - trigger: /sparkleheart
+    replace: "💖"
+  - trigger: /brokenheart
+    replace: "💔"
+  - trigger: /bangbang
+    replace: "‼️"
   - trigger: /cmdkey
     replace: "⌘"
   - trigger: /erdos

@@ -36,7 +36,7 @@ function reviewCycle() {
                     "Stage this file" "Discard changes" "Re-run fastgit" "Ignore")
         case $ACTION in
           "Stage this file") git add "$file" ;;
-          "Discard changes") gum confirm "Are you sure you want to discard all changes?" && eval $DISCARD_CMD "$file" ;;
+          "Discard changes") gum confirm "Are you sure you want to discard all changes?" && eval $DISCARD_CMD "\"$file\"" ;;
           "Re-run fastgit") exec "$0" ;;
            *) ;;
         esac
