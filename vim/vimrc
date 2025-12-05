@@ -89,7 +89,9 @@ let &t_EI = "\<Esc>[2 q"
 set ignorecase " make search non-case-sensitive
 set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 set completeopt=menu,menuone,popup,noinsert
-set wildoptions=pum
+if v:version >= 900
+    set wildoptions=pum
+endif
 set directory=~/dotfiles/vim/vimswp
 set path=.,,.github/**
 let g:rmd_dynamic_comments = 0
@@ -107,6 +109,7 @@ set signcolumn=yes " always show signcolumn to prevent flickering
 set list " show tabchars
 set listchars=tab:>\ ,trail:•,nbsp:+
 set noshowmode
+set scrolloff=0
 " }}}2
 
 " indentation options

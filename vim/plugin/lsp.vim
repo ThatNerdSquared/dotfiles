@@ -1,6 +1,7 @@
 " asyncomplete + vim-lsp settings
 " let g:lsp_log_verbose = 1
 " let g:lsp_log_file = expand('~/vim-lsp.log')
+" let g:asyncomplete_log_file = expand('~/asyncomplete.log')
 let g:asyncomplete_auto_popup = 1
 let g:asyncomplete_auto_completeopt="menu,menuone,popup,noinsert"
 let g:lsp_use_native_client = 1
