@@ -1,9 +1,6 @@
 # taps
 tap "dart-lang/dart"
 tap "homebrew/bundle"
-tap "homebrew/cask-drivers"
-tap "homebrew/cask-fonts"
-tap "homebrew/cask-versions"
 tap "homebrew/services"
 tap "khanhas/tap"
 tap "koekeishiya/formulae"
@@ -69,6 +66,8 @@ brew "coreutils"
 
 # science
 cask "miniconda"
+cask "sage"
+cask "dataspell" # as a native jupyter nb GUI
 
 # dev setup (extended)
 brew "neovim" # occasionally i want to use treesitter
@@ -174,6 +173,7 @@ cask "dropbox" # i use this to sync books to my kobo
 cask "affinity-designer"
 cask "affinity-photo"
 cask "figma"
+cask "inkscape" # just trying this out for now in the post-affinity-3 times
 cask "blender"
 mas "DaVinci Resolve", id: 571213070
 mas "Pastel", id: 413897608 # save color palettes (+ why native != better)
@@ -195,6 +195,8 @@ cask "font-xkcd"
 cask "font-inter"
 cask "font-funnel-display"
 cask "font-schibsted-grotesk"
+cask "font-roboto"
+cask "font-roboto-mono"
 
 # communication
 cask "signal"
