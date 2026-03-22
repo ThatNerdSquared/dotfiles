@@ -14,7 +14,7 @@ brew "typescript-language-server"
 brew "vscode-langservers-extracted"
 # npm install -g emmet-ls
 # npm install -g @astrojs/language-server
-brew "python@3.10"
+brew "python@3.14"
 brew "basedpyright"
 brew "r"
 brew "rustup"
