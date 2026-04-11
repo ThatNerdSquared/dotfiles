@@ -29,4 +29,5 @@ augroup ProjectSpecific
     autocmd BufRead wei-lab-stuff.md setlocal textwidth=0
     autocmd BufRead logging-queue.md setlocal textwidth=0
     autocmd BufRead reading-queue.md nnoremap <buffer> <Space><Space> <Esc>o- [ ] 
+    autocmd BufRead reading-queue.md set wrap!
 augroup END

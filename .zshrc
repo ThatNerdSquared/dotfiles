@@ -14,6 +14,7 @@ export VOLTA_PATH="$HOME/.volta/bin"
 export SCRIPTS_PATH="$HOME/dotfiles/scripts"
 export HOMEBREW_PATH="/opt/homebrew/bin"
 export PSQL_PATH="/opt/homebrew/opt/postgresql@16/bin"
+export LEDGER_FILE="$HOME/heart-hands/10.financial/hledger.journal"
 # add volta installation, scripts, and homebrew to PATH
 export PATH="$VOLTA_PATH:$SCRIPTS_PATH:$HOMEBREW_PATH:$PSQL_PATH:$PATH"
 export OPENSSL_ROOT_DIR="/usr/bin/openssl"
@@ -57,7 +58,11 @@ alias lo="ls -d .*" # only show hidden files
 
 # -- quick open --
 # open my personal documents repo
-alias hh="$EDITOR '/Users/nathanyeung/heart-hands'"
+hh() {
+    cd '/Users/nathanyeung/heart-hands'
+    $EDITOR "$(fzf --preview 'bat {}')"
+}
+alias hhn="$EDITOR '/Users/nathanyeung/heart-hands'"
 # open jupyterlab in current directory
 alias studio="source .venv/bin/activate && jupyter lab --no-browser"
 # open my personal data repo
