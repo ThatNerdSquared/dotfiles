@@ -25,6 +25,8 @@ FILES_TO_LOCATIONS=(
     "vim-launcher.app:/Applications"
     # vscode extensions are included in the brewfile, so we don't store
     # extensions.json
+    "alacritty:$HOME/.config/alacritty"
+    "kitty:$HOME/.config/kitty"
 )
 
 for DOTFILE_SET in "${FILES_TO_LOCATIONS[@]}"; do

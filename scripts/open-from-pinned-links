@@ -1,7 +1,12 @@
 #!/bin/bash
 RED='\033[0;31m'
 
-LINKS=$(cat ~/dotfiles/pinned-links.txt)
+if [ -z $1 ]; then
+    LINKFILE="/Users/nathanyeung/dotfiles/pinned-links.txt"
+else
+    LINKFILE=$1
+fi
+LINKS=$(cat $LINKFILE)
 LINK_TITLES=$(echo "$LINKS" | sed "s/]([^)]*)//g" | sed 's/\[//g')
 
 CHOICE=$(echo "$LINK_TITLES" | choose)
@@ -10,5 +15,11 @@ if [ -z "$CHOICE" ]; then
     exit 1
 fi
 
-LINK=$(grep -w "\[$CHOICE\]" ~/dotfiles/pinned-links.txt | head -1)
-open "$(echo "$LINK" | sed "s/[^(]*(//g" | sed "s/)//g" )"
+LINK=$(grep -w "\[$CHOICE\]" "$LINKFILE" | head -1)
+URI="$(echo "$LINK" | sed "s/[^(]*(//g" | sed "s/)//g" )"
+
+if [[ "$CHOICE" == ::* ]]; then
+    exec "$0" "$URI"
+else
+    open "$URI"
+fi

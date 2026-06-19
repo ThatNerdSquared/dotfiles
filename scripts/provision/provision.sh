@@ -71,6 +71,10 @@ defaults write com.apple.spaces "spans-displays" -bool "true" && killall SystemU
 # keyboard settings: prevent autocaps
 defaults write NSGlobalDomain "NSAutomaticCapitalizationEnabled" -bool "false"
 
+# fix font rendering in alacritty
+# credit: https://github.com/alacritty/alacritty/issues/7333
+defaults write org.alacritty AppleFontSmoothing -int 0
+
 
 cat << EOF
 -------------------------------

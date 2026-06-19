@@ -1,0 +1,6 @@
+[itertools](https://docs.python.org/3/library/itertools.html)
+[dataclasses](https://docs.python.org/3/library/dataclasses.html)
+[more-itertools](https://more-itertools.readthedocs.io/)
+[protocols](https://typing.python.org/en/latest/spec/protocol.html)
+[numpy docs search](https://numpy.org/doc/stable/search.html)
+[matplotlib docs search](https://matplotlib.org/stable/search.html)

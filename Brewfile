@@ -3,9 +3,9 @@ tap "dart-lang/dart"
 tap "homebrew/bundle"
 tap "homebrew/services"
 tap "khanhas/tap"
-tap "koekeishiya/formulae"
+tap "asmvik/formulae"
 tap "supabase/tap"
-tap "saulpw/vd"
+tap "visidata/vd"
 
 # language toolchains (minimal)
 cask "flutter" # my favourite gui framework (comes with dart)
@@ -59,12 +59,15 @@ brew "postgresql@16" # is this outdated?
 # dev setup (minimal)
 brew "vim" # world's best text editor (let the flame wars begin!)
 cask "iterm2"
+cask "kitty" # testing this right now
+cask "alacritty" # testing this right now
 brew "fzf"
 brew "gum"
 brew "ripgrep"
 brew "coreutils"
 
 # science
+# https://account.wolfram.com/products/
 cask "miniconda"
 cask "sage"
 cask "dataspell" # as a native jupyter nb GUI
@@ -74,7 +77,7 @@ brew "neovim" # occasionally i want to use treesitter
 cask "visual-studio-code" # «IDE»
 brew "docker"
 brew "gh"
-brew "saulpw/vd/visidata" # TUI for viewing CSV/SQLite/xlsx/etc
+brew "visidata" # TUI for viewing CSV/SQLite/xlsx/etc
 #cask "db-browser-for-sqlite" # unused bc i use visidata now
 cask "ngrok"
 brew "scc" # analyze no. of lines of code
@@ -84,7 +87,7 @@ mas "TestFlight", id: 899247664
 cask "utm"
 brew "wireshark"
 brew "qemu"
-brew "supabase/tap/supabase"
+brew "supabase"
 brew "cloudflare-wrangler2"
 cask "sf-symbols"
 brew "cargo-binstall" # for dioxus cli for igem
@@ -122,8 +125,8 @@ brew "htop"
 brew "graphviz"
 brew "gnuplot"
 brew "gs" # for compressing PDFs
-#brew "koekeishiya/formulae/yabai" # twm for macOS, i don't use this anymore
-brew "khanhas/tap/spicetify-cli"
+#brew "yabai" # twm for macOS, i don't use this anymore
+brew "spicetify-cli"
 brew "mas" # install mac app store apps from the CLI
 #brew "ical-buddy" # idk why i had this installed but it seems pretty cool
 #brew "tmux" # can't be bothered to learn how this works
@@ -142,7 +145,7 @@ brew "fswatch"
 #brew "ninvaders"
 
 # keyboard & peripheral related
-brew "koekeishiya/formulae/skhd" # global keybinds
+brew "skhd" # global keybinds
 cask "espanso" # text expansion
 cask "karabiner-elements" # low-level keyboard remaps
 cask "keyboardcleantool" # lock keyboard keys
@@ -177,6 +180,7 @@ cask "inkscape" # just trying this out for now in the post-affinity-3 times
 cask "blender"
 mas "DaVinci Resolve", id: 571213070
 mas "Pastel", id: 413897608 # save color palettes (+ why native != better)
+mas "Iconology", id: 1463452867 # for macOS app icons
 cask "gifcapture"
 cask "musescore"
 cask "sim-daltonism"
@@ -212,6 +216,7 @@ cask "tetrio"
 # handy little utilities
 cask "flux-app" # ensure my eyes remain intact
 cask "imageoptim" # legendary image compression
+cask "grandperspective" # a little clunky, but useful for disk cleanup
 cask "pika" # really nice colour picker with contrast report
 mas "Hyperduck", id: 6444667067 # share links to my mac from iOS
 cask "dozer"

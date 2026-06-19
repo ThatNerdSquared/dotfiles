@@ -14,7 +14,6 @@ export VOLTA_PATH="$HOME/.volta/bin"
 export SCRIPTS_PATH="$HOME/dotfiles/scripts"
 export HOMEBREW_PATH="/opt/homebrew/bin"
 export PSQL_PATH="/opt/homebrew/opt/postgresql@16/bin"
-export LEDGER_FILE="$HOME/heart-hands/10.financial/hledger.journal"
 # add volta installation, scripts, and homebrew to PATH
 export PATH="$VOLTA_PATH:$SCRIPTS_PATH:$HOMEBREW_PATH:$PSQL_PATH:$PATH"
 export OPENSSL_ROOT_DIR="/usr/bin/openssl"
@@ -22,6 +21,7 @@ export BAT_THEME="Solarized (light)"
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git/"'
 export VISUAL=vim
 export EDITOR="$VISUAL"
+export LEDGER_FILE="$HOME/heart-hands/10.financial/hledger.journal"
 VIRTUAL_ENV_DISABLE_PROMPT='true'
 
 # load in some zsh goodies

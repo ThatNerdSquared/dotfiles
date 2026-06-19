@@ -1,0 +1,7 @@
+[general]
+import = ["rose-pine-dawn.toml"]
+
+[font]
+normal = { family = "DM Mono", style = "Medium" }
+size = 14
+offset = { x = 0, y = 3 }

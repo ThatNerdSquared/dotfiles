@@ -110,6 +110,9 @@ set list " show tabchars
 set listchars=tab:>\ ,trail:•,nbsp:+
 set noshowmode
 set scrolloff=0
+if $TERM == 'alacritty'
+  set ttymouse=sgr
+endif
 " }}}2
 
 " indentation options
