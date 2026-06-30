@@ -4,3 +4,6 @@
 [protocols](https://typing.python.org/en/latest/spec/protocol.html)
 [numpy docs search](https://numpy.org/doc/stable/search.html)
 [matplotlib docs search](https://matplotlib.org/stable/search.html)
+[logging api](https://docs.python.org/3/library/logging.html)
+[logging HOWTO](https://docs.python.org/3/howto/logging.html)
+[contextlib](https://docs.python.org/3/library/contextlib.html)

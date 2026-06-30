@@ -1,11 +1,11 @@
 # taps
-tap "dart-lang/dart"
-tap "homebrew/bundle"
-tap "homebrew/services"
-tap "khanhas/tap"
-tap "asmvik/formulae"
-tap "supabase/tap"
-tap "visidata/vd"
+tap "dart-lang/dart", trusted: true
+tap "homebrew/bundle", trusted: true
+tap "homebrew/services", trusted: true
+tap "khanhas/tap", trusted: true
+tap "asmvik/formulae", trusted: true
+tap "supabase/tap", trusted: true
+tap "visidata/vd", trusted: true
 
 # language toolchains (minimal)
 cask "flutter" # my favourite gui framework (comes with dart)
@@ -145,7 +145,7 @@ brew "fswatch"
 #brew "ninvaders"
 
 # keyboard & peripheral related
-brew "skhd" # global keybinds
+brew "skhd", trusted: true # global keybinds
 cask "espanso" # text expansion
 cask "karabiner-elements" # low-level keyboard remaps
 cask "keyboardcleantool" # lock keyboard keys

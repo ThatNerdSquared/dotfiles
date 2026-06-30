@@ -114,6 +114,7 @@ ytwl() {
 alias fci="flutter analyze && dart format **/*.dart"
 alias gs="git branch --list | fzf | xargs git checkout"
 alias tree="tree --gitignore -a -I .git --gitfile=\"$HOME\"/.gitignore_global"
+alias simnotif="kitten notify 'simulation complete!' 'please check results.'"
 concat-pdf() {
     pdfjam "$@" -o output.pdf
 }
