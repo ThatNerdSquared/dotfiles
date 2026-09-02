@@ -7,3 +7,4 @@
 [logging api](https://docs.python.org/3/library/logging.html)
 [logging HOWTO](https://docs.python.org/3/howto/logging.html)
 [contextlib](https://docs.python.org/3/library/contextlib.html)
+[pathlib](https://docs.python.org/3/library/pathlib.html)

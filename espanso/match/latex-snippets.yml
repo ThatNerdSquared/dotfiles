@@ -87,6 +87,10 @@ matches:
     replace: "\\vec{$|$}"
   - trigger: /opn
     replace: "\\operatorname{$|$}"
+  - trigger: /cceil
+    replace: "\\lceil $|$ \\rceil"
+  - trigger: /fflor
+    replace: "\\lfloor $|$ \\rfloor"
 # Trig
   - trigger: /sin
     replace: "\\sin(\\theta)"
