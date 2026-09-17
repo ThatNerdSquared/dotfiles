@@ -23,6 +23,16 @@ if g:cwd_basename == "workday-calendar-extension"
     let g:livebuildprg = "yarn dev-firefox"
 endif
 
+if g:cwd_basename == "solo_nyeung27"
+    nnoremap <leader>o :compiler! eslint_yarn<CR>
+    set formatprg=yarn\ --silent\ prettier\ --stdin-filepath\ %
+endif
+
+if g:cwd_basename == "cpsc310-lecture-code"
+    nnoremap <leader>o :compiler! eslint_yarn<CR>
+    set formatprg=yarn\ --silent\ prettier\ --stdin-filepath\ %
+endif
+
 augroup ProjectSpecific
     autocmd!
     autocmd BufRead 00.scratchpad.qmd setlocal textwidth=0

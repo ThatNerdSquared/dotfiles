@@ -171,6 +171,7 @@ cask "calibre"
 cask "chromium" # for webdev testing on chromium
 cask "dropbox" # i use this to sync books to my kobo
 #cask "mochi" # flashcards - don't really need this nowadays
+cask "zed" # for multiplayer notes
 
 # creative
 cask "affinity-designer"
@@ -201,6 +202,7 @@ cask "font-funnel-display"
 cask "font-schibsted-grotesk"
 cask "font-roboto"
 cask "font-roboto-mono"
+cask "font-monaspace" # for zed
 
 # communication
 cask "signal"
@@ -216,7 +218,8 @@ cask "tetrio"
 # handy little utilities
 cask "flux-app" # ensure my eyes remain intact
 cask "imageoptim" # legendary image compression
-cask "grandperspective" # a little clunky, but useful for disk cleanup
+cask "daisydisk" # useful for disk cleanup, goes on discount often
+#cask "grandperspective" # replaced w daisydisk licence
 cask "pika" # really nice colour picker with contrast report
 mas "Hyperduck", id: 6444667067 # share links to my mac from iOS
 cask "dozer"
