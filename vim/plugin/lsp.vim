@@ -16,6 +16,7 @@ set keywordprg=:LspHover
 nnoremap gd <plug>(lsp-definition)
 " nnoremap <silent> gD :rightbelow vertical LspDefinition<CR>
 nnoremap <silent> gD :vertical LspDefinition<CR>
+nnoremap <silent> ge :horizontal LspDefinition<CR>
 nnoremap gr <plug>(lsp-references)
 nnoremap <Space>. <plug>(lsp-code-action-float)
 nnoremap ˚ <plug>(lsp-previous-diagnostic)
@@ -23,6 +24,7 @@ nnoremap ˚ <plug>(lsp-previous-diagnostic)
 nnoremap ∆ <plug>(lsp-next-diagnostic)
 " opt-j
 nnoremap gl <plug>(lsp-document-symbol-search)
+nnoremap go <plug>(lsp-workspace-symbol-search)
 
 " some LSPs don't provide completion unless you tell them you support
 " snippets.

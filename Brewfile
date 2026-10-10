@@ -33,7 +33,7 @@ brew "openjdk"
 # cask "temurin@8"
 brew "jdtls"
 #brew "maven"
-brew "racket" # i took one cs course that needed this, might remove later
+brew "minimal-racket" # i took one cs course that needed this, might remove later
 brew "cmake"
 brew "arduino-cli"
 brew "qt"
@@ -58,9 +58,8 @@ brew "postgresql@16" # is this outdated?
 
 # dev setup (minimal)
 brew "vim" # world's best text editor (let the flame wars begin!)
+cask "kitty" # been switching to this recently
 cask "iterm2"
-cask "kitty" # testing this right now
-cask "alacritty" # testing this right now
 brew "fzf"
 brew "gum"
 brew "ripgrep"

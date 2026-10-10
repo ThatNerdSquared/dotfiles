@@ -12,7 +12,7 @@ nnoremap cw {v}:write !wc -w<CR>
 " count words in file
 nnoremap caw :!wc -w %<CR>
 " count words in selection
-vnoremap cw :'<,'>:write !wc -w<CR>
+vnoremap cw :write !wc -w<CR>
 " open corresponding bibtex file for current doc
 command! -nargs=0 Bib vsplit %:r.bib
 nnoremap <silent> - :call ToggleMarkdownCheckboxes()<CR>

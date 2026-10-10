@@ -28,9 +28,8 @@ if g:cwd_basename == "solo_nyeung27"
     set formatprg=yarn\ --silent\ prettier\ --stdin-filepath\ %
 endif
 
-if g:cwd_basename == "cpsc310-lecture-code"
-    nnoremap <leader>o :compiler! eslint_yarn<CR>
-    set formatprg=yarn\ --silent\ prettier\ --stdin-filepath\ %
+if g:cwd_basename =~ "cpsc340"
+    set path+=code/**,data/**
 endif
 
 augroup ProjectSpecific
