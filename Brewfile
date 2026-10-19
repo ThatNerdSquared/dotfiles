@@ -87,7 +87,7 @@ cask "utm"
 brew "wireshark"
 brew "qemu"
 brew "supabase"
-brew "cloudflare-wrangler2"
+brew "cloudflare-wrangler"
 cask "sf-symbols"
 brew "cargo-binstall" # for dioxus cli for igem
 #brew "neovide" # neat neovim gui, but why gui if vim
@@ -220,8 +220,9 @@ cask "imageoptim" # legendary image compression
 cask "daisydisk" # useful for disk cleanup, goes on discount often
 #cask "grandperspective" # replaced w daisydisk licence
 cask "pika" # really nice colour picker with contrast report
-mas "Hyperduck", id: 6444667067 # share links to my mac from iOS
-cask "dozer"
+# mas "Hyperduck", id: 6444667067 # share links to my mac from iOS - now using
+                                  # firefox
+# cask "dozer" # unmaintained, + i don't use menu bar hiders anymore
 #mas "PDF Viewer", id: 1120099014 # i only use this to insert imgs into PDFS
 #cask "pdfsam-basic" # replaced with scripts
 #cask "rectangle" # window management by a great indie dev - now using raycast

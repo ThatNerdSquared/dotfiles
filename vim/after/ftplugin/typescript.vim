@@ -6,4 +6,4 @@ if g:cwd_basename != "solo_nyeung27"
         setlocal formatprg=npx\ prettier\ --stdin-filepath\ %
     endif
 endif
-set path+=src/**,tests/**
+set path+=src/**,tests/**,test/**
