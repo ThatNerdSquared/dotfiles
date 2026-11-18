@@ -92,6 +92,7 @@ cask "sf-symbols"
 brew "cargo-binstall" # for dioxus cli for igem
 #brew "neovide" # neat neovim gui, but why gui if vim
 #cask "sublime-merge" # great git client, but macOS has opendiff
+cask "webstorm" # annual "should i use jetbrains" test
 
 # git tools
 brew "bfg" # cleanse data from a repo
@@ -207,6 +208,7 @@ cask "font-monaspace" # for zed
 cask "signal"
 cask "zoom"
 cask "slack"
+cask "whatsapp"
 
 # games
 cask "steam"
